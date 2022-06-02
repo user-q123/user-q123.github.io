@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>My blog | Viva la vida</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">My blog</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            hexo新手配置
+        </div>
+        <div class="post-meta">
+            2022-06-01
+        </div>
+    
+
+    <div class="post-md">
+        <p>这篇文章其实算是我跟着这个教程走了一遍. 当然这过程中也遇到了一些其他的问题. 原地址在这里:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://kaiter-plus.gitee.io/2020/03/07/How_To_Freely_Build_Blog/">https://kaiter-plus.gitee.io/2020/03/07/How_To_Freely_Build_Blog/</a></p>
+</blockquote>
+<h2 id="1-安装本地Hexo环境"><a href="#1-安装本地Hexo环境" class="headerlink" title="1. 安装本地Hexo环境"></a>1. 安装本地Hexo环境</h2><p>npm镜像源的配置, 可有可无, 因为我挂着梯子, 所以不用淘宝的源也没什么关系.</p>
+<pre><code class="bash">npm install -g hexo
+#这里稍微提一句, -g就是全局安装, 类似cnpm和ts的命令都是这样, 全局安装了在windows下就类似应用程序用名字就可以在控制台中使用了
+</code></pre>
+<p>然后是初始化工程:</p>
+<pre><code class="bash">hexo init blog      # 初始化创建，会在你所在位置创建 blog 文件夹
+cd blog             # 进入 blog 目录
+npm install         # 进一步安装hexo所需文件
+</code></pre>
+<p>这里可能会发现脚本无法运行的问题, 可以参考这个帖子管理windows的执行策略</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43874301/article/details/111102493">https://blog.csdn.net/weixin_43874301/article/details/111102493</a></p>
+</blockquote>
+<p>或者用命令行</p>
+<pre><code class="bash">set-ExecutionPolicy RemoteSigned
+</code></pre>
+<p>然后是使用hexo的命令生成静态文件和启动服务</p>
+<pre><code class="bash">hexo clean          # 清除所有记录
+hexo generate       # 生成静态网页, 静态资源在这一步的编译后会放在public下
+hexo server -p 80   # 启动服务, -p 80 表示端口号为 80，默认不加端口号是 4000
+</code></pre>
+<p>然后就可以通过 <a target="_blank" rel="noopener" href="http://localhost/">http://localhost:80</a> 来访问了</p>
+<h2 id="2-安装Hexo主题"><a href="#2-安装Hexo主题" class="headerlink" title="2. 安装Hexo主题"></a>2. 安装Hexo主题</h2><p>可以在官方主题商城里找: <a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a><br>我这里选了 one-page 的主题 每个主题有自己的配置方法.<br>主题的配置基本上是在 *** _config.yml ***下配置的.<br>我这个主题, 需要把 highlight.enable 和 prismjs.enable都设为 false. 因为这个主题自带了这2个组件.</p>
+<p>另外 我在clone主题的时候, 发现了这个问题:</p>
+<blockquote>
+<p>error: RPC failed； curl 56 OpenSSL SSL_read: Connection was reset, errno 10054<br>因为我之前git指令都用的好好的, 不知道为什么这里不行.<br>可能原因是我没有实现构建好git目录?<br>不过用下面的方法是可以解决问题的:</p>
+</blockquote>
+<pre><code class="bash">git config http.sslVerify &quot;false&quot;
+# 如果输入上面命令提示报“ fatal: not in a git directory  ”，则输入如下命令：git init
+# 重新下载
+</code></pre>
+<h2 id="3-安装hexo-asset-image-插件"><a href="#3-安装hexo-asset-image-插件" class="headerlink" title="3.安装hexo-asset-image 插件"></a>3.安装hexo-asset-image 插件</h2><pre><code class="bash">npm install https://github.com/7ym0n/hexo-asset-image --save  #安装 hexo-asset-image 插件
+</code></pre>
+<p>我直接从github上克隆没什么问题, 用原帖子里的第一个仓库地址反而不行.</p>
+<p>这个插件给我的直接感觉是: 在使用命令生成新的文章时, 会自动生成放图片的文件夹</p>
+<pre><code class="bash">hexo new test       # 生成新的网页
+</code></pre>
+
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 My blog</span>
+    <!-- <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span> -->
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>
