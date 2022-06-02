@@ -90,8 +90,10 @@
 <meta property="og:image" content="http://example.com/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/002.png">
 <meta property="og:image" content="http://example.com/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/003.png">
 <meta property="og:image" content="http://example.com/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/004.png">
+<meta property="og:image" content="http://example.com/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/005.png">
+<meta property="og:image" content="http://example.com/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/006.png">
 <meta property="article:published_time" content="2022-06-01T07:19:02.000Z">
-<meta property="article:modified_time" content="2022-06-02T09:51:36.701Z">
+<meta property="article:modified_time" content="2022-06-02T10:35:16.961Z">
 <meta property="article:author" content="Petro">
 <meta property="article:tag" content="新手教程">
 <meta name="twitter:card" content="summary">
@@ -358,7 +360,7 @@ hexo server -p <span class="token number">80</span>   <span class="token comment
 </blockquote>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> config http.sslVerify <span class="token string">"false"</span>
 <span class="token comment"># 如果输入上面命令提示报“ fatal: not in a git directory  ”，则输入如下命令：git init</span>
-<span class="token comment"># 重新下载</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token comment"># 之后就可以重新下载了</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>另外一个问题是: </p>
 <blockquote>
@@ -380,7 +382,7 @@ hexo server -p <span class="token number">80</span>   <span class="token comment
 </ol>
 <h3 id="github的page功能"><a href="#github的page功能" class="headerlink" title="github的page功能"></a>github的page功能</h3><ol>
 <li>你得创建一个符合命名规约的repo, 参见这个网站<blockquote>
-<p><a target="_blank" rel="noopener" href="https://pages.github.com/">https://pages.github.com/</a><br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/003.png" alt="pages"></p>
+<p><a target="_blank" rel="noopener" href="https://pages.github.com/">https://pages.github.com/</a><br><a target="_blank" rel="noopener" href="https://docs.github.com/cn/pages/quickstart">https://docs.github.com/cn/pages/quickstart</a><br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/003.png" alt="pages"></p>
 </blockquote>
 </li>
 <li>简而言之如果你符合命名规约了, 那这个repo就可以当网页服务器用了, 比gitee省事很多</li>
@@ -400,11 +402,21 @@ hexo server -p <span class="token number">80</span>   <span class="token comment
 </li>
 <li><p>以上这个问题解决了后, 我们就可以在.git里配置到代码仓库的东西<br>然后.deploy_git的话, 那就只能是读全局的git配置了</p>
 </li>
-<li><p>在**_config.yml**的deploy部分, repo属性也是有2种写法, 如果是<a href="mailto:&#103;&#x69;&#x74;&#x40;&#x67;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#x6f;&#x6d;">&#103;&#x69;&#x74;&#x40;&#x67;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#x6f;&#x6d;</a>: xxx/xxxx的方式的话, 那是ssh的方式, 得在git仓库里添加ssh, 同时本地也得存在ssh的本地文件. 如果是<a target="_blank" rel="noopener" href="https://github.com/xxxx%E7%9A%84%E6%96%B9%E5%BC%8F%E7%9A%84%E8%AF%9D">https://github.com/xxxx的方式的话</a>, 基本上会跳出来让你输用户名和密码, 就可以了</p>
+<li><p>在**_config.yml**的deploy部分, repo属性也是有2种写法, 如果是<a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#x6d;">&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#x6d;</a>: xxx/xxxx的方式的话, 那是ssh的方式, 得在git仓库里添加ssh, 同时本地也得存在ssh的本地文件. 如果是<a target="_blank" rel="noopener" href="https://github.com/xxxx%E7%9A%84%E6%96%B9%E5%BC%8F%E7%9A%84%E8%AF%9D">https://github.com/xxxx的方式的话</a>, 基本上会跳出来让你输用户名和密码, 就可以了</p>
 </li>
-<li><p>让我头疼的是, 我一开始不想配global git config, 加之我之前工作的电脑有配好git的ssh过 (那个时候公司电脑用http拉git会失败, 但是ssh就可以), 所以我选择到我公司的电脑上去进行hexo deploy到github的操作.<br>试了半天, 都是 connection reset. 非常郁闷, 后来迁移到自己电脑上, 一下子就成功了(第三步的内容).<br>内心明白了, 公司电脑应该是block了 GitHub的push功能, 可能防止员工乱传代码.<br>这一步的意义是: git的配置基本上就我们熟悉的哪些, 不会因为hexo的额外配置而出错, 如果出错, 那大概率是我们电脑的网络环境有问题</p>
+<li><p>让我头疼的是, 我一开始不想配global git config, 加之我之前工作的电脑有配好git的ssh过 (那个时候公司电脑用http拉git会失败, 但是ssh就可以), 所以我选择到我公司的电脑上去进行hexo deploy到github的操作.<br>试了半天, 都是 connection reset. 非常郁闷, 后来迁移到自己电脑上, 一下子就成功了(第三步的内容).<br>内心明白了, 公司电脑应该是block了 GitHub的push功能, 可能防止员工乱传代码.<br>这一步的意义是: git的配置基本上就我们熟悉的哪些, 不会因为hexo的额外配置而出错, 如果出错, 那大概率是我们电脑的网络环境有问题<br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/005.png" alt="pages"><br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/006.png" alt="pages"><br>基本上就可以正常走完了</p>
 </li>
 </ol>
+<p>上传完到github的repo中, 就可以访问了, 更新速度挺快的, 完全没有git自己说的可能会出现的20分钟的延迟什么的</p>
+<h2 id="5-生产内容"><a href="#5-生产内容" class="headerlink" title="5.生产内容"></a>5.生产内容</h2><p>用命令自动生成md文件和对应的图片文件夹</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo n <span class="token operator">==</span> hexo new
+hexo g <span class="token operator">==</span> hexo generate
+hexo s <span class="token operator">==</span> hexo server
+hexo d <span class="token operator">==</span> hexo deploy
+
+hexo s -g <span class="token comment">#生成并本地预览</span>
+hexo d -g <span class="token comment">#生成并上传</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>按照Markdown规范来书写就可以</p>
 
       
     </div>
@@ -570,7 +582,7 @@ hexo server -p <span class="token number">80</span>   <span class="token comment
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85%E6%9C%AC%E5%9C%B0Hexo%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">1. 安装本地Hexo环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85Hexo%E4%B8%BB%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">2. 安装Hexo主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%99%E4%B8%80%E6%AD%A5%E4%B9%9F%E5%BE%88%E9%87%8D%E8%A6%81-%E7%8E%B0%E5%9C%A8%E6%96%B0%E7%9A%84%E4%B8%BB%E9%A2%98%E5%9F%BA%E6%9C%AC%E9%83%BD%E9%9C%80%E8%A6%81"><span class="nav-number">3.</span> <span class="nav-text">这一步也很重要, 现在新的主题基本都需要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85hexo-asset-image-%E6%8F%92%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">3.安装hexo-asset-image 插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%85%8D%E7%BD%AEGit"><span class="nav-number">5.</span> <span class="nav-text">4.配置Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gitee%E7%9A%84Pages%E5%8A%9F%E8%83%BD"><span class="nav-number">5.1.</span> <span class="nav-text">gitee的Pages功能:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#github%E7%9A%84page%E5%8A%9F%E8%83%BD"><span class="nav-number">5.2.</span> <span class="nav-text">github的page功能</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85%E6%9C%AC%E5%9C%B0Hexo%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">1. 安装本地Hexo环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85Hexo%E4%B8%BB%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">2. 安装Hexo主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%99%E4%B8%80%E6%AD%A5%E4%B9%9F%E5%BE%88%E9%87%8D%E8%A6%81-%E7%8E%B0%E5%9C%A8%E6%96%B0%E7%9A%84%E4%B8%BB%E9%A2%98%E5%9F%BA%E6%9C%AC%E9%83%BD%E9%9C%80%E8%A6%81"><span class="nav-number">3.</span> <span class="nav-text">这一步也很重要, 现在新的主题基本都需要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85hexo-asset-image-%E6%8F%92%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">3.安装hexo-asset-image 插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%85%8D%E7%BD%AEGit"><span class="nav-number">5.</span> <span class="nav-text">4.配置Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gitee%E7%9A%84Pages%E5%8A%9F%E8%83%BD"><span class="nav-number">5.1.</span> <span class="nav-text">gitee的Pages功能:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#github%E7%9A%84page%E5%8A%9F%E8%83%BD"><span class="nav-number">5.2.</span> <span class="nav-text">github的page功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%94%9F%E4%BA%A7%E5%86%85%E5%AE%B9"><span class="nav-number">6.</span> <span class="nav-text">5.生产内容</span></a></li></ol></div>
             
 
           </div>

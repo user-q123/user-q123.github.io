@@ -79,13 +79,15 @@
 
 
 
+<meta name="description" content="(sql复习向)有个需求:现在有2张表:债券要素表 - 含到期日信息；行情表 - 含每日成交额要找出比如从某个时间点开始, 一个债券如果在1年以上到期的话, 这个债券的成交总额. 比如一个债券在2021-02-01号的时候, 它的到期日是2022-10-01 那么2021-02-01到2022-02-01的每日交易量就都统计进来, 2022-02-02到目前的2022-06-01的交易量就不要计入">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sql一例">
 <meta property="og:url" content="http://example.com/2022/06/02/sql%E4%B8%80%E4%BE%8B/index.html">
 <meta property="og:site_name" content="My blog">
+<meta property="og:description" content="(sql复习向)有个需求:现在有2张表:债券要素表 - 含到期日信息；行情表 - 含每日成交额要找出比如从某个时间点开始, 一个债券如果在1年以上到期的话, 这个债券的成交总额. 比如一个债券在2021-02-01号的时候, 它的到期日是2022-10-01 那么2021-02-01到2022-02-01的每日交易量就都统计进来, 2022-02-02到目前的2022-06-01的交易量就不要计入">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-06-02T07:13:50.000Z">
-<meta property="article:modified_time" content="2022-06-02T07:13:50.166Z">
+<meta property="article:modified_time" content="2022-06-02T10:32:55.704Z">
 <meta property="article:author" content="Petro">
 <meta name="twitter:card" content="summary">
 
@@ -297,7 +299,112 @@
       
 
       
-        
+        <p>(sql复习向)<br>有个需求:<br>现在有2张表:<br>债券要素表 - 含到期日信息；<br>行情表 - 含每日成交额<br>要找出比如从某个时间点开始, 一个债券如果在1年以上到期的话, 这个债券的成交总额.</p>
+<p>比如一个债券在2021-02-01号的时候, 它的到期日是2022-10-01 那么2021-02-01到2022-02-01的每日交易量就都统计进来, 2022-02-02到目前的2022-06-01的交易量就不要计入.<br>然后搞一个汇总.</p>
+<p>这个汇总, 一开始让我有点迷惑, 其实就是group by.<br>SQL如下:</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">--建表阶段</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">DATABASE</span> <span class="token keyword">IF</span> <span class="token operator">NOT</span> <span class="token keyword">EXISTS</span> test_db <span class="token keyword">DEFAULT</span> <span class="token keyword">CHARACTER</span> <span class="token keyword">SET</span> utf8<span class="token punctuation">;</span>
+
+<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token operator">NOT</span> <span class="token keyword">EXISTS</span> <span class="token identifier"><span class="token punctuation">`</span>overall_table<span class="token punctuation">`</span></span><span class="token punctuation">(</span>
+   <span class="token identifier"><span class="token punctuation">`</span>item_id<span class="token punctuation">`</span></span> <span class="token keyword">INT</span> <span class="token keyword">UNSIGNED</span> <span class="token keyword">AUTO_INCREMENT</span><span class="token punctuation">,</span>
+   <span class="token identifier"><span class="token punctuation">`</span>item_title<span class="token punctuation">`</span></span> <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+   <span class="token identifier"><span class="token punctuation">`</span>expire_date<span class="token punctuation">`</span></span> <span class="token keyword">DATE</span><span class="token punctuation">,</span>
+   <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span> <span class="token identifier"><span class="token punctuation">`</span>item_id<span class="token punctuation">`</span></span> <span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token keyword">ENGINE</span><span class="token operator">=</span><span class="token keyword">InnoDB</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CHARSET</span><span class="token operator">=</span>utf8<span class="token punctuation">;</span>
+
+<span class="token comment">-- 给 债券要素表 插入记录</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> overall_table<span class="token punctuation">(</span>item_title<span class="token punctuation">,</span>expire_date<span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token string">'测试1'</span><span class="token punctuation">,</span><span class="token string">'2021-10-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> overall_table<span class="token punctuation">(</span>item_title<span class="token punctuation">,</span>expire_date<span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token string">'测试2'</span><span class="token punctuation">,</span><span class="token string">'2022-10-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> overall_table<span class="token punctuation">(</span>item_title<span class="token punctuation">,</span>expire_date<span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token string">'测试3'</span><span class="token punctuation">,</span><span class="token string">'2022-1-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> overall_table<span class="token punctuation">;</span>
+
+<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token operator">NOT</span> <span class="token keyword">EXISTS</span> <span class="token identifier"><span class="token punctuation">`</span>detail_table<span class="token punctuation">`</span></span><span class="token punctuation">(</span>
+   <span class="token identifier"><span class="token punctuation">`</span>id<span class="token punctuation">`</span></span> <span class="token keyword">INT</span> <span class="token keyword">UNSIGNED</span> <span class="token keyword">AUTO_INCREMENT</span><span class="token punctuation">,</span>
+   <span class="token identifier"><span class="token punctuation">`</span>item_id<span class="token punctuation">`</span></span> <span class="token keyword">INT</span><span class="token punctuation">,</span>
+   <span class="token identifier"><span class="token punctuation">`</span>value<span class="token punctuation">`</span></span> <span class="token keyword">BIGINT</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">DEFAULT</span> <span class="token number">100</span><span class="token punctuation">,</span>
+   <span class="token identifier"><span class="token punctuation">`</span>date<span class="token punctuation">`</span></span> <span class="token keyword">DATE</span><span class="token punctuation">,</span>
+   <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span> <span class="token identifier"><span class="token punctuation">`</span>id<span class="token punctuation">`</span></span> <span class="token punctuation">)</span><span class="token punctuation">,</span>
+   <span class="token keyword">UNIQUE</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span><span class="token identifier"><span class="token punctuation">`</span>item_id<span class="token punctuation">`</span></span><span class="token punctuation">,</span><span class="token identifier"><span class="token punctuation">`</span>date<span class="token punctuation">`</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token keyword">ENGINE</span><span class="token operator">=</span><span class="token keyword">InnoDB</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CHARSET</span><span class="token operator">=</span>utf8<span class="token punctuation">;</span>
+
+<span class="token comment">-- 复习一下Alter语句, 一开始写出varchar了</span>
+<span class="token comment">-- ALTER TABLE detail_table MODIFY value BIGINT NOT NULL DEFAULT 100;</span>
+
+<span class="token comment">-- 给 行情表 插入记录</span>
+
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token string">'2021-1-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token string">'2021-1-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token string">'2021-1-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">60</span><span class="token punctuation">,</span><span class="token string">'2021-6-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">70</span><span class="token punctuation">,</span><span class="token string">'2021-6-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">,</span><span class="token string">'2021-6-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token string">'2021-9-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">12</span><span class="token punctuation">,</span><span class="token string">'2021-9-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">13</span><span class="token punctuation">,</span><span class="token string">'2021-9-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">-- 看看对不对</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> detail_table<span class="token punctuation">;</span>
+
+<span class="token comment">-- 先取个数据看看</span>
+
+<span class="token keyword">SELECT</span> 
+d<span class="token punctuation">.</span><span class="token keyword">value</span>  <span class="token string">'当天成交额'</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span><span class="token keyword">date</span> <span class="token string">'当天成交日'</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span>item_id <span class="token string">'债券代码号'</span><span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>expire_date <span class="token string">'债券到期日'</span><span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>item_title <span class="token string">'债券中文名'</span> 
+<span class="token keyword">FROM</span> detail_table d <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>  overall_table o <span class="token keyword">ON</span> o<span class="token punctuation">.</span>item_id <span class="token operator">=</span>d<span class="token punctuation">.</span>item_id<span class="token punctuation">;</span>
+
+<span class="token comment">-- 再看看日期计算</span>
+<span class="token keyword">SELECT</span> 
+d<span class="token punctuation">.</span><span class="token keyword">value</span>  <span class="token string">'当天成交额'</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span><span class="token keyword">date</span> <span class="token string">'当天成交日'</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span>item_id <span class="token string">'债券代码号'</span><span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>expire_date <span class="token string">'债券到期日'</span><span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>item_title <span class="token string">'债券中文名'</span><span class="token punctuation">,</span>
+DATEDIFF<span class="token punctuation">(</span>o<span class="token punctuation">.</span>expire_date<span class="token punctuation">,</span>d<span class="token punctuation">.</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token string">'日期差值'</span>
+<span class="token keyword">FROM</span> detail_table d <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>  overall_table o <span class="token keyword">ON</span> o<span class="token punctuation">.</span>item_id <span class="token operator">=</span>d<span class="token punctuation">.</span>item_id <span class="token punctuation">;</span> 
+
+<span class="token comment">-- 我就以300天当一年了, 看看能不能过滤出数据</span>
+<span class="token keyword">SELECT</span> 
+d<span class="token punctuation">.</span><span class="token keyword">value</span>  <span class="token string">'当天成交额'</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span><span class="token keyword">date</span> <span class="token string">'当天成交日'</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span>item_id <span class="token string">'债券代码号'</span><span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>expire_date <span class="token string">'债券到期日'</span><span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>item_title <span class="token string">'债券中文名'</span><span class="token punctuation">,</span>
+DATEDIFF<span class="token punctuation">(</span>o<span class="token punctuation">.</span>expire_date<span class="token punctuation">,</span>d<span class="token punctuation">.</span><span class="token keyword">date</span><span class="token punctuation">)</span> date_diff
+<span class="token keyword">FROM</span> detail_table d <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>  overall_table o <span class="token keyword">ON</span> o<span class="token punctuation">.</span>item_id <span class="token operator">=</span>d<span class="token punctuation">.</span>item_id
+<span class="token keyword">WHERE</span> date_diff <span class="token operator">></span> <span class="token number">300</span><span class="token punctuation">;</span>
+
+<span class="token comment">-- 汇总一下看看, 这个一开始犯了个错, Having group by 是不能放在 Having 后面的</span>
+<span class="token keyword">SELECT</span> 
+d<span class="token punctuation">.</span><span class="token keyword">value</span>  <span class="token string">'当天成交额'</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span><span class="token keyword">date</span> <span class="token string">'当天成交日'</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span>item_id <span class="token string">'债券代码号'</span><span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>expire_date <span class="token string">'债券到期日'</span><span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>item_title <span class="token string">'债券中文名'</span><span class="token punctuation">,</span>
+DATEDIFF<span class="token punctuation">(</span>o<span class="token punctuation">.</span>expire_date<span class="token punctuation">,</span>d<span class="token punctuation">.</span><span class="token keyword">date</span><span class="token punctuation">)</span> date_diff
+<span class="token keyword">FROM</span> detail_table d <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>  overall_table o <span class="token keyword">ON</span> o<span class="token punctuation">.</span>item_id <span class="token operator">=</span>d<span class="token punctuation">.</span>item_id
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> d<span class="token punctuation">.</span>item_id <span class="token keyword">HAVING</span> date_diff <span class="token operator">></span> <span class="token number">300</span> 
+
+<span class="token comment">-- 发现直接sum, 会把300天以上的数据也给加上去,</span>
+<span class="token comment">-- 没办法, 使用类似视图的方式吧. 这里生成的表得给一个名字</span>
+<span class="token keyword">SELECT</span> <span class="token function">SUM</span><span class="token punctuation">(</span><span class="token keyword">value</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> <span class="token string">'总成交量'</span><span class="token punctuation">,</span>
+code <span class="token keyword">AS</span> <span class="token string">'债券代码'</span> <span class="token punctuation">,</span>
+item_title <span class="token keyword">AS</span> <span class="token string">'债券中文名'</span> 
+<span class="token keyword">FROM</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> 
+d<span class="token punctuation">.</span><span class="token keyword">value</span> <span class="token keyword">AS</span> <span class="token keyword">value</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span><span class="token keyword">date</span> <span class="token keyword">AS</span>  history_date<span class="token punctuation">,</span>
+d<span class="token punctuation">.</span>item_id <span class="token keyword">AS</span> code<span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>expire_date <span class="token keyword">AS</span> expire_date<span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>item_title <span class="token keyword">AS</span> item_title<span class="token punctuation">,</span>
+DATEDIFF<span class="token punctuation">(</span>o<span class="token punctuation">.</span>expire_date<span class="token punctuation">,</span>d<span class="token punctuation">.</span><span class="token keyword">date</span><span class="token punctuation">)</span> date_diff
+<span class="token keyword">FROM</span> detail_table d <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>  overall_table o <span class="token keyword">ON</span> o<span class="token punctuation">.</span>item_id <span class="token operator">=</span>d<span class="token punctuation">.</span>item_id
+<span class="token keyword">HAVING</span> date_diff <span class="token operator">></span> <span class="token number">300</span><span class="token punctuation">)</span> 
+<span class="token keyword">AS</span> temp_table <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> code<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
       
     </div>
     

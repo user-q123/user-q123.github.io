@@ -300,7 +300,112 @@
       
         
           
-            
+            <p>(sql复习向)<br>有个需求:<br>现在有2张表:<br>债券要素表 - 含到期日信息；<br>行情表 - 含每日成交额<br>要找出比如从某个时间点开始, 一个债券如果在1年以上到期的话, 这个债券的成交总额.</p>
+<p>比如一个债券在2021-02-01号的时候, 它的到期日是2022-10-01 那么2021-02-01到2022-02-01的每日交易量就都统计进来, 2022-02-02到目前的2022-06-01的交易量就不要计入.<br>然后搞一个汇总.</p>
+<p>这个汇总, 一开始让我有点迷惑, 其实就是group by.<br>SQL如下:</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">--建表阶段</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">DATABASE</span> <span class="token keyword">IF</span> <span class="token operator">NOT</span> <span class="token keyword">EXISTS</span> test_db <span class="token keyword">DEFAULT</span> <span class="token keyword">CHARACTER</span> <span class="token keyword">SET</span> utf8<span class="token punctuation">;</span>
+
+<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token operator">NOT</span> <span class="token keyword">EXISTS</span> <span class="token identifier"><span class="token punctuation">`</span>overall_table<span class="token punctuation">`</span></span><span class="token punctuation">(</span>
+   <span class="token identifier"><span class="token punctuation">`</span>item_id<span class="token punctuation">`</span></span> <span class="token keyword">INT</span> <span class="token keyword">UNSIGNED</span> <span class="token keyword">AUTO_INCREMENT</span><span class="token punctuation">,</span>
+   <span class="token identifier"><span class="token punctuation">`</span>item_title<span class="token punctuation">`</span></span> <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+   <span class="token identifier"><span class="token punctuation">`</span>expire_date<span class="token punctuation">`</span></span> <span class="token keyword">DATE</span><span class="token punctuation">,</span>
+   <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span> <span class="token identifier"><span class="token punctuation">`</span>item_id<span class="token punctuation">`</span></span> <span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token keyword">ENGINE</span><span class="token operator">=</span><span class="token keyword">InnoDB</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CHARSET</span><span class="token operator">=</span>utf8<span class="token punctuation">;</span>
+
+<span class="token comment">-- 给 债券要素表 插入记录</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> overall_table<span class="token punctuation">(</span>item_title<span class="token punctuation">,</span>expire_date<span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token string">'测试1'</span><span class="token punctuation">,</span><span class="token string">'2021-10-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> overall_table<span class="token punctuation">(</span>item_title<span class="token punctuation">,</span>expire_date<span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token string">'测试2'</span><span class="token punctuation">,</span><span class="token string">'2022-10-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> overall_table<span class="token punctuation">(</span>item_title<span class="token punctuation">,</span>expire_date<span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token string">'测试3'</span><span class="token punctuation">,</span><span class="token string">'2022-1-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> overall_table<span class="token punctuation">;</span>
+
+<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token operator">NOT</span> <span class="token keyword">EXISTS</span> <span class="token identifier"><span class="token punctuation">`</span>detail_table<span class="token punctuation">`</span></span><span class="token punctuation">(</span>
+   <span class="token identifier"><span class="token punctuation">`</span>id<span class="token punctuation">`</span></span> <span class="token keyword">INT</span> <span class="token keyword">UNSIGNED</span> <span class="token keyword">AUTO_INCREMENT</span><span class="token punctuation">,</span>
+   <span class="token identifier"><span class="token punctuation">`</span>item_id<span class="token punctuation">`</span></span> <span class="token keyword">INT</span><span class="token punctuation">,</span>
+   <span class="token identifier"><span class="token punctuation">`</span>value<span class="token punctuation">`</span></span> <span class="token keyword">BIGINT</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">DEFAULT</span> <span class="token number">100</span><span class="token punctuation">,</span>
+   <span class="token identifier"><span class="token punctuation">`</span>date<span class="token punctuation">`</span></span> <span class="token keyword">DATE</span><span class="token punctuation">,</span>
+   <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span> <span class="token identifier"><span class="token punctuation">`</span>id<span class="token punctuation">`</span></span> <span class="token punctuation">)</span><span class="token punctuation">,</span>
+   <span class="token keyword">UNIQUE</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span><span class="token identifier"><span class="token punctuation">`</span>item_id<span class="token punctuation">`</span></span><span class="token punctuation">,</span><span class="token identifier"><span class="token punctuation">`</span>date<span class="token punctuation">`</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token keyword">ENGINE</span><span class="token operator">=</span><span class="token keyword">InnoDB</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CHARSET</span><span class="token operator">=</span>utf8<span class="token punctuation">;</span>
+
+<span class="token comment">-- 复习一下Alter语句, 一开始写出varchar了</span>
+<span class="token comment">-- ALTER TABLE detail_table MODIFY value BIGINT NOT NULL DEFAULT 100;</span>
+
+<span class="token comment">-- 给 行情表 插入记录</span>
+
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token string">'2021-1-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token string">'2021-1-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token string">'2021-1-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">60</span><span class="token punctuation">,</span><span class="token string">'2021-6-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">70</span><span class="token punctuation">,</span><span class="token string">'2021-6-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">,</span><span class="token string">'2021-6-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token string">'2021-9-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">12</span><span class="token punctuation">,</span><span class="token string">'2021-9-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">13</span><span class="token punctuation">,</span><span class="token string">'2021-9-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">-- 看看对不对</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> detail_table<span class="token punctuation">;</span>
+
+<span class="token comment">-- 先取个数据看看</span>
+
+<span class="token keyword">SELECT</span> 
+d<span class="token punctuation">.</span><span class="token keyword">value</span>  <span class="token string">'当天成交额'</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span><span class="token keyword">date</span> <span class="token string">'当天成交日'</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span>item_id <span class="token string">'债券代码号'</span><span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>expire_date <span class="token string">'债券到期日'</span><span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>item_title <span class="token string">'债券中文名'</span> 
+<span class="token keyword">FROM</span> detail_table d <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>  overall_table o <span class="token keyword">ON</span> o<span class="token punctuation">.</span>item_id <span class="token operator">=</span>d<span class="token punctuation">.</span>item_id<span class="token punctuation">;</span>
+
+<span class="token comment">-- 再看看日期计算</span>
+<span class="token keyword">SELECT</span> 
+d<span class="token punctuation">.</span><span class="token keyword">value</span>  <span class="token string">'当天成交额'</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span><span class="token keyword">date</span> <span class="token string">'当天成交日'</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span>item_id <span class="token string">'债券代码号'</span><span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>expire_date <span class="token string">'债券到期日'</span><span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>item_title <span class="token string">'债券中文名'</span><span class="token punctuation">,</span>
+DATEDIFF<span class="token punctuation">(</span>o<span class="token punctuation">.</span>expire_date<span class="token punctuation">,</span>d<span class="token punctuation">.</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token string">'日期差值'</span>
+<span class="token keyword">FROM</span> detail_table d <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>  overall_table o <span class="token keyword">ON</span> o<span class="token punctuation">.</span>item_id <span class="token operator">=</span>d<span class="token punctuation">.</span>item_id <span class="token punctuation">;</span> 
+
+<span class="token comment">-- 我就以300天当一年了, 看看能不能过滤出数据</span>
+<span class="token keyword">SELECT</span> 
+d<span class="token punctuation">.</span><span class="token keyword">value</span>  <span class="token string">'当天成交额'</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span><span class="token keyword">date</span> <span class="token string">'当天成交日'</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span>item_id <span class="token string">'债券代码号'</span><span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>expire_date <span class="token string">'债券到期日'</span><span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>item_title <span class="token string">'债券中文名'</span><span class="token punctuation">,</span>
+DATEDIFF<span class="token punctuation">(</span>o<span class="token punctuation">.</span>expire_date<span class="token punctuation">,</span>d<span class="token punctuation">.</span><span class="token keyword">date</span><span class="token punctuation">)</span> date_diff
+<span class="token keyword">FROM</span> detail_table d <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>  overall_table o <span class="token keyword">ON</span> o<span class="token punctuation">.</span>item_id <span class="token operator">=</span>d<span class="token punctuation">.</span>item_id
+<span class="token keyword">WHERE</span> date_diff <span class="token operator">></span> <span class="token number">300</span><span class="token punctuation">;</span>
+
+<span class="token comment">-- 汇总一下看看, 这个一开始犯了个错, Having group by 是不能放在 Having 后面的</span>
+<span class="token keyword">SELECT</span> 
+d<span class="token punctuation">.</span><span class="token keyword">value</span>  <span class="token string">'当天成交额'</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span><span class="token keyword">date</span> <span class="token string">'当天成交日'</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span>item_id <span class="token string">'债券代码号'</span><span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>expire_date <span class="token string">'债券到期日'</span><span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>item_title <span class="token string">'债券中文名'</span><span class="token punctuation">,</span>
+DATEDIFF<span class="token punctuation">(</span>o<span class="token punctuation">.</span>expire_date<span class="token punctuation">,</span>d<span class="token punctuation">.</span><span class="token keyword">date</span><span class="token punctuation">)</span> date_diff
+<span class="token keyword">FROM</span> detail_table d <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>  overall_table o <span class="token keyword">ON</span> o<span class="token punctuation">.</span>item_id <span class="token operator">=</span>d<span class="token punctuation">.</span>item_id
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> d<span class="token punctuation">.</span>item_id <span class="token keyword">HAVING</span> date_diff <span class="token operator">></span> <span class="token number">300</span> 
+
+<span class="token comment">-- 发现直接sum, 会把300天以上的数据也给加上去,</span>
+<span class="token comment">-- 没办法, 使用类似视图的方式吧. 这里生成的表得给一个名字</span>
+<span class="token keyword">SELECT</span> <span class="token function">SUM</span><span class="token punctuation">(</span><span class="token keyword">value</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> <span class="token string">'总成交量'</span><span class="token punctuation">,</span>
+code <span class="token keyword">AS</span> <span class="token string">'债券代码'</span> <span class="token punctuation">,</span>
+item_title <span class="token keyword">AS</span> <span class="token string">'债券中文名'</span> 
+<span class="token keyword">FROM</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> 
+d<span class="token punctuation">.</span><span class="token keyword">value</span> <span class="token keyword">AS</span> <span class="token keyword">value</span><span class="token punctuation">,</span>
+d<span class="token punctuation">.</span><span class="token keyword">date</span> <span class="token keyword">AS</span>  history_date<span class="token punctuation">,</span>
+d<span class="token punctuation">.</span>item_id <span class="token keyword">AS</span> code<span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>expire_date <span class="token keyword">AS</span> expire_date<span class="token punctuation">,</span>
+o<span class="token punctuation">.</span>item_title <span class="token keyword">AS</span> item_title<span class="token punctuation">,</span>
+DATEDIFF<span class="token punctuation">(</span>o<span class="token punctuation">.</span>expire_date<span class="token punctuation">,</span>d<span class="token punctuation">.</span><span class="token keyword">date</span><span class="token punctuation">)</span> date_diff
+<span class="token keyword">FROM</span> detail_table d <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>  overall_table o <span class="token keyword">ON</span> o<span class="token punctuation">.</span>item_id <span class="token operator">=</span>d<span class="token punctuation">.</span>item_id
+<span class="token keyword">HAVING</span> date_diff <span class="token operator">></span> <span class="token number">300</span><span class="token punctuation">)</span> 
+<span class="token keyword">AS</span> temp_table <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> code<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
           
         
       
@@ -472,7 +577,7 @@ hexo server -p <span class="token number">80</span>   <span class="token comment
 </blockquote>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> config http.sslVerify <span class="token string">"false"</span>
 <span class="token comment"># 如果输入上面命令提示报“ fatal: not in a git directory  ”，则输入如下命令：git init</span>
-<span class="token comment"># 重新下载</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token comment"># 之后就可以重新下载了</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>另外一个问题是: </p>
 <blockquote>
@@ -494,7 +599,7 @@ hexo server -p <span class="token number">80</span>   <span class="token comment
 </ol>
 <h3 id="github的page功能"><a href="#github的page功能" class="headerlink" title="github的page功能"></a>github的page功能</h3><ol>
 <li>你得创建一个符合命名规约的repo, 参见这个网站<blockquote>
-<p><a target="_blank" rel="noopener" href="https://pages.github.com/">https://pages.github.com/</a><br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/003.png" alt="pages"></p>
+<p><a target="_blank" rel="noopener" href="https://pages.github.com/">https://pages.github.com/</a><br><a target="_blank" rel="noopener" href="https://docs.github.com/cn/pages/quickstart">https://docs.github.com/cn/pages/quickstart</a><br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/003.png" alt="pages"></p>
 </blockquote>
 </li>
 <li>简而言之如果你符合命名规约了, 那这个repo就可以当网页服务器用了, 比gitee省事很多</li>
@@ -514,11 +619,21 @@ hexo server -p <span class="token number">80</span>   <span class="token comment
 </li>
 <li><p>以上这个问题解决了后, 我们就可以在.git里配置到代码仓库的东西<br>然后.deploy_git的话, 那就只能是读全局的git配置了</p>
 </li>
-<li><p>在**_config.yml**的deploy部分, repo属性也是有2种写法, 如果是<a href="mailto:&#103;&#x69;&#x74;&#x40;&#x67;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#x6f;&#x6d;">&#103;&#x69;&#x74;&#x40;&#x67;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#x6f;&#x6d;</a>: xxx/xxxx的方式的话, 那是ssh的方式, 得在git仓库里添加ssh, 同时本地也得存在ssh的本地文件. 如果是<a target="_blank" rel="noopener" href="https://github.com/xxxx%E7%9A%84%E6%96%B9%E5%BC%8F%E7%9A%84%E8%AF%9D">https://github.com/xxxx的方式的话</a>, 基本上会跳出来让你输用户名和密码, 就可以了</p>
+<li><p>在**_config.yml**的deploy部分, repo属性也是有2种写法, 如果是<a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#x6d;">&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#x6d;</a>: xxx/xxxx的方式的话, 那是ssh的方式, 得在git仓库里添加ssh, 同时本地也得存在ssh的本地文件. 如果是<a target="_blank" rel="noopener" href="https://github.com/xxxx%E7%9A%84%E6%96%B9%E5%BC%8F%E7%9A%84%E8%AF%9D">https://github.com/xxxx的方式的话</a>, 基本上会跳出来让你输用户名和密码, 就可以了</p>
 </li>
-<li><p>让我头疼的是, 我一开始不想配global git config, 加之我之前工作的电脑有配好git的ssh过 (那个时候公司电脑用http拉git会失败, 但是ssh就可以), 所以我选择到我公司的电脑上去进行hexo deploy到github的操作.<br>试了半天, 都是 connection reset. 非常郁闷, 后来迁移到自己电脑上, 一下子就成功了(第三步的内容).<br>内心明白了, 公司电脑应该是block了 GitHub的push功能, 可能防止员工乱传代码.<br>这一步的意义是: git的配置基本上就我们熟悉的哪些, 不会因为hexo的额外配置而出错, 如果出错, 那大概率是我们电脑的网络环境有问题</p>
+<li><p>让我头疼的是, 我一开始不想配global git config, 加之我之前工作的电脑有配好git的ssh过 (那个时候公司电脑用http拉git会失败, 但是ssh就可以), 所以我选择到我公司的电脑上去进行hexo deploy到github的操作.<br>试了半天, 都是 connection reset. 非常郁闷, 后来迁移到自己电脑上, 一下子就成功了(第三步的内容).<br>内心明白了, 公司电脑应该是block了 GitHub的push功能, 可能防止员工乱传代码.<br>这一步的意义是: git的配置基本上就我们熟悉的哪些, 不会因为hexo的额外配置而出错, 如果出错, 那大概率是我们电脑的网络环境有问题<br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/005.png" alt="pages"><br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/006.png" alt="pages"><br>基本上就可以正常走完了</p>
 </li>
 </ol>
+<p>上传完到github的repo中, 就可以访问了, 更新速度挺快的, 完全没有git自己说的可能会出现的20分钟的延迟什么的</p>
+<h2 id="5-生产内容"><a href="#5-生产内容" class="headerlink" title="5.生产内容"></a>5.生产内容</h2><p>用命令自动生成md文件和对应的图片文件夹</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo n <span class="token operator">==</span> hexo new
+hexo g <span class="token operator">==</span> hexo generate
+hexo s <span class="token operator">==</span> hexo server
+hexo d <span class="token operator">==</span> hexo deploy
+
+hexo s -g <span class="token comment">#生成并本地预览</span>
+hexo d -g <span class="token comment">#生成并上传</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>按照Markdown规范来书写就可以</p>
 
           
         
