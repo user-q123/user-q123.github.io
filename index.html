@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next pisces use-motion" lang="en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -93,7 +93,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '',
-    scheme: 'Muse',
+    scheme: 'Pisces',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -178,7 +178,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -187,12 +187,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            Archives
+            Tags
           </a>
         </li>
       
@@ -215,6 +215,126 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-Home" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/02/index/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/06/02/index/" itemprop="url">home</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-06-02T18:58:11+08:00">
+                2022-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这是home</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -300,8 +420,16 @@
       
         
           
-            <p>(sql复习向)<br>有个需求:<br>现在有2张表:<br>债券要素表 - 含到期日信息；<br>行情表 - 含每日成交额<br>要找出比如从某个时间点开始, 一个债券如果在1年以上到期的话, 这个债券的成交总额.</p>
-<p>比如一个债券在2021-02-01号的时候, 它的到期日是2022-10-01 那么2021-02-01到2022-02-01的每日交易量就都统计进来, 2022-02-02到目前的2022-06-01的交易量就不要计入.<br>然后搞一个汇总.</p>
+            <p>(sql复习向)<br>有个需求:<br>现在有2张表:</p>
+<ul>
+<li>债券要素表 - 含到期日信息；</li>
+<li>行情表 - 含每日成交额</li>
+</ul>
+<p>要找出比如从某个时间点开始, 一个债券如果在1年以上到期的话, 这个债券的成交总额.</p>
+<p>比如一个债券在2021-02-01号的时候, 它的到期日是2022-10-01 那么2021-02-01到2022-02-01的每日交易量就都统计进来, 2022-02-02到目前的2022-06-01的交易量就不要计入.<br>sql中时间计算函数如下:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/super_qing_/article/details/104018370">https://blog.csdn.net/super_qing_/article/details/104018370</a><br>然后搞一个汇总.</p>
+</blockquote>
 <p>这个汇总, 一开始让我有点迷惑, 其实就是group by.<br>SQL如下:</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">--建表阶段</span>
 <span class="token keyword">CREATE</span> <span class="token keyword">DATABASE</span> <span class="token keyword">IF</span> <span class="token operator">NOT</span> <span class="token keyword">EXISTS</span> test_db <span class="token keyword">DEFAULT</span> <span class="token keyword">CHARACTER</span> <span class="token keyword">SET</span> utf8<span class="token punctuation">;</span>
@@ -495,6 +623,28 @@ DATEDIFF<span class="token punctuation">(</span>o<span class="token punctuation"
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -570,7 +720,10 @@ hexo server -p <span class="token number">80</span>   <span class="token comment
 <h2 id="这一步也很重要-现在新的主题基本都需要"><a href="#这一步也很重要-现在新的主题基本都需要" class="headerlink" title="这一步也很重要, 现在新的主题基本都需要"></a>这一步也很重要, 现在新的主题基本都需要</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 如果出现类似eggjs的那种 &lt;% xxx>的问题, 多半是这个插件没装上</span>
 <span class="token function">npm</span> i hexo-renderer-swig<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>主题的配置基本上是在 <em><strong>_config.yml</strong></em>下配置的.</p>
+<p>主题的配置基本上是在 <em><strong>_config.yml</strong></em>下配置的.<br>next的帮助页面在这里:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/theme-settings.html">http://theme-next.iissnan.com/theme-settings.html</a></p>
+</blockquote>
 <p>另外 我在clone主题的时候, 发现了这个问题:</p>
 <blockquote>
 <p>error: RPC failed； curl 56 OpenSSL SSL_read: Connection was reset, errno 10054<br>因为我之前git指令都用的好好的, 不知道为什么这里不行.<br>可能原因是我没有实现构建好git目录?<br>不过用下面的方法是可以解决问题的:</p>
@@ -619,7 +772,7 @@ hexo server -p <span class="token number">80</span>   <span class="token comment
 </li>
 <li><p>以上这个问题解决了后, 我们就可以在.git里配置到代码仓库的东西<br>然后.deploy_git的话, 那就只能是读全局的git配置了</p>
 </li>
-<li><p>在**_config.yml**的deploy部分, repo属性也是有2种写法, 如果是<a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#x6d;">&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#x6d;</a>: xxx/xxxx的方式的话, 那是ssh的方式, 得在git仓库里添加ssh, 同时本地也得存在ssh的本地文件. 如果是<a target="_blank" rel="noopener" href="https://github.com/xxxx%E7%9A%84%E6%96%B9%E5%BC%8F%E7%9A%84%E8%AF%9D">https://github.com/xxxx的方式的话</a>, 基本上会跳出来让你输用户名和密码, 就可以了</p>
+<li><p>在**_config.yml**的deploy部分, repo属性也是有2种写法, 如果是<a href="mailto:&#x67;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#98;&#46;&#99;&#111;&#x6d;">&#x67;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#98;&#46;&#99;&#111;&#x6d;</a>: xxx/xxxx的方式的话, 那是ssh的方式, 得在git仓库里添加ssh, 同时本地也得存在ssh的本地文件. 如果是<a target="_blank" rel="noopener" href="https://github.com/xxxx%E7%9A%84%E6%96%B9%E5%BC%8F%E7%9A%84%E8%AF%9D">https://github.com/xxxx的方式的话</a>, 基本上会跳出来让你输用户名和密码, 就可以了</p>
 </li>
 <li><p>让我头疼的是, 我一开始不想配global git config, 加之我之前工作的电脑有配好git的ssh过 (那个时候公司电脑用http拉git会失败, 但是ssh就可以), 所以我选择到我公司的电脑上去进行hexo deploy到github的操作.<br>试了半天, 都是 connection reset. 非常郁闷, 后来迁移到自己电脑上, 一下子就成功了(第三步的内容).<br>内心明白了, 公司电脑应该是block了 GitHub的push功能, 可能防止员工乱传代码.<br>这一步的意义是: git的配置基本上就我们熟悉的哪些, 不会因为hexo的额外配置而出错, 如果出错, 那大概率是我们电脑的网络环境有问题<br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/005.png" alt="pages"><br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/006.png" alt="pages"><br>基本上就可以正常走完了</p>
 </li>
@@ -753,7 +906,7 @@ hexo d -g <span class="token comment">#生成并上传</span><span aria-hidden="
       
         
           
-            <p><img src="/2022/06/01/test/01.png" alt="我电脑桌面的截图"></p>
+            <p><img src="/2022/06/01/test/001.png" alt="我电脑桌面的截图"></p>
 
           
         
@@ -833,24 +986,33 @@ hexo d -g <span class="token comment">#生成并上传</span><span aria-hidden="
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%20%7C%7C%20archive">
+                <a href="/archives">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">tags</span>
-                
+                </a>
               </div>
             
 
@@ -903,7 +1065,7 @@ hexo d -g <span class="token comment">#生成并上传</span><span aria-hidden="
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
 
 
 
@@ -950,6 +1112,8 @@ hexo d -g <span class="token comment">#生成并上传</span><span aria-hidden="
   
 
 
+  
+
 
 
 
@@ -990,6 +1154,11 @@ hexo d -g <span class="token comment">#生成并上传</span><span aria-hidden="
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
 
   
 
@@ -1002,6 +1171,13 @@ hexo d -g <span class="token comment">#生成并上传</span><span aria-hidden="
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
 
   
 
