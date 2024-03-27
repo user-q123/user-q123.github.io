@@ -113,7 +113,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -124,7 +124,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -141,6 +141,93 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/02/05/nexT%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89header%E9%83%A8%E5%88%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/02/05/nexT%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89header%E9%83%A8%E5%88%86/" class="post-title-link" itemprop="url">nexT添加自定义header部分</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-02-05 16:38:19" itemprop="dateCreated datePublished" datetime="2023-02-05T16:38:19+08:00">2023-02-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-05-29 14:17:49" itemprop="dateModified" datetime="2023-05-29T14:17:49+08:00">2023-05-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>文章写的越来越多了, 是不是发给朋友看, 他们表示要给我的文章点歌赞又不知道在哪里, 今天折腾了一下.<br>首选是把侧边栏的open变成always<br><img src="/2023/02/05/nexT%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89header%E9%83%A8%E5%88%86/001.png" alt="pages"><br>然后添加GitHub的关联按钮<br><img src="/2023/02/05/nexT%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89header%E9%83%A8%E5%88%86/002.png" alt="pages"><br>这里发现, 国内的Gitee还是不怎么受待见的, 这里 <code>||</code>后的字符串是在fontawesome上在坐标, Gitee根本就没有.<br>但是这样还是不怎么醒目, 本来想到把 <strong>原文仓库地址</strong>放到页脚上的, 但是我的贴子有些都很长, 估计能看到底的人不多<br><img src="/2023/02/05/nexT%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89header%E9%83%A8%E5%88%86/003.png" alt="pages"><br>折腾了半天, 终于发现了合位置, 需要修改NexT的模板文件<br>在NexT的 <code>_partials/header</code>下, 填上我们的原仓库link, 这样每个文章就都有了<br><img src="/2023/02/05/nexT%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89header%E9%83%A8%E5%88%86/004.png" alt="pages"></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">display</span><span class="token punctuation">:</span>flex<span class="token punctuation">;</span><span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span> <span class="token property">align-items</span><span class="token punctuation">:</span>center<span class="token punctuation">;</span> </span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>If you like this page, you can go to <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://github.com/user-q123/user-q123.github.io.git<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token entity named-entity" title="&nbsp;">&amp;nbsp;</span>original repo<span class="token entity named-entity" title="&nbsp;">&amp;nbsp;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span> and star it!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="/2023/02/05/nexT%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89header%E9%83%A8%E5%88%86/005.png" alt="pages"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1236,94 +1323,6 @@ xhr<span class="token punctuation">.</span><span class="token function">send</sp
 <p>2.</p>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cd4y1b7pe/?spm_id_from=333.999.0.0&amp;vd_source=cfbe808519ea188d379aa2527c839b4f">https://www.bilibili.com/video/BV1cd4y1b7pe/?spm_id_from=333.999.0.0&amp;vd_source=cfbe808519ea188d379aa2527c839b4f</a></p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2022/12/15/HID%E6%98%AF%E4%BB%80%E4%B9%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/12/15/HID%E6%98%AF%E4%BB%80%E4%B9%88/" class="post-title-link" itemprop="url">HID是什么</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-12-15 14:43:05" itemprop="dateCreated datePublished" datetime="2022-12-15T14:43:05+08:00">2022-12-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-29 14:17:49" itemprop="dateModified" datetime="2023-05-29T14:17:49+08:00">2023-05-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%B5%84%E6%BA%90%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">资源积累</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>其实就是鼠标键盘这类</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv579512">https://www.bilibili.com/read/cv579512</a></p>
 </blockquote>
 
       

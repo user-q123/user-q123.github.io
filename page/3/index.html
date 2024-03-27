@@ -113,7 +113,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -124,7 +124,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -141,6 +141,93 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/06/25/202306-git-port-443-after-21064-ms-Timed-out/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/06/25/202306-git-port-443-after-21064-ms-Timed-out/" class="post-title-link" itemprop="url">202306-git port 443 after 21064 ms Timed out</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-06-25 13:53:37 / Modified: 14:06:26" itemprop="dateCreated datePublished" datetime="2023-06-25T13:53:37+08:00">2023-06-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>我的电脑有时候使用<code>git pull origin</code>命令会发生网络问题<br><img src="/2023/06/25/202306-git-port-443-after-21064-ms-Timed-out/001.png" alt="pages"><br>有的时候不会发生<br>打算彻底解决一下<br>这是我的clash的端口:<br><img src="/2023/06/25/202306-git-port-443-after-21064-ms-Timed-out/002.png" alt="pages"></p>
+<pre class="line-numbers language-git" data-language="git"><code class="language-git">git config --global http.proxy http://127.0.0.1:7890
+git config --global http.proxy https://127.0.0.1:7890<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>设置完后发现了其他错误, 说明配置的不正确<br><img src="/2023/06/25/202306-git-port-443-after-21064-ms-Timed-out/003.png" alt="pages"><br>先复原</p>
+<pre class="line-numbers language-git" data-language="git"><code class="language-git">git config --global --unset http.proxy
+git config --global --unset https.proxy
+git config --global http.sslBackend <span class="token string">"openssl"</span>
+git config --global http.sslVerify false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>此时我pull突然就可以了:<br><img src="/2023/06/25/202306-git-port-443-after-21064-ms-Timed-out/004.png" alt="pages"></p>
+<p>如果要用梯子的话, 参考这个帖子:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xingxincsdn/article/details/125320830">https://blog.csdn.net/xingxincsdn/article/details/125320830</a></p>
+</blockquote>
+<pre class="line-numbers language-git" data-language="git"><code class="language-git">git config --global -e
+
+[http]
+        proxy = socks5://127.0.0.1:7890
+[https]
+        proxy = socks5://127.0.0.1:7890<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1017,113 +1104,6 @@ dism.exe &#x2F;online &#x2F;enable-feature &#x2F;featurename:VirtualMachinePlatf
 <pre class="line-numbers language-cmd" data-language="cmd"><code class="language-cmd">Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -NoRestart
 
 wsl --set-default-version 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/05/11/python%E5%AD%97%E5%85%B8dict%E7%9A%84%E5%90%88%E5%B9%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/11/python%E5%AD%97%E5%85%B8dict%E7%9A%84%E5%90%88%E5%B9%B6/" class="post-title-link" itemprop="url">python字典dict的合并</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-05-11 15:02:38" itemprop="dateCreated datePublished" datetime="2023-05-11T15:02:38+08:00">2023-05-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-29 14:17:49" itemprop="dateModified" datetime="2023-05-29T14:17:49+08:00">2023-05-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>有的时候在怀疑, 复杂的python嵌套字典对象, 可以嵌套合并么?<br>试了一下是可以的</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">dict1<span class="token operator">=</span><span class="token punctuation">&#123;</span>
-    <span class="token string">"name"</span><span class="token punctuation">:</span><span class="token punctuation">&#123;</span>
-        <span class="token string">"first-name"</span><span class="token punctuation">:</span><span class="token string">"Franklin"</span><span class="token punctuation">,</span>
-        <span class="token string">"surname"</span><span class="token punctuation">:</span><span class="token string">"Roosevelt"</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-    <span class="token string">"extra-info"</span><span class="token punctuation">:</span><span class="token punctuation">&#123;</span>
-        <span class="token string">"born-date"</span><span class="token punctuation">:</span><span class="token string">"1882-01-30"</span><span class="token punctuation">,</span>
-        <span class="token string">"death-date"</span><span class="token punctuation">:</span><span class="token string">"1945-04-12"</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-dict2<span class="token operator">=</span><span class="token punctuation">&#123;</span>
-    <span class="token string">"address"</span><span class="token punctuation">:</span><span class="token punctuation">&#123;</span>
-        <span class="token string">"Country"</span><span class="token punctuation">:</span><span class="token string">"United State"</span><span class="token punctuation">,</span>
-        <span class="token string">"State"</span><span class="token punctuation">:</span><span class="token string">"New York"</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2023/05/11/python%E5%AD%97%E5%85%B8dict%E7%9A%84%E5%90%88%E5%B9%B6/001.png" alt="page"></p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">dict1<span class="token punctuation">[</span><span class="token string">"extra-info"</span><span class="token punctuation">]</span><span class="token punctuation">.</span>update<span class="token punctuation">(</span>dict2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>dict1<span class="token punctuation">,</span> indent<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> ensure_ascii<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-
-
       
     </div>
 

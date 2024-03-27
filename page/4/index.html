@@ -113,7 +113,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -124,7 +124,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -141,6 +141,113 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/05/11/python%E5%AD%97%E5%85%B8dict%E7%9A%84%E5%90%88%E5%B9%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/11/python%E5%AD%97%E5%85%B8dict%E7%9A%84%E5%90%88%E5%B9%B6/" class="post-title-link" itemprop="url">python字典dict的合并</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-05-11 15:02:38" itemprop="dateCreated datePublished" datetime="2023-05-11T15:02:38+08:00">2023-05-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-05-29 14:17:49" itemprop="dateModified" datetime="2023-05-29T14:17:49+08:00">2023-05-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>有的时候在怀疑, 复杂的python嵌套字典对象, 可以嵌套合并么?<br>试了一下是可以的</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">dict1<span class="token operator">=</span><span class="token punctuation">&#123;</span>
+    <span class="token string">"name"</span><span class="token punctuation">:</span><span class="token punctuation">&#123;</span>
+        <span class="token string">"first-name"</span><span class="token punctuation">:</span><span class="token string">"Franklin"</span><span class="token punctuation">,</span>
+        <span class="token string">"surname"</span><span class="token punctuation">:</span><span class="token string">"Roosevelt"</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token string">"extra-info"</span><span class="token punctuation">:</span><span class="token punctuation">&#123;</span>
+        <span class="token string">"born-date"</span><span class="token punctuation">:</span><span class="token string">"1882-01-30"</span><span class="token punctuation">,</span>
+        <span class="token string">"death-date"</span><span class="token punctuation">:</span><span class="token string">"1945-04-12"</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+dict2<span class="token operator">=</span><span class="token punctuation">&#123;</span>
+    <span class="token string">"address"</span><span class="token punctuation">:</span><span class="token punctuation">&#123;</span>
+        <span class="token string">"Country"</span><span class="token punctuation">:</span><span class="token string">"United State"</span><span class="token punctuation">,</span>
+        <span class="token string">"State"</span><span class="token punctuation">:</span><span class="token string">"New York"</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/2023/05/11/python%E5%AD%97%E5%85%B8dict%E7%9A%84%E5%90%88%E5%B9%B6/001.png" alt="page"></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">dict1<span class="token punctuation">[</span><span class="token string">"extra-info"</span><span class="token punctuation">]</span><span class="token punctuation">.</span>update<span class="token punctuation">(</span>dict2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>dict1<span class="token punctuation">,</span> indent<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> ensure_ascii<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1151,93 +1258,6 @@ rl<span class="token punctuation">.</span><span class="token function">on</span>
           <blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/dominoar/QCPNovelAi">https://github.com/dominoar/QCPNovelAi</a></p>
 </blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/02/05/nexT%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89header%E9%83%A8%E5%88%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/02/05/nexT%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89header%E9%83%A8%E5%88%86/" class="post-title-link" itemprop="url">nexT添加自定义header部分</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-02-05 16:38:19" itemprop="dateCreated datePublished" datetime="2023-02-05T16:38:19+08:00">2023-02-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-29 14:17:49" itemprop="dateModified" datetime="2023-05-29T14:17:49+08:00">2023-05-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>文章写的越来越多了, 是不是发给朋友看, 他们表示要给我的文章点歌赞又不知道在哪里, 今天折腾了一下.<br>首选是把侧边栏的open变成always<br><img src="/2023/02/05/nexT%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89header%E9%83%A8%E5%88%86/001.png" alt="pages"><br>然后添加GitHub的关联按钮<br><img src="/2023/02/05/nexT%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89header%E9%83%A8%E5%88%86/002.png" alt="pages"><br>这里发现, 国内的Gitee还是不怎么受待见的, 这里 <code>||</code>后的字符串是在fontawesome上在坐标, Gitee根本就没有.<br>但是这样还是不怎么醒目, 本来想到把 <strong>原文仓库地址</strong>放到页脚上的, 但是我的贴子有些都很长, 估计能看到底的人不多<br><img src="/2023/02/05/nexT%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89header%E9%83%A8%E5%88%86/003.png" alt="pages"><br>折腾了半天, 终于发现了合位置, 需要修改NexT的模板文件<br>在NexT的 <code>_partials/header</code>下, 填上我们的原仓库link, 这样每个文章就都有了<br><img src="/2023/02/05/nexT%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89header%E9%83%A8%E5%88%86/004.png" alt="pages"></p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">display</span><span class="token punctuation">:</span>flex<span class="token punctuation">;</span><span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span> <span class="token property">align-items</span><span class="token punctuation">:</span>center<span class="token punctuation">;</span> </span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>If you like this page, you can go to <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://github.com/user-q123/user-q123.github.io.git<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token entity named-entity" title="&nbsp;">&amp;nbsp;</span>original repo<span class="token entity named-entity" title="&nbsp;">&amp;nbsp;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span> and star it!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/2023/02/05/nexT%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89header%E9%83%A8%E5%88%86/005.png" alt="pages"></p>
 
       
     </div>
