@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="这个代码是用来查看本地安装的包的, 但是运行会发生错误 from pip._internal.commands.show import search_packages_info import subprocess import sys import json import pathlib import math import operator  TMPL &#x3D; &#39;&amp;#123;:&lt;30&amp;#125">
+<meta property="og:type" content="article">
+<meta property="og:title" content="202306-给查看python第三方包代码错误debug">
+<meta property="og:url" content="https://user-q123.github.io/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/index.html">
+<meta property="og:site_name" content="My blog">
+<meta property="og:description" content="这个代码是用来查看本地安装的包的, 但是运行会发生错误 from pip._internal.commands.show import search_packages_info import subprocess import sys import json import pathlib import math import operator  TMPL &#x3D; &#39;&amp;#123;:&lt;30&amp;#125">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/001.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/002.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/003.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/004.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/005.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/006.png">
+<meta property="article:published_time" content="2023-06-30T07:18:27.000Z">
+<meta property="article:modified_time" content="2023-10-31T07:06:23.456Z">
+<meta property="article:author" content="Petro">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-q123.github.io/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/001.png">
+
+
+<link rel="canonical" href="https://user-q123.github.io/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/","path":"2023/06/30/202306-给查看python第三方包代码错误debug/","title":"202306-给查看python第三方包代码错误debug"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>202306-给查看python第三方包代码错误debug | My blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">My blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Viva la vida</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Petro</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="202306-给查看python第三方包代码错误debug | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          202306-给查看python第三方包代码错误debug
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-06-30 15:18:27" itemprop="dateCreated datePublished" datetime="2023-06-30T15:18:27+08:00">2023-06-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-31 15:06:23" itemprop="dateModified" datetime="2023-10-31T15:06:23+08:00">2023-10-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>这个代码是用来查看本地安装的包的, 但是运行会发生错误</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pip<span class="token punctuation">.</span>_internal<span class="token punctuation">.</span>commands<span class="token punctuation">.</span>show <span class="token keyword">import</span> search_packages_info
+<span class="token keyword">import</span> subprocess
+<span class="token keyword">import</span> sys
+<span class="token keyword">import</span> json
+<span class="token keyword">import</span> pathlib
+<span class="token keyword">import</span> math
+<span class="token keyword">import</span> operator
+
+TMPL <span class="token operator">=</span> <span class="token string">'&#123;:&lt;30&#125; &#123;:&lt;30&#125; &#123;:&lt;10&#125; &#123;:>9&#125;'</span>
+
+<span class="token comment"># 把单位为位转换成K,M这样的</span>
+<span class="token keyword">def</span> <span class="token function">humanize</span><span class="token punctuation">(</span>size<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Convert size in bytes to human readable output."""</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        units <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'B'</span><span class="token punctuation">,</span> <span class="token string">'KB'</span><span class="token punctuation">,</span> <span class="token string">'MB'</span><span class="token punctuation">,</span> <span class="token string">'GB'</span><span class="token punctuation">]</span>
+        i <span class="token operator">=</span> math<span class="token punctuation">.</span>floor<span class="token punctuation">(</span>math<span class="token punctuation">.</span>log<span class="token punctuation">(</span>size<span class="token punctuation">)</span> <span class="token operator">/</span> math<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        hsize <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span><span class="token builtin">round</span><span class="token punctuation">(</span>size <span class="token operator">/</span> <span class="token number">1024</span><span class="token operator">**</span>i<span class="token punctuation">)</span><span class="token punctuation">&#125;</span></span><span class="token interpolation"><span class="token punctuation">&#123;</span>units<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">&#125;</span></span><span class="token string">"</span></span>
+    <span class="token keyword">except</span> ValueError<span class="token punctuation">:</span>
+        hsize <span class="token operator">=</span> <span class="token string">'0B'</span>
+    <span class="token keyword">return</span> hsize
+
+
+<span class="token keyword">def</span> <span class="token function">pip_list_ext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""List installed packages with additional information."""</span>
+    <span class="token comment"># python -m pip list --format --json --verbose</span>
+    pip_list <span class="token operator">=</span> subprocess<span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token punctuation">[</span>sys<span class="token punctuation">.</span>executable<span class="token punctuation">,</span> <span class="token string">'-m'</span><span class="token punctuation">,</span> <span class="token string">'pip'</span><span class="token punctuation">,</span> <span class="token string">'list'</span><span class="token punctuation">,</span>
+                               <span class="token string">'--format'</span><span class="token punctuation">,</span> <span class="token string">'json'</span><span class="token punctuation">,</span> <span class="token string">'--verbose'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                              capture_output<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> pip_list<span class="token punctuation">.</span>returncode <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        <span class="token keyword">raise</span> RuntimeError<span class="token punctuation">(</span><span class="token string">'...'</span><span class="token punctuation">)</span>
+
+    query <span class="token operator">=</span> <span class="token punctuation">[</span>pkg<span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span> <span class="token keyword">for</span> pkg <span class="token keyword">in</span> json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>pip_list<span class="token punctuation">.</span>stdout<span class="token punctuation">)</span><span class="token punctuation">]</span>
+    
+    packages <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> pkg <span class="token keyword">in</span> search_packages_info<span class="token punctuation">(</span>query<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        location <span class="token operator">=</span> pathlib<span class="token punctuation">.</span>Path<span class="token punctuation">(</span>pkg<span class="token punctuation">[</span><span class="token string">'location'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        pkg<span class="token punctuation">[</span><span class="token string">'installer'</span><span class="token punctuation">]</span> <span class="token operator">=</span> pkg<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'installer'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>
+        pkg<span class="token punctuation">[</span><span class="token string">'files'</span><span class="token punctuation">]</span> <span class="token operator">=</span> pkg<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'files'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        size <span class="token operator">=</span> <span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">(</span>location <span class="token operator">/</span> f<span class="token punctuation">)</span><span class="token punctuation">.</span>stat<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>st_size
+                       <span class="token keyword">for</span> f <span class="token keyword">in</span> pkg<span class="token punctuation">[</span><span class="token string">'files'</span><span class="token punctuation">]</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>location <span class="token operator">/</span> f<span class="token punctuation">)</span><span class="token punctuation">.</span>is_file<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        pkg<span class="token punctuation">[</span><span class="token string">'size'</span><span class="token punctuation">]</span> <span class="token operator">=</span> size
+        packages<span class="token punctuation">.</span>append<span class="token punctuation">(</span>pkg<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> packages
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    packages <span class="token operator">=</span> pip_list_ext<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>TMPL<span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span><span class="token string">'Package'</span><span class="token punctuation">,</span> <span class="token string">'Version'</span><span class="token punctuation">,</span> <span class="token string">'Installer'</span><span class="token punctuation">,</span> <span class="token string">'Size'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>TMPL<span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span><span class="token string">'-'</span><span class="token operator">*</span><span class="token number">30</span><span class="token punctuation">,</span> <span class="token string">'-'</span><span class="token operator">*</span><span class="token number">30</span><span class="token punctuation">,</span> <span class="token string">'-'</span><span class="token operator">*</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">'-'</span><span class="token operator">*</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> pkg <span class="token keyword">in</span> packages<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>TMPL<span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>pkg<span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> pkg<span class="token punctuation">[</span><span class="token string">'version'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                          pkg<span class="token punctuation">[</span><span class="token string">'installer'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> humanize<span class="token punctuation">(</span>pkg<span class="token punctuation">[</span><span class="token string">'size'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># TOP 10</span>
+    N <span class="token operator">=</span> <span class="token number">10</span>
+    pkgs <span class="token operator">=</span> <span class="token builtin">sorted</span><span class="token punctuation">(</span>packages<span class="token punctuation">,</span> key<span class="token operator">=</span>operator<span class="token punctuation">.</span>itemgetter<span class="token punctuation">(</span><span class="token string">'size'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> reverse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"\nTOP </span><span class="token interpolation"><span class="token punctuation">&#123;</span>N<span class="token punctuation">&#125;</span></span><span class="token string">:"</span></span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i<span class="token punctuation">,</span> pkg <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>pkgs<span class="token punctuation">[</span><span class="token punctuation">:</span>N<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>i<span class="token punctuation">:</span><span class="token format-spec">>2</span><span class="token punctuation">&#125;</span></span><span class="token string">. </span><span class="token interpolation"><span class="token punctuation">&#123;</span>pkg<span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span></span><span class="token string"> (</span><span class="token interpolation"><span class="token punctuation">&#123;</span>humanize<span class="token punctuation">(</span>pkg<span class="token punctuation">[</span><span class="token string">'size'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span></span><span class="token string">)"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行会报这个错:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Traceback <span class="token punctuation">(</span>most recent call last<span class="token punctuation">)</span>:
+  File <span class="token string">"c:\Users\petro\Desktop<span class="token entity" title="\t">\t</span>est\python\show-pip-package-size\main.py"</span>, line <span class="token number">47</span>, <span class="token keyword">in</span> <span class="token operator">&lt;</span>module<span class="token operator">></span>
+    packages <span class="token operator">=</span> pip_list_ext<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  File <span class="token string">"c:\Users\petro\Desktop<span class="token entity" title="\t">\t</span>est\python\show-pip-package-size\main.py"</span>, line <span class="token number">36</span>, <span class="token keyword">in</span> pip_list_ext
+    location <span class="token operator">=</span> pathlib.Path<span class="token punctuation">(</span>pkg<span class="token punctuation">[</span><span class="token string">'location'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+TypeError: tuple indices must be integers or slices, not str<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里应该是这句话错了</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">for</span> pkg <span class="token keyword">in</span> search_packages_info<span class="token punctuation">(</span>query<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    location <span class="token operator">=</span> pathlib<span class="token punctuation">.</span>Path<span class="token punctuation">(</span>pkg<span class="token punctuation">[</span><span class="token string">'location'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>从这里可以看出来, 这个query对象是一个存了各种包名的list<br><img src="/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/001.png" alt="pages"><br>再看一下这里, 这个返回值是个生成器对象.<br>什么是生成器对象: </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/9185ccbe9cd7">https://www.jianshu.com/p/9185ccbe9cd7</a><br><img src="/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/002.png" alt="pages"></p>
+</blockquote>
+<p>生成器对象不大好看里面有什么东西<br><img src="/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/003.png" alt="pages"><br>转成list对象发现, 里面的内容果然很多</p>
+<p>查看一项具体里面有什么<br><img src="/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/004.png" alt="pages"><br>发现了错误</p>
+<p>看了一下这个<code>_PackageInfo</code>对象, 也没有get方法, 查看<code>__dict__</code>属性也报错<br><img src="/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/005.png" alt="pages"><br>用<code>dir()</code>查看后, 各个参数也没有给到获取的方法, 而下面的代码中可以发现, 它是以列表的形式来处理的, 所以转换成字典</p>
+<p>//TODO<br>结果转换还失败了<br><img src="/2023/06/30/202306-%E7%BB%99%E6%9F%A5%E7%9C%8Bpython%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AFdebug/006.png" alt="pages"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/06/25/202306-git-port-443-after-21064-ms-Timed-out/" rel="prev" title="202306-git port 443 after 21064 ms Timed out">
+                  <i class="fa fa-angle-left"></i> 202306-git port 443 after 21064 ms Timed out
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/09/07/202309-NPM%E5%AE%89%E8%A3%85%E9%94%99%E8%AF%AF/" rel="next" title="202309-公司新电脑Npm和Git安装错误">
+                  202309-公司新电脑Npm和Git安装错误 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Petro</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="关于babel配置一直想用一下js的装饰器也就是@符号, 因为这看起来和java和python比较像, 显得比较高端.但是发现 @ 符合是无法被识别的, 让我头疼了半天, 一度以为是不是这个符合是只能在 ts 中使用但是看了看多方教程, 发现似乎大家都是讲在js环境下怎么使用的.那我估计是, 这一定是一个新功能, 那必然是我的babel配置的不怎么正确. 趁此机会重新学习一遍babel, 因为之前">
+<meta property="og:type" content="article">
+<meta property="og:title" content="202305-babel与js装饰器学习">
+<meta property="og:url" content="https://user-q123.github.io/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="My blog">
+<meta property="og:description" content="关于babel配置一直想用一下js的装饰器也就是@符号, 因为这看起来和java和python比较像, 显得比较高端.但是发现 @ 符合是无法被识别的, 让我头疼了半天, 一度以为是不是这个符合是只能在 ts 中使用但是看了看多方教程, 发现似乎大家都是讲在js环境下怎么使用的.那我估计是, 这一定是一个新功能, 那必然是我的babel配置的不怎么正确. 趁此机会重新学习一遍babel, 因为之前">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-q123.github.io/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/001.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/002.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/003.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/004.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/005.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/006.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/007.png">
+<meta property="article:published_time" content="2023-05-24T10:15:07.000Z">
+<meta property="article:modified_time" content="2023-05-27T12:40:03.722Z">
+<meta property="article:author" content="Petro">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="babel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-q123.github.io/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/001.png">
+
+
+<link rel="canonical" href="https://user-q123.github.io/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/","path":"2023/05/24/202305-babel与js装饰器学习/","title":"202305-babel与js装饰器学习"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>202305-babel与js装饰器学习 | My blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">My blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Viva la vida</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Ebabel%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">关于babel配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EJavaScript%E4%B8%AD%E7%9A%84%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">关于JavaScript中的装饰器</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Petro</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="202305-babel与js装饰器学习 | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          202305-babel与js装饰器学习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-05-24 18:15:07" itemprop="dateCreated datePublished" datetime="2023-05-24T18:15:07+08:00">2023-05-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-05-27 20:40:03" itemprop="dateModified" datetime="2023-05-27T20:40:03+08:00">2023-05-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="关于babel配置"><a href="#关于babel配置" class="headerlink" title="关于babel配置"></a>关于babel配置</h2><p>一直想用一下js的装饰器也就是<code>@</code>符号, 因为这看起来和java和python比较像, 显得比较高端.<br>但是发现 <code>@</code> 符合是无法被识别的, 让我头疼了半天, 一度以为是不是这个符合是只能在 <code>ts</code> 中使用<br>但是看了看多方教程, 发现似乎大家都是讲在<code>js</code>环境下怎么使用的.<br>那我估计是, 这一定是一个新功能, 那必然是我的babel配置的不怎么正确. 趁此机会重新学习一遍babel, 因为之前基本上都是拿过来用就是了</p>
+<p>首先是找到了2个比较好的教程, 阮一峰关于babel的教程并不好</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/zyl1314/blog/issues/16">https://github.com/zyl1314/blog/issues/16</a><br><a target="_blank" rel="noopener" href="https://www.pengfeixc.com/blogs/javascript/babel-tutorial">https://www.pengfeixc.com/blogs/javascript/babel-tutorial</a></p>
+</blockquote>
+<p>核心库:<code>@babel/core</code> 用来做语法转换的<br><code>@babel/cli</code> 能让你在命令行中使用babel命令的, 不然就只能在js中像其他的代码那样用babel了</p>
+<p>其他的依赖就是一堆插件或者是插件的集合, 相当于告诉babel, 我是要用哪个插件(这些个插件基本上可以转换一些个特地的ES6+语法). 而配置这些插件, 也基本上相当于配置我要转换的新语法. 而这个配置文件就是 <code>.babelrc</code> 或者是 <code>babel.config.json</code><br>配置文件中就2个属性: <code>presets</code>, <code>plugins</code>.<br><code>plugins</code> 这个属性就是我刚刚说的插件, 即你要转换哪些内容, 而 <code>presets</code> 则是插件的集合, 因为一个个插件写起来毕竟麻烦.</p>
+<p>这是一个常规的使用babel的安装依赖</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev @babel/core @babel/cli @babel/node @babel/plugin-transform-runtime @babel/preset-env  @babel/plugin-proposal-decorators @babel/runtime nodemon<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这些依赖所对应的配置文件:</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+    <span class="token property">"presets"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"@babel/preset-env"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">[</span><span class="token string">"@babel/plugin-proposal-decorators"</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token property">"legacy"</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token string">"@babel/plugin-transform-runtime"</span><span class="token punctuation">]</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>其中 <code>&quot;presets&quot;: [&quot;@babel/preset-env&quot;]</code> 基本上覆盖了常规的ES6+的新语法, 但是 <code>@</code> 不在其中   </p>
+<p>这里稍微说一下, 各种插件, 比如最常举例的<code>@babel/plugin-transform-arrow-functions</code>, <code>@babel/plugin-transform-destructuring</code> 你可以理解成是对语法的转换, 而 <code>@babel/polyfill</code> 可以理解成是对一些方法的转换, 比如<code>Promise()</code>, <code>Object.Assign()</code>, <code>String.prototype.replaceAl</code>等等</p>
+<p>这里的 <code>@babel/plugin-proposal-decorators</code> 就是用来解释装饰符号 <code>@</code> 的, 如果不告诉<code>babel</code> 的话, 会报错</p>
+<p><img src="/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/001.png" alt="pages"></p>
+<p> 但是光光把这个插件声明放到<code>plugins</code>属性中还不对. 会报错<br> <img src="/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/002.png" alt="pages"><br> 需要把属性变成这样: (注意这里如果对一个plugin项有额外属性设置的话, 那就会从单数组变成嵌套数组)<br> <pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">"@babel/plugin-proposal-decorators"</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token property">"legacy"</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><br> 参考这个帖子:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/71942479/">https://stackoverflow.com/questions/71942479/</a><br> 问题解决</p>
+</blockquote>
+<p> 在实际使用过程种, 首先是发现了版本不正确的问题<br>使用的babel编译命令是:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> ./node_modules/.bin/babel .<span class="token punctuation">\</span>test.js --out-dir lib<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这里的<code>test.js</code>文件是需要被babel编译的对象文件<br> <img src="/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/003.png" alt="pages"><br> 可以通过重新安装的方式来更新版本<br> <img src="/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/004.png" alt="pages"><br>其实我这里的命令不是很好 <code>babel-cli</code>和<code>@babel/cli</code>不应该混用, 安装一个就可以了</p>
+<p>基本上就可以编译成功了<br><img src="/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/005.png" alt="pages"></p>
+<p>那我们要运行代码的话, 就得先编译, 再运行. 而且一有改动还得去编译, 就很麻烦<br>可以使用<code>babel-node</code>来解决这个问题</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> @babel/node <span class="token parameter variable">-g</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>就可以了<br><img src="/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/006.png" alt="pages">.<br>最后也可以把这个命令写到<code>package.json</code>文件中, 就可以用npm命令运行了<br><img src="/2023/05/24/202305-babel%E4%B8%8Ejs%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0/007.png" alt="pages"></p>
+<p>当然也可以加上nodemon命令:</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token property">"start"</span><span class="token operator">:</span> <span class="token string">"nodemon --exec babel-node src/test.js  -e js,json"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><code>-e js json</code>是指有js或者json文件变动的时候就重启, 这里没有加上<code>--watch</code> 所以默认就是监听整个工作目录</p>
+<h2 id="关于JavaScript中的装饰器"><a href="#关于JavaScript中的装饰器" class="headerlink" title="关于JavaScript中的装饰器"></a>关于JavaScript中的装饰器</h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/js/" rel="tag"># js</a>
+              <a href="/tags/babel/" rel="tag"># babel</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/05/19/202305-iframe%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" rel="prev" title="202305-iframe跨域问题">
+                  <i class="fa fa-angle-left"></i> 202305-iframe跨域问题
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/05/30/202305%E6%89%BE%E4%B8%8D%E5%88%B0hexo%E5%91%BD%E4%BB%A4%E7%AD%89/" rel="next" title="202305找不到hexo命令等">
+                  202305找不到hexo命令等 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Petro</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

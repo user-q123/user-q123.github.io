@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="最近在学习next和ts的过程中, 经常要新建工程. 而npx命令太慢了, 修改了npm的源也没有什么用, 因为网上查到到:例如npx create-react-app my-app使用的registry还是原始的 https:&#x2F;&#x2F;registry.npmjs.org&#x2F; 这个源就很麻烦, 太慢了.修改npm的源和npx是没有关系的 我尝试了修改.npmrc文件或者干脆使用yarn命令 试了一下,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="202309-npx提速">
+<meta property="og:url" content="https://user-q123.github.io/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/index.html">
+<meta property="og:site_name" content="My blog">
+<meta property="og:description" content="最近在学习next和ts的过程中, 经常要新建工程. 而npx命令太慢了, 修改了npm的源也没有什么用, 因为网上查到到:例如npx create-react-app my-app使用的registry还是原始的 https:&#x2F;&#x2F;registry.npmjs.org&#x2F; 这个源就很麻烦, 太慢了.修改npm的源和npx是没有关系的 我尝试了修改.npmrc文件或者干脆使用yarn命令 试了一下,">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/003.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/001.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/002.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/004.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/005.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/006.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/007.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/008.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/009.png">
+<meta property="article:published_time" content="2023-09-12T02:49:30.000Z">
+<meta property="article:modified_time" content="2023-09-27T04:07:01.274Z">
+<meta property="article:author" content="Petro">
+<meta property="article:tag" content="npm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-q123.github.io/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/003.png">
+
+
+<link rel="canonical" href="https://user-q123.github.io/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/","path":"2023/09/12/202309-npx提速/","title":"202309-npx提速"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>202309-npx提速 | My blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">My blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Viva la vida</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Petro</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="202309-npx提速 | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          202309-npx提速
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-09-12 10:49:30" itemprop="dateCreated datePublished" datetime="2023-09-12T10:49:30+08:00">2023-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-09-27 12:07:01" itemprop="dateModified" datetime="2023-09-27T12:07:01+08:00">2023-09-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>最近在学习next和ts的过程中, 经常要新建工程. 而npx命令太慢了, 修改了npm的源也没有什么用, 因为网上查到到:<br>例如<code>npx create-react-app my-app</code>使用的registry还是原始的 <code>https://registry.npmjs.org/</code> 这个源<br>就很麻烦, 太慢了.<br>修改npm的源和npx是没有关系的<br><img src="/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/003.png" alt="pic"></p>
+<p><img src="/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/001.png" alt="pic"><br>我尝试了修改<code>.npmrc</code>文件或者干脆使用<code>yarn</code>命令<br><img src="/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/002.png" alt="pic"></p>
+<p>试了一下, 这2步依然很慢<br><img src="/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/004.png" alt="pic"><br><img src="/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/005.png" alt="pic"><br>感觉使用nrm工具切换源也没什么用了</p>
+<p> 试试使用 <code>yarn</code><br> <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"> <span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">-g</span> <span class="token function">yarn</span> <span class="token parameter variable">--registry</span><span class="token operator">=</span>https://registry.npm.taobao.org
+
+<span class="token function">yarn</span> config <span class="token builtin class-name">set</span> registry https://registry.npm.taobao.org <span class="token parameter variable">-g</span>
+
+<span class="token function">yarn</span> config <span class="token builtin class-name">set</span> sass_binary_site http://cdn.npm.taobao.org/dist/node-sass <span class="token parameter variable">-g</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><br> <img src="/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/006.png" alt="pic"> </p>
+<p> 在公司电脑上不出意外地发生了ssl错误<br> <img src="/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/007.png" alt="pic"> </p>
+<p>修改ssl策略</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">yarn</span> config <span class="token builtin class-name">set</span> strict-ssl <span class="token boolean">false</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>可以看到, yarn比npx命令要快不少, 安装过程的UI也更好看<br> <img src="/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/008.png" alt="pic"><br> <img src="/2023/09/12/202309-npx%E6%8F%90%E9%80%9F/009.png" alt="pic"></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/36391490">https://zhuanlan.zhihu.com/p/36391490</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/27449990">https://zhuanlan.zhihu.com/p/27449990</a><br> 在看了这2个帖子后, 我觉得, npm也不是不好, 毕竟依赖混淆的问题已经完全解决, 但是因为npx命令的源问题, 目前这个节点 <code>2023年</code> 在init react项目时, 还是yarn比较好</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/npm/" rel="tag"># npm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/11/202309-Windows%E5%88%A0%E6%96%87%E4%BB%B6%E5%88%A0%E4%B8%8D%E6%8E%89/" rel="prev" title="202309-Windows删文件删不掉">
+                  <i class="fa fa-angle-left"></i> 202309-Windows删文件删不掉
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/09/19/202309-%E4%BD%BF%E7%94%A8react%E9%87%8D%E6%9E%84next%E9%A1%B9%E7%9B%AE/" rel="next" title="202309-使用react重构next项目">
+                  202309-使用react重构next项目 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Petro</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

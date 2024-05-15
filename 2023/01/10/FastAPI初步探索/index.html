@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="主要参考来自官网:  https:&#x2F;&#x2F;fastapi.tiangolo.com&#x2F;  安装首先是安装官网来安装:     bash pip install fastapi -i http:&#x2F;&#x2F;pypi.douban.com&#x2F;simple&#x2F;  pip -U --trusted-host pypi.douban.com             bash  pip install &quot;uvicor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FastAPI初步探索">
+<meta property="og:url" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/index.html">
+<meta property="og:site_name" content="My blog">
+<meta property="og:description" content="主要参考来自官网:  https:&#x2F;&#x2F;fastapi.tiangolo.com&#x2F;  安装首先是安装官网来安装:     bash pip install fastapi -i http:&#x2F;&#x2F;pypi.douban.com&#x2F;simple&#x2F;  pip -U --trusted-host pypi.douban.com             bash  pip install &quot;uvicor">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/001.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/002.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/005.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/006.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/003.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/003.jpg">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/004.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/007.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/008.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/009.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/010.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/011.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/012.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/013.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/014.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/015.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/016.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/017.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/018.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/019.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/020.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/021.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/022.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/023.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/025.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/026.png">
+<meta property="article:published_time" content="2023-01-10T02:35:51.000Z">
+<meta property="article:modified_time" content="2023-04-24T09:37:41.434Z">
+<meta property="article:author" content="Petro">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/001.png">
+
+
+<link rel="canonical" href="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/","path":"2023/01/10/FastAPI初步探索/","title":"FastAPI初步探索"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>FastAPI初步探索 | My blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">My blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Viva la vida</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2-%E4%BD%BF%E7%94%A8Deta"><span class="nav-number">3.</span> <span class="nav-text">部署, 使用Deta</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2-%E4%BD%BF%E7%94%A8%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86%E5%99%A8-process-manager"><span class="nav-number">4.</span> <span class="nav-text">部署, 使用进程管理器(process manager)</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Petro</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="FastAPI初步探索 | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FastAPI初步探索
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-01-10 10:35:51" itemprop="dateCreated datePublished" datetime="2023-01-10T10:35:51+08:00">2023-01-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-04-24 17:37:41" itemprop="dateModified" datetime="2023-04-24T17:37:41+08:00">2023-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>主要参考来自官网:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://fastapi.tiangolo.com/">https://fastapi.tiangolo.com/</a></p>
+</blockquote>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>首先是安装官网来安装:<br> <code>  </code>  <code>bash pip install fastapi -i http://pypi.douban.com/simple/  pip -U --trusted-host pypi.douban.com  </code>  <code>  </code> </p>
+<p> <code>  </code>  <code>bash  pip install &quot;uvicorn[standard]&quot; -i http://pypi.douban.com/simple/  pip -U --trusted-host pypi.douban.com </code>  <code>  </code><br>这里 “uvicorn[standard]” 的形式很奇怪, 不过的确就是这个包</p>
+<p>初步认识, FastAPI只是一个API框架, uvicorn才是服务器(uvicorn是一个ASGI(异步服务器网关接口))</p>
+<p>关于uvicorn的介绍</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.uvicorn.org/#fastapi">https://www.uvicorn.org/#fastapi</a></p>
+</blockquote>
+<p> <code>  </code>  <code>bash </code>  <code>  </code> </p>
+<p>然后运行的时候, 就发生了这样老问题:<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/001.png" alt="pages"></p>
+<p>开始一通查帖子, 首先我不是环境变量的问题, 我早就配置好了<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/002.png" alt="pages"></p>
+<p>还有这2个帖子:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45255658/article/details/116058217">https://blog.csdn.net/weixin_45255658/article/details/116058217</a><br>把Windows\System32文件夹下的libssl-1_1-x64.dll和libcrypto-1_1-x64.dll移除也没用<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/005.png" alt="pages"><br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/006.png" alt="pages"></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/dailinqing1984/article/details/90579944">https://blog.csdn.net/dailinqing1984/article/details/90579944</a></p>
+</blockquote>
+<p>替换 _ssl.pyd的方法无效<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/003.png" alt="pages"><br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/003.jpg" alt="pages"></p>
+<p>还查了这个帖子,也没用</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/45954528/pip-is-configured-with-locations-that-require-tls-ssl-however-the-ssl-module-in/62264725#62264725">https://stackoverflow.com/questions/45954528/pip-is-configured-with-locations-that-require-tls-ssl-however-the-ssl-module-in/62264725#62264725</a><br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/004.png" alt="pages"></p>
+</blockquote>
+<p>最后通过这个帖子的方法, 成功了</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/dally2/article/details/103917604">https://blog.csdn.net/dally2/article/details/103917604</a><br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/007.png" alt="pages"><br>SSL模块载入成功. 之前出现TLS/SSL的问题应该也不会出现了<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/008.png" alt="pages"></p>
+</blockquote>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>运行官方给出的例子:<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/009.png" alt="pages"><br>这里顺便安利一下polacode这个VSCODE扩展, 上图就是polacode生成的, vscode自带的代码高亮比markdown的更加丰富</p>
+<p>启动uvicorn server,可以顺利运行了, 这里的 –reload是指监听代码变化自动刷新<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/010.png" alt="pages"></p>
+<p>浏览器访问的结果:<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/011.png" alt="pages"><br>由swagger生成的文档:<br><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000/docs</a><br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/012.png" alt="pages"><br>也可以选择由redoc生成的文档:<br><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/redoc">http://127.0.0.1:8000/redoc</a></p>
+<p>因为我对python不是特别熟悉, 我此次的主要task是学习fastAPI的部署, 对于pydantic更是没用听说过, 在搜索中, 发现了这个集合. 之后再慢慢看.</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/mazhiyong/p/12807660.html">https://www.cnblogs.com/mazhiyong/p/12807660.html</a></p>
+</blockquote>
+<h3 id="部署-使用Deta"><a href="#部署-使用Deta" class="headerlink" title="部署, 使用Deta"></a>部署, 使用Deta</h3><p>Deta是一个可以用来白嫖的, 并且有点类似于托管(serverless)的云提供商, 也是FastAPI推荐的. 它提供的服务有fastAPI(python), 也有express(node)的, 也提供数据库甚至文件储存服务. 这里我只看了网络服务器的部分.<br>首先是注册:<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/013.png" alt="pages">,<br>这里要注意, 国内邮箱似乎不行, 我163, yeah的都不行, 换成gmail秒收邮件.</p>
+<ol>
+<li>按照教程安装完本地cli后, 安装提示进行登录, 如果登录成功是 successful, 如果登录失败是error<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/014.png" alt="pages"></li>
+<li>使用 <code>deta new</code> 命令初始化本地仓库. 要注意, 必要要在 <code>main.py</code> 或者 <code>index.js</code> 的同级目录下<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/015.png" alt="pages"></li>
+<li>如果和服务器通讯成功, 它会打印配置文件的一些信息, 并且按照依赖<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/016.png" alt="pages"></li>
+<li>要注意, 依赖不要乱写, 这是我在python中发现的问题, 因为我的python没有单独设置虚拟环境, 所以 <code>pip freeze &gt; requirements.txt</code> 命令生成的requirements文件里依赖太多了, 会导致安装不成功, 就我们这个初学者例子, requirements里只要有一个 <code>fastapi==0.89.0</code> 就可以了. (我这时候的版本是0.89.0)<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/017.png" alt="pages"></li>
+<li>在网页端登录, 会发现Mircos下有了这个工程 (这里依赖安装失败也会同步完成, 只是无法正常运行项目)<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/018.png" alt="pages"></li>
+<li>用Deta提供的url来进行访问<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/019.png" alt="pages"></li>
+<li>跑一跑别的<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/020.png" alt="pages"></li>
+<li>看看Deta提供的监视功能, 也就是查看API的调用历史<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/021.png" alt="pages">这里要使用 <code>deta visor enable</code> 来开启监视功能<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/022.png" alt="pages">此外这里还有一个http auth功能, 教程里初始化本地文件的时候, 这个auth是开启的, 开启了就无法让别人随意访问, 我这里实际操作的时候默认就是disable的, 可以通过 <code>deta auth disable</code> 来关闭</li>
+</ol>
+<h3 id="部署-使用进程管理器-process-manager"><a href="#部署-使用进程管理器-process-manager" class="headerlink" title="部署, 使用进程管理器(process manager)"></a>部署, 使用进程管理器(process manager)</h3><p>原文教程地址: </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://fastapi.tiangolo.com/deployment/server-workers/">https://fastapi.tiangolo.com/deployment/server-workers/</a></p>
+</blockquote>
+<p>因为只有英文的, 所以看起来可能比较唬人, 其实只说了一点, 就是让你用 Gunicorn 来做进程管理(后文中它也说了, uvicorn也可以提供进程管理功能, 但是没有 Gunicorn 好)<br>安装Gunicorn</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> <span class="token string">"uvicorn[standard]"</span> gunicorn <span class="token parameter variable">-i</span> http://pypi.douban.com/simple/  pip <span class="token parameter variable">-U</span> --trusted-host pypi.douban.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>通过Gunicorn来运行</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gunicorn main:app <span class="token parameter variable">--workers</span> <span class="token number">4</span> --worker-class uvicorn.workers.UvicornWorker <span class="token parameter variable">--bind</span> <span class="token number">0.0</span>.0.0:80<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>这里windows下会出错</strong><br>它会告诉你没有fcntl模块, 这是由于windows上其实gunicorn是不可用的<br>参考这个帖子</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/a/25471508">https://stackoverflow.com/a/25471508</a> </p>
+</blockquote>
+<p>可以得知一个比较tricky的方法, 就是自己新建一个<code>fcntl.py</code>文件放在<code>site-packages</code>下,获取<code>site-packages</code>路径的方法如下<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/023.png" alt="pages"><br>但是解决了这个问题后它会告诉你缺 pwd 模块, 而pwd模块是给unix系统提供秘密管理服务的, 所以只能放弃了. 目前我试下来使用waitress也是不行的, 虽然这个帖子里是成功的</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/a/73488736">https://stackoverflow.com/a/73488736</a></p>
+</blockquote>
+<p>可以比对一下, 我们一开始是这样运行的</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">uvicorn main:app <span class="token parameter variable">--reload</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这里的参数, 也挺简单, 把官网的翻译一下</p>
+<ol>
+<li><code>main:app</code> 指定入口文件是main.py, 去找里面的app这个变量</li>
+<li><code>--workers 4</code>要启动4个工作线程, 也就是复制4份服务器</li>
+<li><code> --worker-class uvicorn.workers.UvicornWorker</code> uvicorn提供的可以让 gunicorn 使用的工作类, 后半部分指定类名</li>
+<li><code>--bind 0.0.0.0:80</code>让进程管理器绑定监听的端口</li>
+</ol>
+<p>文章最后提到了, 也可以用uvicorn自带的进程管理器</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">uvicorn main:app <span class="token parameter variable">--host</span> <span class="token number">0.0</span>.0.0 <span class="token parameter variable">--port</span> <span class="token number">8080</span> <span class="token parameter variable">--workers</span> <span class="token number">4</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/025.png" alt="pages"></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/62976648/architecture-flask-vs-fastapi">https://stackoverflow.com/questions/62976648/architecture-flask-vs-fastapi</a></p>
+</blockquote>
+<p>在这个帖子中可以看到, 即使不用gunicorn作为进程管理器, 用uvicorn自身来做worker service, 性能也是很优越的.<br><img src="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/026.png" alt="pages"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/01/10/pip%E5%AE%89%E8%A3%85%E5%8C%85TLS-SSL%E6%8A%A5%E9%94%99%E8%87%AA%E7%94%A8/" rel="prev" title="pip安装包TLS/SSL报错简单方案(自用) python基础知识拾遗">
+                  <i class="fa fa-angle-left"></i> pip安装包TLS/SSL报错简单方案(自用) python基础知识拾遗
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="next" title="mock.js的使用">
+                  mock.js的使用 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Petro</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

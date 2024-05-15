@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="mockJs的本身使用十分简单, 这里拓展说一下项目结构上的事情.mockjs的官网  http:&#x2F;&#x2F;mockjs.com&#x2F;examples.html#  1.安装npm install mockjs --save  2.使用先建一个mock的文件夹, 下面写js文件就可以, 因为index.js是默认入口, 再加上我这里要做的mock不多,所以只有一个文件, 如果要mock的接口多的话, 那可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mock.js的使用">
+<meta property="og:url" content="https://user-q123.github.io/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="My blog">
+<meta property="og:description" content="mockJs的本身使用十分简单, 这里拓展说一下项目结构上的事情.mockjs的官网  http:&#x2F;&#x2F;mockjs.com&#x2F;examples.html#  1.安装npm install mockjs --save  2.使用先建一个mock的文件夹, 下面写js文件就可以, 因为index.js是默认入口, 再加上我这里要做的mock不多,所以只有一个文件, 如果要mock的接口多的话, 那可以">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/001.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/002.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/003.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/004.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/005.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/006.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/007.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/008.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/009.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/010.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/012.png">
+<meta property="article:published_time" content="2023-01-20T14:12:56.000Z">
+<meta property="article:modified_time" content="2023-04-24T09:37:41.966Z">
+<meta property="article:author" content="Petro">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-q123.github.io/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/001.png">
+
+
+<link rel="canonical" href="https://user-q123.github.io/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/","path":"2023/01/20/mock-js的使用/","title":"mock.js的使用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>mock.js的使用 | My blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">My blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Viva la vida</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">1.安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">2.使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%8E%AF%E5%A2%83%E6%96%87%E4%BB%B6-VUE%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">3.环境文件(VUE中的使用)</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Petro</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="mock.js的使用 | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mock.js的使用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-01-20 22:12:56" itemprop="dateCreated datePublished" datetime="2023-01-20T22:12:56+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-04-24 17:37:41" itemprop="dateModified" datetime="2023-04-24T17:37:41+08:00">2023-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>mockJs的本身使用十分简单, 这里拓展说一下项目结构上的事情.<br>mockjs的官网</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://mockjs.com/examples.html#">http://mockjs.com/examples.html#</a></p>
+</blockquote>
+<h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> mockjs <span class="token parameter variable">--save</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2-使用"><a href="#2-使用" class="headerlink" title="2.使用"></a>2.使用</h3><p>先建一个mock的文件夹, 下面写js文件就可以, 因为index.js是默认入口, 再加上我这里要做的mock不多,所以只有一个文件, 如果要mock的接口多的话, 那可以分开来写多个文件<br><img src="/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/001.png" alt="pages"></p>
+<p>文件里面是这样的, 首先是require, 当然babel安装配置了也可以用import写法.<br>setup是模拟延迟时间, 这对于模拟异步请求还是有些必要的, 这可以验证你异步的代码有没有写对<br>然后直接使用 Mock.mock(), 就可以了, 也不需要export<br><img src="/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/002.png" alt="pages"> </p>
+<p>然后axios调用的地方, 是这样的, 正常使用就可以<br><img src="/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/003.png" alt="pages"><br><img src="/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/004.png" alt="pages"></p>
+<h3 id="3-环境文件-VUE中的使用"><a href="#3-环境文件-VUE中的使用" class="headerlink" title="3.环境文件(VUE中的使用)"></a>3.环境文件(VUE中的使用)</h3><p>要添加2个文件, 用来填写生产环境和开发环境的各种配置信息(如果还有验证环境质量环境什么的可以再添加)<br><code>.env.development</code>  <code>.env.production</code></p>
+<p><img src="/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/005.png" alt="pages"><br><img src="/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/006.png" alt="pages"><br>这里主要是配置了</p>
+<ol>
+<li>名字, 会在vue.config.js中用到.<br><img src="/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/007.png" alt="pages"></li>
+<li>各种url, 为了在本地和不同服务器间使用不同的具体url</li>
+<li>是否使用mock<br><img src="/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/008.png" alt="pages"><br>加上这句话, 打包的时候就简单了, 因为<code>npm run bulid</code>和<code>npm run serve</code>去读取的环境文件是不一样的, 就什么都不用改了, 注意这里是<code>VUE_APP_MOCK</code>这个属性是字符串, 所以这里有个坑, 就是在判断<code>true or false</code>的时候, <code>&quot;false&quot;</code>很容易被判断成true<br><img src="/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/009.png" alt="pages"><br>(我这里是因为前端先写了mock的请求地址, 和实际的后端的地址不一样, 所以误打误撞发现了这个问题, 一半情况都是拼接同一个url) 把字符串的false强转为布尔值是true…当时坑了我半天<br><img src="/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/010.png" alt="pages"></li>
+</ol>
+<p>环境文件中的各种属性, 可以通过<code>process.env.</code>来获取.<br><img src="/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/012.png" alt="pages"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/javascript/" rel="tag"># javascript</a>
+              <a href="/tags/vue/" rel="tag"># vue</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/01/10/FastAPI%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2/" rel="prev" title="FastAPI初步探索">
+                  <i class="fa fa-angle-left"></i> FastAPI初步探索
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/" rel="next" title="本地使用wordpress创建wooCommerce">
+                  本地使用wordpress创建wooCommerce <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Petro</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

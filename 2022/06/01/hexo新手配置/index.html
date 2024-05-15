@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="(可能是本贴对其他人有用的部分可能就在git配置那边了,其他的hexo相关教程其实挺多的, git&#x2F;gitee的规约有效期参考这篇文章的发文时间)  这篇文章其实算是我跟着这个教程走了一遍. 当然这过程中也遇到了一些其他的问题. 原地址在这里:  https:&#x2F;&#x2F;kaiter-plus.gitee.io&#x2F;2020&#x2F;03&#x2F;07&#x2F;How_To_Freely_Build_Blog&#x2F;  1. 安装本地He">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo新手配置">
+<meta property="og:url" content="https://user-q123.github.io/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="My blog">
+<meta property="og:description" content="(可能是本贴对其他人有用的部分可能就在git配置那边了,其他的hexo相关教程其实挺多的, git&#x2F;gitee的规约有效期参考这篇文章的发文时间)  这篇文章其实算是我跟着这个教程走了一遍. 当然这过程中也遇到了一些其他的问题. 原地址在这里:  https:&#x2F;&#x2F;kaiter-plus.gitee.io&#x2F;2020&#x2F;03&#x2F;07&#x2F;How_To_Freely_Build_Blog&#x2F;  1. 安装本地He">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-q123.github.io/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/001.png">
+<meta property="og:image" content="https://user-q123.github.io/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/002.png">
+<meta property="og:image" content="https://user-q123.github.io/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/003.png">
+<meta property="og:image" content="https://user-q123.github.io/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/004.png">
+<meta property="og:image" content="https://user-q123.github.io/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/005.png">
+<meta property="og:image" content="https://user-q123.github.io/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/006.png">
+<meta property="article:published_time" content="2022-06-01T07:19:02.000Z">
+<meta property="article:modified_time" content="2023-04-24T09:37:41.943Z">
+<meta property="article:author" content="Petro">
+<meta property="article:tag" content="hexo学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-q123.github.io/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/001.png">
+
+
+<link rel="canonical" href="https://user-q123.github.io/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/","path":"2022/06/01/hexo新手配置/","title":"hexo新手配置"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>hexo新手配置 | My blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">My blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Viva la vida</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85%E6%9C%AC%E5%9C%B0Hexo%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">1. 安装本地Hexo环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85Hexo%E4%B8%BB%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">2. 安装Hexo主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%99%E4%B8%80%E6%AD%A5%E4%B9%9F%E5%BE%88%E9%87%8D%E8%A6%81-%E7%8E%B0%E5%9C%A8%E6%96%B0%E7%9A%84%E4%B8%BB%E9%A2%98%E5%9F%BA%E6%9C%AC%E9%83%BD%E9%9C%80%E8%A6%81"><span class="nav-number">3.</span> <span class="nav-text">这一步也很重要, 现在新的主题基本都需要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85hexo-asset-image-%E6%8F%92%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">3.安装hexo-asset-image 插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%85%8D%E7%BD%AEGit"><span class="nav-number">5.</span> <span class="nav-text">4.配置Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gitee%E7%9A%84Pages%E5%8A%9F%E8%83%BD"><span class="nav-number">5.1.</span> <span class="nav-text">gitee的Pages功能:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#github%E7%9A%84page%E5%8A%9F%E8%83%BD"><span class="nav-number">5.2.</span> <span class="nav-text">github的page功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%94%9F%E4%BA%A7%E5%86%85%E5%AE%B9"><span class="nav-number">6.</span> <span class="nav-text">5.生产内容</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Petro</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="hexo新手配置 | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hexo新手配置
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-06-01 15:19:02" itemprop="dateCreated datePublished" datetime="2022-06-01T15:19:02+08:00">2022-06-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-04-24 17:37:41" itemprop="dateModified" datetime="2023-04-24T17:37:41+08:00">2023-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>(可能是本贴对其他人有用的部分可能就在git配置那边了,其他的hexo相关教程其实挺多的, git/gitee的规约有效期参考这篇文章的发文时间)</p>
+<hr>
+<p>这篇文章其实算是我跟着这个教程走了一遍. 当然这过程中也遇到了一些其他的问题. 原地址在这里:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://kaiter-plus.gitee.io/2020/03/07/How_To_Freely_Build_Blog/">https://kaiter-plus.gitee.io/2020/03/07/How_To_Freely_Build_Blog/</a></p>
+</blockquote>
+<h2 id="1-安装本地Hexo环境"><a href="#1-安装本地Hexo环境" class="headerlink" title="1. 安装本地Hexo环境"></a>1. 安装本地Hexo环境</h2><p>npm镜像源的配置, 可有可无, 因为我挂着梯子, 所以不用淘宝的源也没什么关系.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">-g</span> hexo
+<span class="token comment">#这里稍微提一句, -g就是全局安装, 类似cnpm和ts的命令都是这样, 全局安装了在windows下就类似应用程序用名字就可以在控制台中使用了</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>然后是初始化工程:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo init blog      <span class="token comment"># 初始化创建，会在你所在位置创建 blog 文件夹</span>
+<span class="token builtin class-name">cd</span> blog             <span class="token comment"># 进入 blog 目录</span>
+<span class="token function">npm</span> <span class="token function">install</span>         <span class="token comment"># 进一步安装hexo所需文件</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>这里可能会发现脚本无法运行的问题, 可以参考这个帖子管理windows的执行策略</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43874301/article/details/111102493">https://blog.csdn.net/weixin_43874301/article/details/111102493</a></p>
+</blockquote>
+<p>或者用命令行</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">set-ExecutionPolicy RemoteSigned<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后是使用hexo的命令生成静态文件和启动服务</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo clean          <span class="token comment"># 清除所有记录</span>
+hexo generate       <span class="token comment"># 生成静态网页, 静态资源在这一步的编译后会放在public下</span>
+hexo server <span class="token parameter variable">-p</span> <span class="token number">80</span>   <span class="token comment"># 启动服务, -p 80 表示端口号为 80，默认不加端口号是 4000</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>然后就可以通过 <a target="_blank" rel="noopener" href="http://localhost/">http://localhost:80</a> 来访问了</p>
+<h2 id="2-安装Hexo主题"><a href="#2-安装Hexo主题" class="headerlink" title="2. 安装Hexo主题"></a>2. 安装Hexo主题</h2><p>可以在官方主题商城里找: <a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a></p>
+<blockquote>
+<p>我也试了很多个主题, 包括one-page, Nlvi, yilia, yilia-plus, 3-hexo, matery, shoku, hermes,fluid等等<br>里面也有挺多挺好的主题</p>
+</blockquote>
+<p>对于这些我试过的 我评论一下:</p>
+<ul>
+<li>one-page: 很干净, 不过对字体的支持和代码的高亮, 我调了调还是有问题, 一开始选择的这个, 如果是用这个主题的话需要把 highlight.enable 和 prismjs.enable都设为 false. 因为这个主题自带了这2个组件.</li>
+<li>Nlvi: 看起来挺好的, 不过我怎么设置都会出问题</li>
+<li>yilia, yilia-plus: 有个头像侧边栏, 感觉不大好, yilia-plus的话, 作为熟悉设置还是不错的, 可能以后会换吧, 不过我暂时不用评论/RSS等功能</li>
+<li>3-hexo: 也是侧边栏感觉不大好</li>
+<li>shoku: 太二次元了</li>
+<li>matery: 很庞大的一个主题, 做的很漂亮, 不过我先从简单的开始学起了</li>
+<li>fluid: 感觉还是不错的, 而且还在实时更新, 我还没用, 不过先用next了</li>
+<li>hermes: 在官网主题首页上就有, 我感觉应该还是不错的,不过先使用next试试了. 这个集成的功能很少, 不过很少意味着不大会报错</li>
+</ul>
+<h2 id="这一步也很重要-现在新的主题基本都需要"><a href="#这一步也很重要-现在新的主题基本都需要" class="headerlink" title="这一步也很重要, 现在新的主题基本都需要"></a>这一步也很重要, 现在新的主题基本都需要</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 如果出现类似eggjs的那种 &lt;% xxx>的问题, 多半是这个插件没装上</span>
+<span class="token function">npm</span> i hexo-renderer-swig<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>主题的配置基本上是在 <em><strong>_config.yml</strong></em>下配置的.<br>next的帮助页面在这里:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/theme-settings.html">http://theme-next.iissnan.com/theme-settings.html</a></p>
+</blockquote>
+<p>另外 我在clone主题的时候, 发现了这个问题:</p>
+<blockquote>
+<p>error: RPC failed； curl 56 OpenSSL SSL_read: Connection was reset, errno 10054<br>因为我之前git指令都用的好好的, 不知道为什么这里不行.<br>可能原因是我没有实现构建好git目录?<br>不过用下面的方法是可以解决问题的:</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> config http.sslVerify <span class="token string">"false"</span>
+<span class="token comment"># 如果输入上面命令提示报“ fatal: not in a git directory  ”，则输入如下命令：git init</span>
+<span class="token comment"># 之后就可以重新下载了</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>另外一个问题是: </p>
+<blockquote>
+<p>OpenSSL SSL_read: Connection was reset, errno 10054<br>这个问题是由于. 在国内github容易上不去, 所以我们经常会挂着梯子, 把梯子开开关关就可以了.</p>
+</blockquote>
+<h2 id="3-安装hexo-asset-image-插件"><a href="#3-安装hexo-asset-image-插件" class="headerlink" title="3.安装hexo-asset-image 插件"></a>3.安装hexo-asset-image 插件</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> https://github.com/7ym0n/hexo-asset-image <span class="token parameter variable">--save</span>  <span class="token comment">#安装 hexo-asset-image 插件</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>我直接从github上克隆没什么问题, 用原帖子里的第一个仓库地址反而不行.</p>
+<p>这个插件给我的直接感觉是: 在使用命令生成新的文章时, 会自动生成放图片的文件夹</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo new <span class="token builtin class-name">test</span>       <span class="token comment"># 生成新的网页</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="4-配置Git"><a href="#4-配置Git" class="headerlink" title="4.配置Git"></a>4.配置Git</h2><p>这里就是坑开始的地方的. 我也不怎么好顺序说. 如果你看见了这个帖子, 那这一部分需要你对Git有基本的了解.</p>
+<p>首先, 我们是想白嫖服务器的, 所以省力的选择+教程推荐的选择,是用 github或者是gitee.<br>为了让国人访问的方便, 我一开始选择了gitee做服务器, 包括我的这个hexo工程也是放在gitee上的.</p>
+<p>第一点坑的是, 类似gitee/github, 他们的静态页面托管服务, 类似他们这2个服务中的 Pages/Gitee Pages功能, 和代码仓库有类似的地方却又不完全一样, 简单的说, 你首先要创建一个repository, 用于页面托管, 但是和代码仓库不一样, 还有额外要求</p>
+<h3 id="gitee的Pages功能"><a href="#gitee的Pages功能" class="headerlink" title="gitee的Pages功能:"></a>gitee的Pages功能:</h3><ol>
+<li>你得先创建一个repo</li>
+<li>如果你想要他变成public/启动它的Pages功能, 那你得首先随便上传些什么东西激活它, 这就比较麻烦, 因为静态页面托管服务其实我们以后里面只放hexo自动上传的东西, 不过可以通过上传了些再覆盖, 问题不大</li>
+<li>gitee中, 只有把这个repo设置为了 Pages 才能进行静态页面托管, 具体的大家自己搜 gitee+pages功能吧.<br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/001.png" alt="pages"></li>
+<li>然后这个Gitee Pages功能是需要实名制的, 上传身份证啥的, 虽然这个比申请服务器和域名简单多了(申请域名要读保证书什么的比较麻烦).<br>但还是麻烦, 我就选择放弃了<br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/002.png" alt="pages"></li>
+</ol>
+<h3 id="github的page功能"><a href="#github的page功能" class="headerlink" title="github的page功能"></a>github的page功能</h3><ol>
+<li>你得创建一个符合命名规约的repo, 参见这个网站<blockquote>
+<p><a target="_blank" rel="noopener" href="https://pages.github.com/">https://pages.github.com/</a><br><a target="_blank" rel="noopener" href="https://docs.github.com/cn/pages/quickstart">https://docs.github.com/cn/pages/quickstart</a><br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/003.png" alt="pages"></p>
+</blockquote>
+</li>
+<li>简而言之如果你符合命名规约了, 那这个repo就可以当网页服务器用了, 比gitee省事很多</li>
+<li>至于Github官网上推荐的 生成一个read.md啦 使用Jekyll啦 都可以忽略不计. 因为<ul>
+<li>如果是用hexo, 那所有的markdown文件都会被转译成html, 加了也没用</li>
+<li>Jekyll是用ruby命令的, 那还是js和npm来的方便, 毕竟你都用vscode了, 那我默认你会js</li>
+</ul>
+</li>
+<li>仓库合理创建完毕</li>
+</ol>
+<p>然后接下来坑的地方在于, 我的hexo工程代码是在gitee上的, 我想要发布的地址是在github上的.虽然多环境git config我之前也使用过, 不过这次还是翻车了. 翻车点如下:</p>
+<ol>
+<li><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo deploy <span class="token comment"># 或者是hexo d</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这个命令, 不是一个git命令, 所以之前的简单使用 git config user.username这个命令是没用的<br>必须使用 </p>
+<pre class="line-numbers language-none"><code class="language-none">git config --global  user.username &#39;xxxxx&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>因为我猜, hexo是从 .deploy_git下进行配置的而不是从 我们熟悉的 .git目录下<br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/004.png" alt="pages"><br>这导致不配全局git的config就git会一直告诉你: 我不知道你的身份, 不论是使用https的push方式还是使用ssh的方式<br>我一开始觉得我配置了, 然后使用ssh的方式是不是就可以了. 和这个没有关系</p>
+</li>
+<li><p>以上这个问题解决了后, 我们就可以在.git里配置到代码仓库的东西<br>然后.deploy_git的话, 那就只能是读全局的git配置了</p>
+</li>
+<li><p>在**_config.yml**的deploy部分, repo属性也是有2种写法, 如果是<a href="mailto:&#x67;&#105;&#x74;&#64;&#103;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;">&#x67;&#105;&#x74;&#64;&#103;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;</a>: xxx/xxxx的方式的话, 那是ssh的方式, 得在git仓库里添加ssh, 同时本地也得存在ssh的本地文件. 如果是<a target="_blank" rel="noopener" href="https://github.com/xxxx%E7%9A%84%E6%96%B9%E5%BC%8F%E7%9A%84%E8%AF%9D">https://github.com/xxxx的方式的话</a>, 基本上会跳出来让你输用户名和密码, 就可以了</p>
+</li>
+<li><p>让我头疼的是, 我一开始不想配global git config, 加之我之前工作的电脑有配好git的ssh过 (那个时候公司电脑用http拉git会失败, 但是ssh就可以), 所以我选择到我公司的电脑上去进行hexo deploy到github的操作.<br>试了半天, 都是 connection reset. 非常郁闷, 后来迁移到自己电脑上, 一下子就成功了(第三步的内容).<br>内心明白了, 公司电脑应该是block了 GitHub的push功能, 可能防止员工乱传代码.<br>这一步的意义是: git的配置基本上就我们熟悉的哪些, 不会因为hexo的额外配置而出错, 如果出错, 那大概率是我们电脑的网络环境有问题<br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/005.png" alt="pages"><br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/006.png" alt="pages"><br>基本上就可以正常走完了</p>
+</li>
+</ol>
+<p>上传完到github的repo中, 就可以访问了, 更新速度挺快的, 完全没有git自己说的可能会出现的20分钟的延迟什么的</p>
+<h2 id="5-生产内容"><a href="#5-生产内容" class="headerlink" title="5.生产内容"></a>5.生产内容</h2><p>用命令自动生成md文件和对应的图片文件夹</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo n <span class="token operator">==</span> hexo new
+hexo g <span class="token operator">==</span> hexo generate
+hexo s <span class="token operator">==</span> hexo server
+hexo d <span class="token operator">==</span> hexo deploy
+
+hexo s <span class="token parameter variable">-g</span> <span class="token comment">#生成并本地预览</span>
+hexo d <span class="token parameter variable">-g</span> <span class="token comment">#生成并上传</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>按照Markdown规范来书写就可以</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/hexo%E5%AD%A6%E4%B9%A0/" rel="tag"># hexo学习</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/01/test/" rel="prev" title="纪念第一次使用Hexo">
+                  <i class="fa fa-angle-left"></i> 纪念第一次使用Hexo
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/06/02/sql%E4%B8%80%E4%BE%8B/" rel="next" title="sql一例">
+                  sql一例 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Petro</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

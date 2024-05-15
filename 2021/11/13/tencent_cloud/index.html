@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="腾讯云折腾日记1首先是购买腾讯云,首先要注册账号, 期间会要求你实名制认证. 要和微信号绑定 实名制认证结束后, 就可以购买云服务器了. 我这里是买了一个最便宜的.我这里还不知道镜像能不能换的,按理说应该可以换的吧,还没研究到 买完后, 一时蒙蔽. 介绍一下它的功能 首先是关于这个宝塔面板是什么,可以参考这个文章  http:&#x2F;&#x2F;tencent.yundashi168.com&#x2F;558.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="腾讯云折腾日记">
+<meta property="og:url" content="https://user-q123.github.io/2021/11/13/tencent_cloud/index.html">
+<meta property="og:site_name" content="My blog">
+<meta property="og:description" content="腾讯云折腾日记1首先是购买腾讯云,首先要注册账号, 期间会要求你实名制认证. 要和微信号绑定 实名制认证结束后, 就可以购买云服务器了. 我这里是买了一个最便宜的.我这里还不知道镜像能不能换的,按理说应该可以换的吧,还没研究到 买完后, 一时蒙蔽. 介绍一下它的功能 首先是关于这个宝塔面板是什么,可以参考这个文章  http:&#x2F;&#x2F;tencent.yundashi168.com&#x2F;558.html">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-q123.github.io/2021/11/13/tencent_cloud/001.png">
+<meta property="og:image" content="https://user-q123.github.io/2021/11/13/tencent_cloud/002.png">
+<meta property="og:image" content="https://user-q123.github.io/2021/11/13/tencent_cloud/003.png">
+<meta property="og:image" content="https://user-q123.github.io/2021/11/13/tencent_cloud/004.png">
+<meta property="og:image" content="https://user-q123.github.io/2021/11/13/tencent_cloud/005.png">
+<meta property="og:image" content="https://user-q123.github.io/2021/11/13/tencent_cloud/006.png">
+<meta property="og:image" content="https://user-q123.github.io/2021/11/13/tencent_cloud/007.png">
+<meta property="og:image" content="https://user-q123.github.io/2021/11/13/tencent_cloud/008.png">
+<meta property="og:image" content="https://user-q123.github.io/2021/11/13/tencent_cloud/009.png">
+<meta property="og:image" content="https://user-q123.github.io/2021/11/13/tencent_cloud/010.png">
+<meta property="og:image" content="https://user-q123.github.io/2021/11/13/tencent_cloud/011.png">
+<meta property="article:published_time" content="2021-11-13T07:13:50.000Z">
+<meta property="article:modified_time" content="2023-04-25T02:06:45.658Z">
+<meta property="article:author" content="Petro">
+<meta property="article:tag" content="部署">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-q123.github.io/2021/11/13/tencent_cloud/001.png">
+
+
+<link rel="canonical" href="https://user-q123.github.io/2021/11/13/tencent_cloud/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2021/11/13/tencent_cloud/","path":"2021/11/13/tencent_cloud/","title":"腾讯云折腾日记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>腾讯云折腾日记 | My blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">My blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Viva la vida</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%85%BE%E8%AE%AF%E4%BA%91%E6%8A%98%E8%85%BE%E6%97%A5%E8%AE%B01"><span class="nav-number">1.</span> <span class="nav-text">腾讯云折腾日记1</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Petro</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2021/11/13/tencent_cloud/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="腾讯云折腾日记 | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          腾讯云折腾日记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-11-13 15:13:50" itemprop="dateCreated datePublished" datetime="2021-11-13T15:13:50+08:00">2021-11-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-04-25 10:06:45" itemprop="dateModified" datetime="2023-04-25T10:06:45+08:00">2023-04-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="腾讯云折腾日记1"><a href="#腾讯云折腾日记1" class="headerlink" title="腾讯云折腾日记1"></a>腾讯云折腾日记1</h3><p>首先是购买腾讯云,<br>首先要注册账号, 期间会要求你实名制认证. 要和微信号绑定</p>
+<p>实名制认证结束后, 就可以购买云服务器了. 我这里是买了一个最便宜的.<br><img src="/2021/11/13/tencent_cloud/001.png" alt="这是图片"><br>我这里还不知道镜像能不能换的,按理说应该可以换的吧,还没研究到</p>
+<p>买完后, 一时蒙蔽. 介绍一下它的功能</p>
+<p>首先是关于这个宝塔面板是什么,可以参考这个文章</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://tencent.yundashi168.com/558.html">http://tencent.yundashi168.com/558.html</a></p>
+</blockquote>
+<p>总而言之就是登录,然后这里是自己的服务器实例<br><img src="/2021/11/13/tencent_cloud/002.png" alt="这是图片"></p>
+<p>这里点登录的话,是登录到自己的root文件夹<br><img src="/2021/11/13/tencent_cloud/003.png" alt="这是图片"></p>
+<p>看起来什么都没有, cd .. 网上就能发现是一个Linux系统了</p>
+<p>点击,更多-&gt; 管理. 就到了服务器实例的具体管理界面<br><img src="/2021/11/13/tencent_cloud/004.png" alt="这是图片"></p>
+<p>可以开关机, 看看内存分配什么的.<br>然后讲一下这里的主要功能.</p>
+<ul>
+<li><p>1<br>  一键登录<br>  <img src="/2021/11/13/tencent_cloud/005.png" alt="这是图片"><br>  其实还是用默认的窗口内悬浮工具登录</p>
+</li>
+<li><p>2<br>  VNC登录<br>  相当于新开了一个tab页面，里面是命令行，没什么用，而且会卡。<br>  但是这里是要你输入用户名密码的，在&lt;1&gt;里不用，&lt;1&gt;里默认登录了<br>  <img src="/2021/11/13/tencent_cloud/006.png" alt="这是图片"></p>
+</li>
+<li><p>3<br>  SSH登录<br>  使用putty. ssh默认是关闭的，很讨厌。查了攻略才搞定。<br>  攻略基本如下，在&lt;1&gt;里</p>
+  <pre class="line-numbers language-none"><code class="language-none">&#x2F;etc&#x2F;ssh&#x2F;sshd_config #找到ssh文件
+
+vi sshd_config #修改config
+
+systemctl restart sshd #重启ssh服务，保险点也可以关机重启服务器<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  这里复习一下vim的操作<br>  i进入插入模式，把注释打开后，esc退回命令模式，在命令模式中</p>
+  <pre class="line-numbers language-none"><code class="language-none">:wq<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>  保存并退出</p>
+<p>  然后就可以使用putty登录了.<br>  我这里没用密钥，先用最简单的用户名密码配置<br>  用户名固定是：root，密码是你登录腾讯云的密码</p>
+</li>
+</ul>
+<p>然后在应用管理这个tab中<br><img src="/2021/11/13/tencent_cloud/007.png" alt="这是图片"><br>这个应用管理其实是宝塔面板的内容<br>1:是在浏览器中访问自己这个服务器实例的宝塔面板，这里这个8888是要手动打开添加的，默认没有的<br>2：是宝塔面板的登录信息，虽然进到宝塔面板后还需注册宝塔的账号（bt应该就是宝塔的意思）<br>3：是宝塔面板存在你这个linux服务器实例里的位置，在以后如果通过宝塔安装的php,node环境，都在这个文件内</p>
+<p>在防火墙这个tab中<br><img src="/2021/11/13/tencent_cloud/008.png" alt="这是图片"><br>为了访问宝塔面板，需要添加8888端口，当然之后要是面板改了端口，那这里同步要修改</p>
+<p>添加了之后，就可以访问宝塔面板了<br><img src="/2021/11/13/tencent_cloud/009.png" alt="这是图片"></p>
+<p>最后付一下putty和winscp的图<br><img src="/2021/11/13/tencent_cloud/010.png" alt="这是图片"><br><img src="/2021/11/13/tencent_cloud/011.png" alt="这是图片"></p>
+<p>建站,域名,换一个镜像之类的,再慢慢折腾</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag"># 部署</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/28/%E9%85%8D%E7%BD%AE%E6%9B%B4%E5%A5%BD%E7%9A%84powershell/" rel="prev" title="配置更好的powershell">
+                  <i class="fa fa-angle-left"></i> 配置更好的powershell
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/06/01/test/" rel="next" title="纪念第一次使用Hexo">
+                  纪念第一次使用Hexo <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Petro</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

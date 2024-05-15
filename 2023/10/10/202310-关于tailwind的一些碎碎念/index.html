@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="使用tailwind有一段时间, 写一些自己的小感触  这个class类使用@apply的复用就没啥用, 还不如把变成字符串常量, 使用这个方式className&#x3D;&amp;#123;DIV_CLASS&amp;#125;来进行复用  https:&#x2F;&#x2F;tailwindcss.com&#x2F;docs&#x2F;reusing-styles#extracting-classes-with-apply   如果不是tailwind中自">
+<meta property="og:type" content="article">
+<meta property="og:title" content="202310-关于tailwind的一些碎碎念">
+<meta property="og:url" content="https://user-q123.github.io/2023/10/10/202310-%E5%85%B3%E4%BA%8Etailwind%E7%9A%84%E4%B8%80%E4%BA%9B%E7%A2%8E%E7%A2%8E%E5%BF%B5/index.html">
+<meta property="og:site_name" content="My blog">
+<meta property="og:description" content="使用tailwind有一段时间, 写一些自己的小感触  这个class类使用@apply的复用就没啥用, 还不如把变成字符串常量, 使用这个方式className&#x3D;&amp;#123;DIV_CLASS&amp;#125;来进行复用  https:&#x2F;&#x2F;tailwindcss.com&#x2F;docs&#x2F;reusing-styles#extracting-classes-with-apply   如果不是tailwind中自">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-10T13:38:56.000Z">
+<meta property="article:modified_time" content="2023-10-19T03:29:15.044Z">
+<meta property="article:author" content="Petro">
+<meta property="article:tag" content="tailwind">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://user-q123.github.io/2023/10/10/202310-%E5%85%B3%E4%BA%8Etailwind%E7%9A%84%E4%B8%80%E4%BA%9B%E7%A2%8E%E7%A2%8E%E5%BF%B5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2023/10/10/202310-%E5%85%B3%E4%BA%8Etailwind%E7%9A%84%E4%B8%80%E4%BA%9B%E7%A2%8E%E7%A2%8E%E5%BF%B5/","path":"2023/10/10/202310-关于tailwind的一些碎碎念/","title":"202310-关于tailwind的一些碎碎念"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>202310-关于tailwind的一些碎碎念 | My blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">My blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Viva la vida</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Petro</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/10/10/202310-%E5%85%B3%E4%BA%8Etailwind%E7%9A%84%E4%B8%80%E4%BA%9B%E7%A2%8E%E7%A2%8E%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="202310-关于tailwind的一些碎碎念 | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          202310-关于tailwind的一些碎碎念
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-10-10 21:38:56" itemprop="dateCreated datePublished" datetime="2023-10-10T21:38:56+08:00">2023-10-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-19 11:29:15" itemprop="dateModified" datetime="2023-10-19T11:29:15+08:00">2023-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>使用<code>tailwind</code>有一段时间, 写一些自己的小感触</p>
+<ol>
+<li><p>这个class类使用@apply的复用就没啥用, 还不如把变成字符串常量, 使用这个方式<code>className=&#123;DIV_CLASS&#125;</code>来进行复用</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://tailwindcss.com/docs/reusing-styles#extracting-classes-with-apply">https://tailwindcss.com/docs/reusing-styles#extracting-classes-with-apply</a></p>
+</blockquote>
+</li>
+<li><p>如果不是tailwind中自定义的类的话, 可以这么用来进行css的管理</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7031528538209681444">https://juejin.cn/post/7031528538209681444</a><br>事实上这样用的确是最好的, 有个大佬也推荐不要使用类似<code>tailwind</code>这样的css框架, 因为会导致代码混乱<br>可以把<code>tailwind</code>中的class实际背后的css摘出来(使用vscode可以提示出这一点), 使用原来的css</p>
+</blockquote>
+</li>
+<li><p>或者是使用 <code>classNames</code> 这个包来进行css的式样管理, 特别是在需要进行式样切换的地方, 我用了一下感觉还挺好的</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/JedWatson/classnames">https://github.com/JedWatson/classnames</a></p>
+</blockquote>
+</li>
+<li><p><code>tailwind</code>的组件是要收费的, 这很恶心, CSDN上似乎有组件的源码可以下载导入使用, 我还没试过. 还是老老实实看tw的文档查看一下用法来的实在</p>
+</li>
+<li><p>tailwind是属于postCSS的一种, 也就是说, 它会对css代码进行事先的编译优化, 比如像tailwind自己宣传的那样, 删除不必要的代码</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7200782261997338681">https://juejin.cn/post/7200782261997338681</a><br>所以这些postCSS的东西必不可少</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">pnpm</span> i <span class="token parameter variable">-D</span> tailwindcss postcss autoprefixer
+<span class="token comment"># yarn add -D tailwindcss postcss autoprefixer</span>
+<span class="token comment"># npm i -D tailwindcss postcss autoprefixer</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/tailwind/" rel="tag"># tailwind</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/10/10/202309-tailwind%E7%9A%84%E4%B8%80%E4%BA%9Bsample%E7%BD%91%E7%AB%99-%E7%94%A8%E5%A4%84%E4%B8%8D%E6%98%AF%E5%BE%88%E5%A4%A7/" rel="prev" title="202309-tailwind的一些sample网站--用处不是很大">
+                  <i class="fa fa-angle-left"></i> 202309-tailwind的一些sample网站--用处不是很大
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/10/10/202310-redux%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/" rel="next" title="202310-redux的一些使用体验">
+                  202310-redux的一些使用体验 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Petro</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

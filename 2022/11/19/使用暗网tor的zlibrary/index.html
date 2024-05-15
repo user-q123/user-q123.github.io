@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="科学上网很多年了,不过事先申明一下,不是每个人都是反骨仔哈哈. 我是参加工作后, 从事安卓开发的工作, SDK实在下不下来(google被封的原因), 才开始每年都使用的. 但是我从来没接触过暗网,因为我不是特别会折腾的那种人. 但是最近zlibrary被封了, 实在是难定, 那些镜像站和zlibrary相比差太远了. 虽然有人给出了以下一些解决方案   https:&#x2F;&#x2F;libgena.ee">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用暗网tor的zlibrary">
+<meta property="og:url" content="https://user-q123.github.io/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/index.html">
+<meta property="og:site_name" content="My blog">
+<meta property="og:description" content="科学上网很多年了,不过事先申明一下,不是每个人都是反骨仔哈哈. 我是参加工作后, 从事安卓开发的工作, SDK实在下不下来(google被封的原因), 才开始每年都使用的. 但是我从来没接触过暗网,因为我不是特别会折腾的那种人. 但是最近zlibrary被封了, 实在是难定, 那些镜像站和zlibrary相比差太远了. 虽然有人给出了以下一些解决方案   https:&#x2F;&#x2F;libgena.ee">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-q123.github.io/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/002.png">
+<meta property="og:image" content="https://user-q123.github.io/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/003.png">
+<meta property="og:image" content="https://user-q123.github.io/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/004.png">
+<meta property="og:image" content="https://user-q123.github.io/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/005.png">
+<meta property="og:image" content="https://user-q123.github.io/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/001.png">
+<meta property="og:image" content="https://user-q123.github.io/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/006.png">
+<meta property="article:published_time" content="2022-11-19T09:56:16.000Z">
+<meta property="article:modified_time" content="2023-04-24T09:37:42.184Z">
+<meta property="article:author" content="Petro">
+<meta property="article:tag" content="电子书">
+<meta property="article:tag" content="科学上网">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-q123.github.io/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/002.png">
+
+
+<link rel="canonical" href="https://user-q123.github.io/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/","path":"2022/11/19/使用暗网tor的zlibrary/","title":"使用暗网tor的zlibrary"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>使用暗网tor的zlibrary | My blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">My blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Viva la vida</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Petro</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="使用暗网tor的zlibrary | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用暗网tor的zlibrary
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-11-19 17:56:16" itemprop="dateCreated datePublished" datetime="2022-11-19T17:56:16+08:00">2022-11-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>科学上网很多年了,不过事先申明一下,不是每个人都是反骨仔哈哈. 我是参加工作后, 从事安卓开发的工作, SDK实在下不下来(google被封的原因), 才开始每年都使用的.</p>
+<p>但是我从来没接触过暗网,因为我不是特别会折腾的那种人.</p>
+<p>但是最近zlibrary被封了, 实在是难定, 那些镜像站和zlibrary相比差太远了. 虽然有人给出了以下一些解决方案</p>
+<ul>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://libgena.ee/">https://libgena.ee</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://libgen.rocks/">https://libgen.rocks</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://cdn1.booksdl.org/">https://cdn1.booksdl.org</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://libgen.unblockit.nz/">https://libgen.unblockit.nz</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>telegram方案 <a target="_blank" rel="noopener" href="https://find.looks.wang/">https://find.looks.wang/</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://1lib.ink/">https://1lib.ink/</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zlib.ren/">https://zlib.ren/</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://1lib.ren/">https://1lib.ren/</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zlib.ink/">https://zlib.ink/</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://en.booksee.org/">https://en.booksee.org/</a>  需国际网络</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://libcats.org/">https://libcats.org/</a> 需国际网络</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bookzz.ren/">https://www.bookzz.ren/</a> 需国际网络</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.ooopn.com/tool/zlibrary/">https://www.ooopn.com/tool/zlibrary/</a> 镜像集</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="http://pilimi.org/">http://pilimi.org/</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://aliyundrive.com/s/t8ry1r6ieuk">https://aliyundrive.com/s/t8ry1r6ieuk</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/78jWjEkyCV1">https://www.aliyundrive.com/s/78jWjEkyCV1</a></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<p>但是, 这些都不好使, 和zlibrary没法比(包括网传的zhelper,也已经停止服务了,怕被抓)</p>
+<p>无意间看见说, zlibrary的tor链接还可以使用,就觉得很好奇, 了解了一下, 原来tor就是暗网.</p>
+<p>关于tor网络的介绍:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1KZ4y1T7YE">https://www.bilibili.com/video/BV1KZ4y1T7YE</a></p>
+</blockquote>
+<p>那暗网或者说tor可以干什么呢?可以直接购买信用卡,别人的电话卡,买别人的数据…这些我早有耳闻,反正就是我把握不住的东西,目前还只是听说,以后有机会看看有点什么.</p>
+<p>而我,只是一个复习线性代数忘记带书,想搞本电子书的善良青年.</p>
+<p><strong>首先,要有一级代理,也就是科学上网</strong></p>
+<p>第一,要能上暗网在表网络中的url: </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.torproject.org/zh-CN/">https://www.torproject.org/zh-CN/</a><br>第二,在中国tor节点分配的网桥基本就没法用,速度太慢(白嫖的总共是慢的,因为我是要下载pdf的电子书,如果是仅仅浏览网页的话,自带的也能接受)</p>
+</blockquote>
+<p>网桥是这些:</p>
+<p><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/002.png" alt="pages"><br>网上一直有教程告诉你,如果你所在的国家或者地区被网络审查了怎么怎么办, 官网(<a target="_blank" rel="noopener" href="https://tb-manual.torproject.org/zh-CN/circumvention/)%E5%92%8C%E5%85%B6%E4%BB%96%E7%9A%84%E6%95%99%E7%A8%8B%E7%9A%84%E5%8A%9E%E6%B3%95%E6%98%AF%E7%94%A8%E6%9B%B4%E5%BC%BA%E7%9A%84%E5%8A%A0%E5%AF%86%E5%8D%8F%E8%AE%AE,%E4%B9%9F%E5%B0%B1%E6%98%AF%E9%85%8D%E7%BD%AE%E4%B8%8B%E9%9D%A2%E8%BF%99%E5%BC%A0%E5%9B%BE">https://tb-manual.torproject.org/zh-CN/circumvention/)和其他的教程的办法是用更强的加密协议,也就是配置下面这张图</a><br><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/003.png" alt="pages"></p>
+<p>可能我的网络环境不大好,我实测还是连不上网桥.</p>
+<p><strong>然后配置代理就可以了</strong></p>
+<p><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/004.png" alt="pages"></p>
+<p>这里的端口在自己的科学上网代理软件中查看,比如我这里用的是clash, 默认就是7890</p>
+<p><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/005.png" alt="pages"></p>
+<p><strong>然后就可以连上了</strong></p>
+<p>zlibrary的tor链接如下:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://loginzlib2vrak5zzpcocc3ouizykn6k5qecgj2tzlnab5wcbqhembyd.onion/">http://loginzlib2vrak5zzpcocc3ouizykn6k5qecgj2tzlnab5wcbqhembyd.onion/</a></p>
+</blockquote>
+<p>至少在我写这个文章的时候,zlibrary还是可以访问的<br><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/001.png" alt="pages"></p>
+<p>访问资源也没有问题:</p>
+<p><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/006.png" alt="pages"></p>
+<p>最后,忘记说了, 这个torproject也是有手机版的,<br>手机版的网桥连接就很快. 比电脑少去了不少折腾的步骤</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%94%B5%E5%AD%90%E4%B9%A6/" rel="tag"># 电子书</a>
+              <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag"># 科学上网</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/10/10/%E4%B8%80%E4%B8%AA%E4%BF%84%E8%AF%AD%E6%96%87%E7%AB%A0%E6%A3%80%E6%9F%A5%E7%BD%91%E7%AB%99/" rel="prev" title="一个俄语文章检查网站">
+                  <i class="fa fa-angle-left"></i> 一个俄语文章检查网站
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/12/05/%E4%BD%BF%E7%94%A8HTML%E6%9D%A5%E5%BD%95%E5%B1%8F/" rel="next" title="使用HTML来录屏">
+                  使用HTML来录屏 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Petro</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

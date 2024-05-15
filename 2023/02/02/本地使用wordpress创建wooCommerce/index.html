@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="首先要明确, wooCommerce是开源而免费的, 因为毕竟它是基于wordpress的, 但是如果你打开wooCommerce的官网, 基本上就会发现是要收费的, 这点很奇怪.可以看见这幅图里, 它是要你用wordpress账号进行授权登录, 可以wordpress就不应该会要收费 后来我明白了, 应该是wooCommerce官网, 它为了方便提供了基于云服务器服务的傻瓜式操作, 而这个服务器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="本地使用wordpress创建wooCommerce">
+<meta property="og:url" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/index.html">
+<meta property="og:site_name" content="My blog">
+<meta property="og:description" content="首先要明确, wooCommerce是开源而免费的, 因为毕竟它是基于wordpress的, 但是如果你打开wooCommerce的官网, 基本上就会发现是要收费的, 这点很奇怪.可以看见这幅图里, 它是要你用wordpress账号进行授权登录, 可以wordpress就不应该会要收费 后来我明白了, 应该是wooCommerce官网, 它为了方便提供了基于云服务器服务的傻瓜式操作, 而这个服务器">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/102.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/103.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/104.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/105.jpg">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/004.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/0011.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/001.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/002.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/003.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/005.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/006.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/2001.jpg">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/2002.jpg">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/2003.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/2004.jpg">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/2005.jpg">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/2006.jpg">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/2007.jpg">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/007.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/008.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/010.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/011.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/012.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/013.png">
+<meta property="article:published_time" content="2023-02-02T02:51:23.000Z">
+<meta property="article:modified_time" content="2024-05-14T10:03:23.565Z">
+<meta property="article:author" content="Petro">
+<meta property="article:tag" content="部署">
+<meta property="article:tag" content="wordpress">
+<meta property="article:tag" content="wooCommerce">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/102.png">
+
+
+<link rel="canonical" href="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/","path":"2023/02/02/本地使用wordpress创建wooCommerce/","title":"本地使用wordpress创建wooCommerce"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>本地使用wordpress创建wooCommerce | My blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">My blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Viva la vida</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Petro</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="本地使用wordpress创建wooCommerce | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          本地使用wordpress创建wooCommerce
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-02-02 10:51:23" itemprop="dateCreated datePublished" datetime="2023-02-02T10:51:23+08:00">2023-02-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-14 18:03:23" itemprop="dateModified" datetime="2024-05-14T18:03:23+08:00">2024-05-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>首先要明确, wooCommerce是开源而免费的, 因为毕竟它是基于wordpress的, 但是如果你打开wooCommerce的官网, 基本上就会发现是要收费的, 这点很奇怪.<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/102.png" alt="pages"><br>可以看见这幅图里, 它是要你用wordpress账号进行授权登录, 可以wordpress就不应该会要收费<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/103.png" alt="pages"></p>
+<p>后来我明白了, 应该是wooCommerce官网, 它为了方便提供了基于云服务器服务的傻瓜式操作, 而这个服务器主机总归是要花钱的, 但是wooCommerce本身是不要花钱的. 如果你使用自己的服务器, 那就不用花钱了.</p>
+<p>之前学习云主机的时候没好好学, 直接用了wordpress的镜像, 那现在要做的就是在本地配置wordpress服务, 并且安装wooCommerce插件.</p>
+<p>wordpress是基于php的, 所以在windows上安装phpstudy(用其他的类似xampp也可以, 但是经过php程序员指点, 还是用这个比较好). 如果是在linux上, 就是用bt. </p>
+<p>然后把解压后的wordpress放到WWW目录下. 启动web Server(apache和nginx随便哪个都行)和db server.<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/104.png" alt="pages"></p>
+<p>启动你wordpress的路径, 会出现让你第一次配置的图(如果没有找到<code>wp-config.php</code>这个配置文件的话)<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/105.jpg" alt="pages"><br>可以发现这里要你填写数据库名, 而这里就比较蛋疼了.</p>
+<p>如果你的电脑上没有mysql, 那只有一个mysql服务, 使用的端口是3306, 而如果你的电脑上已经按照了mysql, 那phpstudy想要启动的mysqld服务, 默认端口也是3306, 就会出问题, 而且后面启动网页的数据库链接也是都是默认3306, 会链接到不受phpstudy管理数据库的, 所以要添加一下配置文件. </p>
+<ol>
+<li>修改phpstudy的mysql端口号:<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/004.png" alt="pages"><br>修改port为3308(或者其他什么的)<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/0011.png" alt="pages"></li>
+<li>给phpMyAdmin修改端口号, 新建<code>config.inc.php</code>文件(可以从原来就有的<code>config.sample.inc.php</code>文件中复制过滤)<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/001.png" alt="pages"><br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/002.png" alt="pages"><br>可以看到修改为3308也就是和mysql服务的3306错开, 就可以链接上了<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/003.png" alt="pages"></li>
+<li>此时虽然phpstudy的链接和启动好了, 但是wordpress的默认数据库链接还没有改, 此时再进入wordpress会进入这个页面<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/005.png" alt="pages"><br>这就要求手动配置wordpress的配置文件<code>wp-config.php</code><br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/006.png" alt="pages"><br>和phpMyAdmin的配置文件一样, 这个配置文件也是要自己新建的</li>
+</ol>
+<p>接下来就是安装wooCommerce, 可以在wordpress的插件市场中安装, 但是那个安装速度很慢还容易出错, 建议在wordpress plugin的网页版中搜索插件, 然后再下载安装.<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/2001.jpg" alt="pages"><br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/2002.jpg" alt="pages"><br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/2003.png" alt="pages"><br>下载好之后, 可以在UI界面中, 把zip文件上传并安装, 但是我试了试, 这一步很慢会导致出错安装失败<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/2004.jpg" alt="pages"><br>所以还是建议解压之后, 安装到plugin目录下<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/2005.jpg" alt="pages"><br>插件就会被识别并出现了<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/2006.jpg" alt="pages"><br>启动wooCommerce插件后, 会进入它的引到页面<br>然后就是一直下一步就可以, 最近建一些测试商品<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/2007.jpg" alt="pages"><br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/007.png" alt="pages"></p>
+<hr>
+<p>最后就是设置付款收款的问题, 因为wordpress默认的收款方式, 是要和wordpress的账号进行关联的, 这一步又容易网络不好而导致不成功, 可以直接安装Paypal的插件, 安装方法同理, 解压放到插件目录下.  </p>
+<ol>
+<li>填写对应信息<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/008.png" alt="pages"><br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/010.png" alt="pages"><br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/011.png" alt="pages"></li>
+<li>设置完成<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/012.png" alt="pages"></li>
+<li>在页面中就可以使用Paypal进行收款了<br><img src="/2023/02/02/%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8wordpress%E5%88%9B%E5%BB%BAwooCommerce/013.png" alt="pages"></li>
+</ol>
+<p>至此你的本地wooCommerce就可以搭建完毕了, 如果是为了真实运营, 那么把它部署到公网服务器上就可以了. 另外一点就是, 默认的主题一片白的也没有交互(毕竟wordpress是个博客工具, 要变成电子商城肯定要魔改), 有很多针对wooCommerce开发的购物车风格的主题比如flatsome之类, 可以去试用或者在本地自己刷刷, 但是这些主题都是收费的, 真实运营的话, 不购买后使用可能会收律师函</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag"># 部署</a>
+              <a href="/tags/wordpress/" rel="tag"># wordpress</a>
+              <a href="/tags/wooCommerce/" rel="tag"># wooCommerce</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/01/20/mock-js%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="prev" title="mock.js的使用">
+                  <i class="fa fa-angle-left"></i> mock.js的使用
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/02/05/nexT%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89header%E9%83%A8%E5%88%86/" rel="next" title="nexT添加自定义header部分">
+                  nexT添加自定义header部分 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Petro</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

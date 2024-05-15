@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="首先, 我注册了一个邮箱用于申请新的aws账号, server-baipiao01@outlook.com Qq@111222333  aws login pwd:Qq@111222333 在提交信用卡那个步骤, 直接用假的信用卡号就可以, 我本来还想用招行的无界卡之类的, 发现没有这个必要我使用了一张过期的卡, 到22年就到期的苏州银行的卡号, 估计这里的关键是仅仅是银联但不是visa, 到期日">
+<meta property="og:type" content="article">
+<meta property="og:title" content="202306白嫖aws服务器">
+<meta property="og:url" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:site_name" content="My blog">
+<meta property="og:description" content="首先, 我注册了一个邮箱用于申请新的aws账号, server-baipiao01@outlook.com Qq@111222333  aws login pwd:Qq@111222333 在提交信用卡那个步骤, 直接用假的信用卡号就可以, 我本来还想用招行的无界卡之类的, 发现没有这个必要我使用了一张过期的卡, 到22年就到期的苏州银行的卡号, 估计这里的关键是仅仅是银联但不是visa, 到期日">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/001.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/002.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/003.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/004.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/005.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/006.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/007.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/008.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/009.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/010.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/011.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/012.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/013.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/014.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/015.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/016.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/017.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/018.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/019.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/020.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/021.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/022.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/023.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/024.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/025.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/026.png">
+<meta property="article:published_time" content="2023-06-07T08:23:48.000Z">
+<meta property="article:modified_time" content="2023-07-19T03:37:24.247Z">
+<meta property="article:author" content="Petro">
+<meta property="article:tag" content="aws">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/001.png">
+
+
+<link rel="canonical" href="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/","path":"2023/06/07/202306白嫖aws服务器/","title":"202306白嫖aws服务器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>202306白嫖aws服务器 | My blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">My blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Viva la vida</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Petro</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="202306白嫖aws服务器 | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          202306白嫖aws服务器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-06-07 16:23:48" itemprop="dateCreated datePublished" datetime="2023-06-07T16:23:48+08:00">2023-06-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-07-19 11:37:24" itemprop="dateModified" datetime="2023-07-19T11:37:24+08:00">2023-07-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>首先, 我注册了一个邮箱用于申请新的aws账号,</p>
+<pre class="line-numbers language-none"><code class="language-none">server-baipiao01@outlook.com
+Qq@111222333
+
+aws login pwd:Qq@111222333<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/001.png" alt="pages"><br><del>在提交信用卡那个步骤, 直接用假的信用卡号就可以, 我本来还想用招行的无界卡之类的, 发现没有这个必要</del><br>我使用了一张过期的卡, 到22年就到期的苏州银行的卡号, 估计这里的关键是仅仅是银联但不是visa, 到期日随便写了26年就可以了<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/002.png" alt="pages"><br>可以看到能到下一步<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/003.png" alt="pages"><br>用这种信用卡的话, 会报错, 但是还是可以登录的,  选择用root用户/根用户登录, 之后就好了<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/004.png" alt="pages"><br>登录后, 搜索<code>EC2</code>并且收藏<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/005.png" alt="pages"><br>如果使用假的卡,会导致支付方式不通过<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/006.png" alt="pages"><br>使用银联的卡, 在payment preference这边就是正确的<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/007.png" alt="pages"><br>进入到下方的EC2界面, 能出现这个界面说明应该是成功了. 新账号的审核需要一点时间, 我一开始的时候也是说账号需要认证, 它说可能需要做一笔1美元的测试交易之类, 我以为是不是因为账号的信用卡无效的, 所以导致的这个问题, 但是发现睡了一觉可以了<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/008.png" alt="pages"></p>
+<p>启动新的实例<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/009.png" alt="pages"><br>创建实例的时候一点要是支持免费套餐的<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/010.png" alt="pages"><br>创建密钥对<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/011.png" alt="pages"><br>自动下载密钥对, 防火墙策略选择现有的<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/012.png" alt="pages"><br>启动<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/013.png" alt="pages"><br>结果又失败了<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/014.png" alt="pages"><br>我写了一个邮件, 说明了一下失败的情况和截图, 后来它发了一个邮件给我说明已经可以用了<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/015.png" alt="pages"><br>创建成功<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/016.png" alt="pages"><br>在这里增加一个账单提醒(比如公司邮箱,方便天天看得见)<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/017.png" alt="pages"><br>接下来去安全组中添加端口<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/018.png" alt="pages"><br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/019.png" alt="pages"><br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/020.png" alt="pages"><br>使用<code>MobaXterm</code>来进行SSH连接<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/021.png" alt="pages"><br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/022.png" alt="pages"><br>使用这个配置发现登录不上, 我怀疑是密钥对的问题, 因为我是把私钥文件从公司电脑上拖到自己电脑上的(公司电脑无法使用ssh), 怀疑是不是这个过程中编码有问题导致私钥不一样了.<br>然后我尝试在EC2 dashboard中替换密钥对, 发现基本上无法替换的, 即使你新增了新的密钥对也无法指定使用新的密钥对. (但是我又失手把老的密钥对删掉了). 就只能新建一个示例了.<br>在这个帖子中, 发现了其实是我的登录名错了, 不是<code>admin</code></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://becomethesolution.com/disconnected-no-supported-authentication-methods-available-aws-putty#:~:text=Disconnected%3A%20No%20supported%20authentication%20methods%20available%20%28server%20sent%3A,default%20login%2Fusernames%20when%20connecting%20to%20your%20AMI%20instance">https://becomethesolution.com/disconnected-no-supported-authentication-methods-available-aws-putty#:~:text=Disconnected%3A%20No%20supported%20authentication%20methods%20available%20%28server%20sent%3A,default%20login%2Fusernames%20when%20connecting%20to%20your%20AMI%20instance</a>.</p>
+</blockquote>
+<p>使用<code>root</code> 或者 <code>ubuntu</code> 来登录就可以了<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/023.png" alt="pages"></p>
+<p>大功告成了: 使用下面的命令看看配置</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token parameter variable">-i</span>
+<span class="token function">wget</span> -qO- bench.sh <span class="token operator">|</span> <span class="token function">bash</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/024.png" alt="pages"><br>最后是如何查看流量<br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/025.png" alt="pages"><br><img src="/2023/06/07/202306%E7%99%BD%E5%AB%96aws%E6%9C%8D%E5%8A%A1%E5%99%A8/026.png" alt="pages"></p>
+<p>找到的一个参考视频</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1sg4y1F78k">https://www.bilibili.com/video/BV1sg4y1F78k</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/aws/" rel="tag"># aws</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/05/30/202305%E6%89%BE%E4%B8%8D%E5%88%B0hexo%E5%91%BD%E4%BB%A4%E7%AD%89/" rel="prev" title="202305找不到hexo命令等">
+                  <i class="fa fa-angle-left"></i> 202305找不到hexo命令等
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/06/25/202306-git-port-443-after-21064-ms-Timed-out/" rel="next" title="202306-git port 443 after 21064 ms Timed out">
+                  202306-git port 443 after 21064 ms Timed out <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Petro</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="创建repo, 选私有库, 之后要放到PayPal内部Git上的, 先声明一下叠甲避免安全性问题 创建ts的create项目 npx create-react-app display-site --template typescript 发现无法push代码想到可能是没有权限的问题, invite自己的GitHub账号就可以成功了删掉创建工程时的一些默认项参考开发文档安装tailwind在主 CS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="202309-学习使用tailwind加ts创建一个网站">
+<meta property="og:url" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/index.html">
+<meta property="og:site_name" content="My blog">
+<meta property="og:description" content="创建repo, 选私有库, 之后要放到PayPal内部Git上的, 先声明一下叠甲避免安全性问题 创建ts的create项目 npx create-react-app display-site --template typescript 发现无法push代码想到可能是没有权限的问题, invite自己的GitHub账号就可以成功了删掉创建工程时的一些默认项参考开发文档安装tailwind在主 CS">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/001.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/002.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/004.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/003.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/005.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/006.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/007.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/008.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/009.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/010.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/011.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/012.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/013.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/014.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/015.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/016.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/017.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/018.png">
+<meta property="og:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/019.png">
+<meta property="article:published_time" content="2023-09-11T06:19:40.000Z">
+<meta property="article:modified_time" content="2023-09-19T06:44:13.485Z">
+<meta property="article:author" content="Petro">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="ts">
+<meta property="article:tag" content="css">
+<meta property="article:tag" content="tailwind">
+<meta property="article:tag" content="PayPal">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/001.png">
+
+
+<link rel="canonical" href="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/","path":"2023/09/11/202309-学习使用tailwind加ts创建一个网站/","title":"202309-学习使用tailwind加ts创建一个网站"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>202309-学习使用tailwind加ts创建一个网站 | My blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">My blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Viva la vida</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Petro</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="202309-学习使用tailwind加ts创建一个网站 | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          202309-学习使用tailwind加ts创建一个网站
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-09-11 14:19:40" itemprop="dateCreated datePublished" datetime="2023-09-11T14:19:40+08:00">2023-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-09-19 14:44:13" itemprop="dateModified" datetime="2023-09-19T14:44:13+08:00">2023-09-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>创建repo, 选私有库, 之后要放到PayPal内部Git上的, 先声明一下叠甲避免安全性问题<br><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/001.png" alt="pic"></p>
+<p>创建ts的create项目</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">npx create-react-app display-site <span class="token parameter variable">--template</span> typescript<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/002.png" alt="pic"><br>发现无法push代码<br><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/004.png" alt="pic"><br>想到可能是没有权限的问题, invite自己的GitHub账号<br><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/003.png" alt="pic"><br>就可以成功了<br><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/005.png" alt="pic"><br>删掉创建工程时的一些默认项<br><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/006.png" alt="pic"><br>参考开发文档<br><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/007.png" alt="pic"><br>安装tailwind<br><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/008.png" alt="pic"><br>在主 CSS 文件中通过 @tailwind 指令加载 Tailwind 功能模块<br><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/009.png" alt="pic"><br>添加tailwind的插件, 不然没有自动提示, 包括颜色什么的<br><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/010.png" alt="pic"><br>发现没有效果<br><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/011.png" alt="pic"><br>原因是官网的示例代码不正确, 可能是我参考的入口不对, 但是这里配置文件需要自己把 <code>ts,tsx</code> 添加上去</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json">content<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"./src/**/*.&#123;html,js,ts,tsx,jsx&#125;"</span><span class="token punctuation">,</span>'./src/pages<span class="token comment">/**/</span>*.<span class="token punctuation">&#123;</span>js<span class="token punctuation">,</span>ts<span class="token punctuation">,</span>jsx<span class="token punctuation">,</span>tsx<span class="token punctuation">&#125;</span>'<span class="token punctuation">,</span> './src/components<span class="token comment">/**/</span>*.<span class="token punctuation">&#123;</span>js<span class="token punctuation">,</span>ts<span class="token punctuation">,</span>jsx<span class="token punctuation">,</span>tsx<span class="token punctuation">&#125;</span>'<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/012.png" alt="pic"><br>有效果了<br><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/013.png" alt="pic"></p>
+<p>在搜索侧边栏的样式过程中, 我发现了一个文章, 可能这样安装<code>tailwind</code>更好</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">-D</span> tailwindcss@latest postcss@latest autoprefixer@latest<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://devpress.csdn.net/react/62ed61bbc6770329307f245c.html">https://devpress.csdn.net/react/62ed61bbc6770329307f245c.html</a><br><a target="_blank" rel="noopener" href="https://codepen.io/junchow/pen/GRoJPeo?editors=1000">https://codepen.io/junchow/pen/GRoJPeo?editors=1000</a></p>
+</blockquote>
+<hr>
+<p>为了使用next框架, 只能重建项目了, 因为next虽然是基于react的, 但是使用了SSR服务端渲染, 没有什么比较好的办法可以直接从react项目转过来, 所以重新建一个项目了.</p>
+<p><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/014.png" alt="pic"></p>
+<hr>
+<p>nextjs的使用办法, 我这里就不说了, 毕竟很多, 看文档比较好<br>但是在我使用 <code>create-next-app</code> 的这个时间节点 (2023-09-13), next版本已经从12变成了13, 这里有一个天坑的地方, nextjs是一个以规范为导向的框架, 也就是说你的文件名, 文件夹名字是要符合规范的, 比如在老的12以前的版本中, 路由不需要自己配置, 放在 <code>pages\文件夹名\页面名[url参数名].js</code>下就可以了, 这个<code>文件夹名\页面名</code> 就是最终的访问路径.<br>但是这么关键的东西, 在<code>13</code>版本里改了但是文档里说的却不清楚<br>这就很要命了, 现在的结构是, 每一个页面, 都是一套组合拳, 比如<code>test</code>这个页面, 会有自己的<code>layout</code> 和 <code>page</code>, 并且命名规范变成了文件夹导向, 文件夹下的默认文件也从 <code>index.jsx</code> 变成了 <code>page.tsx</code>, 这谁扛得住啊? 看看现在的目录是这样的<br><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/015.png" alt="pic">  </p>
+<p>原来的<code>pages</code> 变成了现在的 <code>app</code>, 而且官方文档还没说! 而且这个功能还必须要修改配置文件, 不然还不会生效,<br><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/016.png" alt="pic"> </p>
+<p>但是令人困惑的是, 既然写了是<code>experimental</code>功能, 那在使用<code>cli</code>的时候让人选一下是不是要启用这点吧. 它也没有, 默认都是有的.</p>
+<hr>
+<p>反正, 就这么先用着吧, 毕竟next也算是react下一个很火的框架</p>
+<p>然后是第一次使用了<code>heroicons</code>, 这个库的确很方便, 直接把icon变成了<code>ReactNode</code>类型, 直接用就可以, 但是里面的图标还不是很多, 不比直接从svg比如iconfont上多, 但是svg还需要转一下, 我现在也没啥好的转的方法找到.</p>
+<hr>
+<p>一个关于nextjs 13比较好的帖子</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7247740446280007741">https://juejin.cn/post/7247740446280007741</a></p>
+</blockquote>
+<p>总结几个比较坑的地方:</p>
+<ol>
+<li><p>在debug和打包的时候, 临时文件/部署文件默认是放在<code>.next</code>文件夹下的, 如果要修改为熟悉的名字比如<code>dist</code>,<code>build</code>, 需要添加配置项<br><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/017.png" alt="pic"> </p>
+</li>
+<li><p>因为nextjs服务器端渲染的特性, 所以它打包出来的部署文件不是静态的html文件, 没有<code>index.html</code>, 这点不用特别大惊小怪, 如果想要变成静态文件, 也需要添加配置项<br><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/018.png" alt="pic"> </p>
+</li>
+<li><p>配置一些其他的简单配置项</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/blogs-xlf/p/14014656.html">https://www.cnblogs.com/blogs-xlf/p/14014656.html</a></p>
+</blockquote>
+</li>
+<li><p>一个新的电子邮箱账号</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">addr</span><span class="token punctuation">:</span> browser.sync.cityofwind@gmail.com
+<span class="token key atrule">pwd</span><span class="token punctuation">:</span> Qq111222333<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p>如何在render中部署一个nextjs项目</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://render.com/docs/deploy-nextjs-app">https://render.com/docs/deploy-nextjs-app</a></p>
+</blockquote>
+</li>
+<li><p>next比较好的非官方教程</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.builder.io/blog/next-13-app-router">https://www.builder.io/blog/next-13-app-router</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7247044423024721980">https://juejin.cn/post/7247044423024721980</a></p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<p>这里有一个坑爹的地方, 因为我做的仅仅是一个类似demo的网站, 所以很多按钮是按了没有效果的, 就想用popover的这个方式来做一下提示, 之前我尝试过 <code>tippy.js</code> 这里本来也是想用的. 但是其在<code>typescript</code>中那是完全没法用啊(这个库有点问题, 在强类型下, 有2个关键参数没有类型, 使用者又不知道应该是什么), 放弃 <code>tippy.js</code>了, 在兜兜转转了好久之后, 放弃了转而使用<code>material UI</code></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://mui.com/material-ui/react-tooltip/">https://mui.com/material-ui/react-tooltip/</a></p>
+</blockquote>
+<p><img src="/2023/09/11/202309-%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8tailwind%E5%8A%A0ts%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99/019.png" alt="pic"> </p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">yarn</span> <span class="token function">add</span> @mui/material @emotion/react @emotion/styled @heroicons/react  react-router-dom<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>不知道为什么这么创建出来的react中ts的支持是要手动加上去的</p>
+<pre class="line-numbers language-none"><code class="language-none">yarn add typescript @types&#x2F;node @types&#x2F;react @types&#x2F;react-dom @types&#x2F;jest<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后把src/index.js 重命名为 src/index.tsx</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/js/" rel="tag"># js</a>
+              <a href="/tags/ts/" rel="tag"># ts</a>
+              <a href="/tags/css/" rel="tag"># css</a>
+              <a href="/tags/tailwind/" rel="tag"># tailwind</a>
+              <a href="/tags/PayPal/" rel="tag"># PayPal</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/07/202309-%E4%BD%BF%E7%94%A8Npm%E5%AE%89%E8%A3%85hexo%E4%B8%BB%E9%A2%98/" rel="prev" title="202309-使用Npm安装hexo主题">
+                  <i class="fa fa-angle-left"></i> 202309-使用Npm安装hexo主题
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/09/11/202309-Windows%E5%88%A0%E6%96%87%E4%BB%B6%E5%88%A0%E4%B8%8D%E6%8E%89/" rel="next" title="202309-Windows删文件删不掉">
+                  202309-Windows删文件删不掉 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Petro</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
