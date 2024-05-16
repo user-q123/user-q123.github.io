@@ -1,2 +1,2 @@
 To view:
-https://user-q123.github.com
+https://user-q123.github.io
