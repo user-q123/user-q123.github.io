@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="安装部署下载prestashop, 解压, 放到网站服务器目录下, 然后访问. (这里注意,prestashop.zip这个文件, 它必须要通过安装php zip extansion插件安装, 自行解压没有作用)这里在windows下用laragon作为host环境没有作用, 我试过好几个, 包括win server, 都没有成功, 可能prestashop对于windows的支持不是很好, 我最">
+<meta property="og:type" content="article">
+<meta property="og:title" content="202406-prestashop学习">
+<meta property="og:url" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="My blog">
+<meta property="og:description" content="安装部署下载prestashop, 解压, 放到网站服务器目录下, 然后访问. (这里注意,prestashop.zip这个文件, 它必须要通过安装php zip extansion插件安装, 自行解压没有作用)这里在windows下用laragon作为host环境没有作用, 我试过好几个, 包括win server, 都没有成功, 可能prestashop对于windows的支持不是很好, 我最">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/001.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/002.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/003.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/004.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/005.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/006.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/007.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/008.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/009.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/010.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/011.jpg">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/012.jpg">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/015.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/014.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/016.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/017.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/018.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/019.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/020.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/021.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0211.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/022.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0212.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0221.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/023.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/02301.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/02302.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/027.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/023.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/024.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/025.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/029.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/026.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0301.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0302.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/033.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/034.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/035.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/036.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/037.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/038.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/039.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/040.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/041.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/042.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/043.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/044.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/045.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04501.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04502.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04503.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04504.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04505.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04506.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04507.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0450701.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04508.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04509.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0450901.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0450902.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0450903.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0450904.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/046.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/047.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/048.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/049.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/050.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/051.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/052.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/053.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/054.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/055.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/056.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/057.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/058.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/059.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/060.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/061.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/062.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/063.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/064.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/065.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/066.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/067.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/068.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/069.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/070.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/071.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/072.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/073.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/074.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/075.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/076.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/077.png">
+<meta property="article:published_time" content="2024-06-04T02:15:29.000Z">
+<meta property="article:modified_time" content="2024-07-09T13:58:19.356Z">
+<meta property="article:author" content="Petro">
+<meta property="article:tag" content="部署">
+<meta property="article:tag" content="prestashop">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/001.png">
+
+
+<link rel="canonical" href="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/","path":"2024/06/04/202406-prestashop学习/","title":"202406-prestashop学习"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>202406-prestashop学习 | My blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">My blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Viva la vida</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2"><span class="nav-number">1.</span> <span class="nav-text">安装部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">插件安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%95%8C%E9%9D%A2"><span class="nav-number">3.</span> <span class="nav-text">配置界面:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PayPal-Official-Module"><span class="nav-number">3.1.</span> <span class="nav-text">PayPal Official Module</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%9B%BD%E8%B4%A6%E5%8F%B7-%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83%E6%97%A0%E6%B3%95%E6%88%90%E5%8A%9Flink"><span class="nav-number">3.2.</span> <span class="nav-text">使用中国账号(测试环境无法成功link):</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83"><span class="nav-number">3.2.1.</span> <span class="nav-text">测试环境:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PayPal-Official-Module%E6%AD%A3%E5%BC%8F%E7%8E%AF%E5%A2%83"><span class="nav-number">3.2.2.</span> <span class="nav-text">PayPal Official Module正式环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%AF%A6%E6%83%85-%E9%9D%9EGerman"><span class="nav-number">3.2.3.</span> <span class="nav-text">设置详情(非German):</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%AF%A6%E6%83%85-German"><span class="nav-number">3.2.4.</span> <span class="nav-text">设置详情(German):</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#C2-PayPal-account-%E8%A1%A8%E7%8E%B0%E4%B8%8D%E6%AD%A3%E7%A1%AE"><span class="nav-number">3.2.4.1.</span> <span class="nav-text">C2 PayPal account (表现不正确)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#US-PayPal-account-%E8%A1%A8%E7%8E%B0%E6%AD%A3%E7%A1%AE"><span class="nav-number">3.2.4.2.</span> <span class="nav-text">US PayPal account (表现正确)</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8PrestaShop-Checkout-built-with-PayPal-%E6%8F%92%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">使用PrestaShop Checkout built with PayPal 插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PayPal%E6%94%AF%E4%BB%98%E6%96%B9%E5%BC%8F%E5%9C%A8%E5%90%84%E4%B8%AA%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%B1%95%E7%A4%BA%E6%83%85%E5%86%B5-%E4%BB%A5%E4%B8%8B%E9%83%BD%E6%98%AFC2%E5%8D%96%E5%AE%B6%E8%B4%A6%E5%8F%B7"><span class="nav-number">4.1.</span> <span class="nav-text">PayPal支付方式在各个页面的展示情况: (以下都是C2卖家账号)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vault-PayPal"><span class="nav-number">4.2.</span> <span class="nav-text">Vault  PayPal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vault-Card"><span class="nav-number">4.3.</span> <span class="nav-text">Vault  Card</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Petro</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="202406-prestashop学习 | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          202406-prestashop学习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-06-04 10:15:29" itemprop="dateCreated datePublished" datetime="2024-06-04T10:15:29+08:00">2024-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-07-09 21:58:19" itemprop="dateModified" datetime="2024-07-09T21:58:19+08:00">2024-07-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="安装部署"><a href="#安装部署" class="headerlink" title="安装部署"></a>安装部署</h2><p>下载<code>prestashop</code>, 解压, 放到网站服务器目录下, 然后访问. (这里注意,<code>prestashop.zip</code>这个文件, 它必须要通过安装<code>php zip extansion</code>插件安装, 自行解压没有作用)<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/001.png" alt="pic"><br>这里在windows下用<code>laragon</code>作为host环境没有作用, 我试过好几个, 包括<code>win server</code>, 都没有成功, 可能<code>prestashop</code>对于windows的支持不是很好, 我最终在linux(centos)上终于成功<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/002.png" alt="pic"><br>开始安装流程<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/003.png" alt="pic"><br>会检查各种依赖<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/004.png" alt="pic"><br>安装缺失依赖<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/005.png" alt="pic"><br>如果依赖都安装好了, 可以进入下一步<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/006.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/007.png" alt="pic"><br>配置数据库(这里是在windows上的, laragon里)<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/008.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/009.png" alt="pic"><br>这里windows系统都会报一个很迷的错误<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/010.png" alt="pic"><br>在Linux不会报错<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/011.jpg" alt="pic"><br>安装成功<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/012.jpg" alt="pic"><br>访问后台会告诉你为了安全考虑, 需要删除<code>/Install</code>文件夹<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/015.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/014.png" alt="pic"><br>删除后可以进入<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/016.png" alt="pic"></p>
+<p>这里有一点, 一定要启用SSL, 或者在店铺的后台管理设置中也启用SSL, 否则会导致访问店铺时出现一直重定向的问题.<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/017.png" alt="pic"></p>
+<hr>
+<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>添加<code>PayPal Offical</code>插件<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/018.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/019.png" alt="pic"><br>当然也可以通过从插件市场下载, 然后通过上传的方式安装  </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://addons.prestashop.com/en/payment-card-wallet/1748-paypal-official.html">https://addons.prestashop.com/en/payment-card-wallet/1748-paypal-official.html</a><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/020.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/021.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0211.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/022.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0212.png" alt="pic"><br>但是事实上我发现通过UI界面安装这个<code>PayPal Official</code>插件很难安装成功, 也可以把插件直接解压到<code>module</code>文件夹下<br>比如出现这个错误时: <code>An error occurred while installing PayPal Official.</code><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0221.png" alt="pic"><br>安装完毕<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/023.png" alt="pic">  </p>
+</blockquote>
+<hr>
+<h2 id="配置界面"><a href="#配置界面" class="headerlink" title="配置界面:"></a>配置界面:</h2><h3 id="PayPal-Official-Module"><a href="#PayPal-Official-Module" class="headerlink" title="PayPal Official Module"></a>PayPal Official Module</h3><p><code>PayPal Official Module</code>的卡支付功能只有在德国地区才可以使用.<br>调整地区: International $\Rightarrow$ Localization<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/02301.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/02302.png" alt="pic">  </p>
+<p>之后先安装启用插件<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/027.png" alt="pic"><br>然后到支付方式列表中配置<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/023.png" alt="pic"><br>进入插件配置页面<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/024.png" alt="pic"><br>点击<code>Logout/Switch Mode</code>配置账号信息<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/025.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/029.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/026.png" alt="pic"></p>
+<h3 id="使用中国账号-测试环境无法成功link"><a href="#使用中国账号-测试环境无法成功link" class="headerlink" title="使用中国账号(测试环境无法成功link):"></a>使用中国账号(测试环境无法成功link):</h3><h4 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境:"></a>测试环境:</h4><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">email</span><span class="token punctuation">:</span>
+    business1@ebay.com
+<span class="token key atrule">pwd</span><span class="token punctuation">:</span>
+    <span class="token number">11111111</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0301.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0302.png" alt="pic"></p>
+<h4 id="PayPal-Official-Module正式环境"><a href="#PayPal-Official-Module正式环境" class="headerlink" title="PayPal Official Module正式环境"></a>PayPal Official Module正式环境</h4><p><code>gpscntest@outlook.com</code><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/033.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/034.png" alt="pic"><br>link成功<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/035.png" alt="pic"><br>配置:<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/036.png" alt="pic">  </p>
+<h4 id="设置详情-非German"><a href="#设置详情-非German" class="headerlink" title="设置详情(非German):"></a>设置详情(非German):</h4><p><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/037.png" alt="pic"><br>vault无法被启用<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/038.png" alt="pic"><br>启用状态:<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/039.png" alt="pic"><br>PayPal支付方式在各个页面的展示情况:<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/040.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/041.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/042.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/043.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/044.png" alt="pic"><br>点击<code>place order</code>后的新标签页展示<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/045.png" alt="pic"> </p>
+<h4 id="设置详情-German"><a href="#设置详情-German" class="headerlink" title="设置详情(German):"></a>设置详情(German):</h4><p><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04501.png" alt="pic"><br>PayPal支付方式在各个页面的展示情况: </p>
+<h5 id="C2-PayPal-account-表现不正确"><a href="#C2-PayPal-account-表现不正确" class="headerlink" title="C2 PayPal account (表现不正确)"></a>C2 PayPal account (表现不正确)</h5><p><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04502.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04503.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04504.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04505.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04506.png" alt="pic"> </p>
+<h5 id="US-PayPal-account-表现正确"><a href="#US-PayPal-account-表现正确" class="headerlink" title="US PayPal account (表现正确)"></a>US PayPal account (表现正确)</h5><p>PayPal - 无JS SDK, 新标签页跳转<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04507.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0450701.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04508.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/04509.png" alt="pic"><br>VISA - 支付<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0450901.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0450902.png" alt="pic"><br>MasterCard - 支付<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0450903.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/0450904.png" alt="pic"> </p>
+<hr>
+<h2 id="使用PrestaShop-Checkout-built-with-PayPal-插件"><a href="#使用PrestaShop-Checkout-built-with-PayPal-插件" class="headerlink" title="使用PrestaShop Checkout built with PayPal 插件"></a>使用PrestaShop Checkout built with PayPal 插件</h2><p>Disable <code>paypal official</code>插件<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/046.png" alt="pic"><br>进入到<code>PrestaShop Checkout built with PayPal</code>插件配置页中, 关联<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/047.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/048.png" alt="pic"><br>在link PayPal账号前需要link Prestashop账号<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/049.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/050.png" alt="pic"><br>Link完成, 可以link PayPal 账号<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/051.png" alt="pic"><br>Onboard:<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/052.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/053.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/054.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/055.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/056.png" alt="pic"><br>打开ACDC:<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/057.png" alt="pic"><br>3DS和Vault<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/058.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/059.png" alt="pic"><br>(Vault的账号无法被管理, 只有一个数量显示)<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/060.png" alt="pic"> </p>
+<h3 id="PayPal支付方式在各个页面的展示情况-以下都是C2卖家账号"><a href="#PayPal支付方式在各个页面的展示情况-以下都是C2卖家账号" class="headerlink" title="PayPal支付方式在各个页面的展示情况: (以下都是C2卖家账号)"></a>PayPal支付方式在各个页面的展示情况: (以下都是C2卖家账号)</h3><p><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/061.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/062.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/063.png" alt="pic"><br>(沙箱环境的卡支付只支持BCDC)<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/064.png" alt="pic"><br>(正式环境的卡支付可以支持ACDC V2)<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/065.png" alt="pic"><br>VisaCard支付 - With 3ds<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/066.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/067.png" alt="pic"><br>MasterCard支付 - With 3ds<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/068.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/069.png" alt="pic"><br>VisaCard支付 - WithOut 3ds 失败<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/070.png" alt="pic"> </p>
+<h3 id="Vault-PayPal"><a href="#Vault-PayPal" class="headerlink" title="Vault  PayPal"></a>Vault  PayPal</h3><ul>
+<li>first time<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/071.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/072.png" alt="pic"></li>
+<li>Returning<br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/073.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/074.png" alt="pic">  <h3 id="Vault-Card"><a href="#Vault-Card" class="headerlink" title="Vault  Card"></a>Vault  Card</h3><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/075.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/076.png" alt="pic"><br><img src="/2024/06/04/202406-prestashop%E5%AD%A6%E4%B9%A0/077.png" alt="pic"></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag"># 部署</a>
+              <a href="/tags/prestashop/" rel="tag"># prestashop</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/05/17/20240517-%E9%87%8D%E6%96%B0%E5%AD%A6%E4%B9%A0ts/" rel="prev" title="20240517-重新学习ts">
+                  <i class="fa fa-angle-left"></i> 20240517-重新学习ts
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/" rel="next" title="202406-wsl折腾1panel">
+                  202406-wsl折腾1panel <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Petro</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

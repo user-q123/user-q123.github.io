@@ -113,7 +113,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -124,7 +124,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -141,6 +141,477 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/05/19/202305-iframe%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/19/202305-iframe%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">202305-iframe跨域问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-05-19 09:59:53" itemprop="dateCreated datePublished" datetime="2023-05-19T09:59:53+08:00">2023-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-05-24 10:05:26" itemprop="dateModified" datetime="2023-05-24T10:05:26+08:00">2023-05-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>目前遇到了一个要在iframe中渲染Paypal账单的问题, 他们本来是渲染自己的账单的, 那必然没有什么跨域问题. 而iframe中src换成了其他网站的话, 就会出现 <code>Display forbidden by X-Frame-Options</code> 或者 <code>Refused to display ‘url’ in a frame because it set &#39;X-Frame-Options&#39; to &#39;sameorigin&#39; </code> 的问题.  </p>
+<p>在StackoverFlow上参照这个帖子研究了半天, 似乎也没有什么很好的解决方案.</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/6666423/overcoming-display-forbidden-by-x-frame-options">https://stackoverflow.com/questions/6666423/overcoming-display-forbidden-by-x-frame-options</a></p>
+</blockquote>
+<ol>
+<li><p>第一个方案, 正如我们有时候会嵌入B站的视频一样, 那B站的地址不也是跨域了? 这种情况下, 有时候我们在原来会跨域的地址比如 <code>https://xxxx.aaa</code> 的后面加上一些东西, 比如 <code>https://xxxx.aaa&amp;embed</code> 或者 <code>https://xxxx.aaa&amp;target=popup</code> 之类的来告诉请求源, 我这个网站是要在iframe中使用的, 请服务器在response头里允许我在iframe中展示, <code>X-Frame-Options:ALLOW</code>, 这是最好的办法, 但是需要服务器的后台支持</p>
+</li>
+<li><p>重写iframe, 参照这个方案, 这个方案是使用了 <code>html</code> 的 <code>is</code> 属性, 事实上我们是使用了重写过的iframe. 在这个iframe中, 其实是请求了一个不会跨域的地址. 但是那些个免费的跨域代理服务器都不怎么稳定, 如果要使用这个方案还是代理到自己的服务器上,  </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/niutech/x-frame-bypass">https://github.com/niutech/x-frame-bypass</a><br><img src="/2023/05/19/202305-iframe%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/001.png" alt="pages"></p>
+</blockquote>
+</li>
+<li><p>使用插件修改HTTP头. 参考这个方法： </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://requestly.io/blog/bypass-iframe-busting-header">https://requestly.io/blog/bypass-iframe-busting-header</a><br>但是这几个办法我试了都不行<br><img src="/2023/05/19/202305-iframe%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/002.png" alt="pages"><br><img src="/2023/05/19/202305-iframe%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/003.png" alt="pages"></p>
+</blockquote>
+</li>
+<li><p>使用代理服务器</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/05/17/202305-%E6%89%8B%E6%9C%BA%E6%B5%8B%E5%88%86%E8%B4%9D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/17/202305-%E6%89%8B%E6%9C%BA%E6%B5%8B%E5%88%86%E8%B4%9D/" class="post-title-link" itemprop="url">202305-手机测分贝</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-05-17 16:03:44 / Modified: 16:04:11" itemprop="dateCreated datePublished" datetime="2023-05-17T16:03:44+08:00">2023-05-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%B5%84%E6%BA%90%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">资源积累</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/halibobo/SoundMeter">https://github.com/halibobo/SoundMeter</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fuyaozhishang/p/8547523.html">https://www.cnblogs.com/fuyaozhishang/p/8547523.html</a><br><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/media/live/wx.createLivePusherContext.html">https://developers.weixin.qq.com/miniprogram/dev/api/media/live/wx.createLivePusherContext.html</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/05/17/202305%E6%89%8B%E6%9C%BA%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E6%96%B9%E6%A1%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/17/202305%E6%89%8B%E6%9C%BA%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">202305手机远程控制方案</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-05-17 16:03:17" itemprop="dateCreated datePublished" datetime="2023-05-17T16:03:17+08:00">2023-05-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-07-19 11:37:24" itemprop="dateModified" datetime="2023-07-19T11:37:24+08:00">2023-07-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%B5%84%E6%BA%90%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">资源积累</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Nc411L76A">https://www.bilibili.com/video/BV1Nc411L76A</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/05/12/202305-wordpress%E7%9A%84%E9%BB%98%E8%AE%A4%E5%AF%86%E7%A0%81%20-%20TODO/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/12/202305-wordpress%E7%9A%84%E9%BB%98%E8%AE%A4%E5%AF%86%E7%A0%81%20-%20TODO/" class="post-title-link" itemprop="url">202305-wordpress的默认密码</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-05-12 11:10:39" itemprop="dateCreated datePublished" datetime="2023-05-12T11:10:39+08:00">2023-05-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-05-19 10:00:20" itemprop="dateModified" datetime="2023-05-19T10:00:20+08:00">2023-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>//TODO</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.coonote.com/wordpress-note/reset-wordpress-administrator-password.html">https://www.coonote.com/wordpress-note/reset-wordpress-administrator-password.html</a></p>
+</blockquote>
+<p>时间长了会忘记wordpress的默认用户名和密码是什么:<br>这里记录一下</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>此外还有php-admin的</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/05/12/202305-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%20-%20TODO/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/12/202305-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%20-%20TODO/" class="post-title-link" itemprop="url">202305-离线安装python第三方库</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-05-12 10:22:16" itemprop="dateCreated datePublished" datetime="2023-05-12T10:22:16+08:00">2023-05-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-05-17 16:14:56" itemprop="dateModified" datetime="2023-05-17T16:14:56+08:00">2023-05-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>//TODO 未写完</p>
+<p>为了可以在vscode的ipynotebook中使用debug功能, 必须要安装6.0版本以上的ipykernel</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> sys
+<span class="token keyword">import</span> ipykernel
+
+<span class="token comment"># ensure that ipykernel version 6.0.0 or greater</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"kernal version:"</span><span class="token punctuation">,</span>ipykernel<span class="token punctuation">.</span>__version__<span class="token punctuation">)</span>
+
+<span class="token comment"># Ensure that you're using a kernel based on Python 3.7 or greater.	</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Python version:"</span><span class="token punctuation">,</span>sys<span class="token punctuation">.</span>version<span class="token punctuation">)</span>	<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode-jupyter/wiki/Setting-Up-Run-by-Line-and-Debugging-for-Notebooks">https://github.com/microsoft/vscode-jupyter/wiki/Setting-Up-Run-by-Line-and-Debugging-for-Notebooks</a></p>
+</blockquote>
+<p>首先是碰到的第一个问题, 因为公司电脑权限的问题, 在安装时候提示没有权限. 添加 <code>--user</code> 来解决</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhouzhiwengang/article/details/120011564">https://blog.csdn.net/zhouzhiwengang/article/details/120011564</a></p>
+</blockquote>
+<p>但是还是不尽人意, 尝试通过手动安装</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m_buddy/article/details/86619440">https://blog.csdn.net/m_buddy/article/details/86619440</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/351494670">https://zhuanlan.zhihu.com/p/351494670</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/334548570">https://www.zhihu.com/question/334548570</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -784,516 +1255,8 @@ rl<span class="token punctuation">.</span><span class="token function">on</span>
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/04/18/%E4%B8%80%E4%BA%9BGithub%E9%A1%B9%E7%9B%AE%E6%94%B6%E9%9B%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/04/18/%E4%B8%80%E4%BA%9BGithub%E9%A1%B9%E7%9B%AE%E6%94%B6%E9%9B%86/" class="post-title-link" itemprop="url">一些Github项目收集</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-04-18 11:01:36" itemprop="dateCreated datePublished" datetime="2023-04-18T11:01:36+08:00">2023-04-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%B5%84%E6%BA%90%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">资源积累</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ol>
-<li><p>故意给项目捣乱</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/duo001/evil.js">https://github.com/duo001/evil.js</a></p>
-</blockquote>
-</li>
-<li><p>程序员延寿指南</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/geekan/HowToLiveLonger">https://github.com/geekan/HowToLiveLonger</a></p>
-</blockquote>
-</li>
-<li><p>各种语言免费编程书</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/EbookFoundation/free-programming-books">https://github.com/EbookFoundation/free-programming-books</a></p>
-</blockquote>
-</li>
-<li><p>壁纸生成器</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/pearmini/colorfu">https://github.com/pearmini/colorfu</a></p>
-</blockquote>
-</li>
-<li><p>人生重开模拟器</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/xitu/coding-life">https://github.com/xitu/coding-life</a></p>
-</blockquote>
-</li>
-<li><p>P站风格图片生成</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/bestony/logoly">https://github.com/bestony/logoly</a></p>
-</blockquote>
-</li>
-<li><p>神级注释</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/Blankj/awesome-comment">https://github.com/Blankj/awesome-comment</a></p>
-</blockquote>
-</li>
-<li><p>一个很好玩的游戏(森林种田文字游戏)</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/doublespeakgames/adarkroom">https://github.com/doublespeakgames/adarkroom</a></p>
-</blockquote>
-</li>
-</ol>
-<ol start="9">
-<li>BiliBili API 收集<blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/SocialSisterYi/bilibili-API-collect">https://github.com/SocialSisterYi/bilibili-API-collect</a></p>
-</blockquote>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/04/11/AI%E4%BD%9C%E7%94%BB%E8%8E%B7%E5%8F%96Tag%E7%BD%91%E7%AB%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/04/11/AI%E4%BD%9C%E7%94%BB%E8%8E%B7%E5%8F%96Tag%E7%BD%91%E7%AB%99/" class="post-title-link" itemprop="url">AI作画获取Tag网站</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-04-11 16:10:51" itemprop="dateCreated datePublished" datetime="2023-04-11T16:10:51+08:00">2023-04-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-24 17:37:41" itemprop="dateModified" datetime="2023-04-24T17:37:41+08:00">2023-04-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>获取tag的网址: </p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://prompt.noonshot.com/">https://prompt.noonshot.com/</a><br><a target="_blank" rel="noopener" href="http://heizicao.gitee.io/novelai/#/home">http://heizicao.gitee.io/novelai/#/home</a><br><a target="_blank" rel="noopener" href="https://www.prompttool.com/">https://www.prompttool.com</a><br><a target="_blank" rel="noopener" href="https://docs.qq.com/doc/DWHl3am5Zb05QbGVs">https://docs.qq.com/doc/DWHl3am5Zb05QbGVs</a></p>
-</blockquote>
-<p> 重新贴一下C站的地址</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://civitai.com/">https://civitai.com/</a></p>
-</blockquote>
-<p> Korean doll likeness训练图包</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/606825889">https://zhuanlan.zhihu.com/p/606825889</a></p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/03/28/ChatGPT%E7%9B%B8%E5%85%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/03/28/ChatGPT%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">ChatGPT相关</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-03-28 13:40:54" itemprop="dateCreated datePublished" datetime="2023-03-28T13:40:54+08:00">2023-03-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-24 17:37:41" itemprop="dateModified" datetime="2023-04-24T17:37:41+08:00">2023-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如何让ChatGPT更好地回答你的问题:</p>
-<pre class="line-numbers language-none"><code class="language-none">https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Le411c7pC<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/f/awesome-chatgpt-prompts">https://github.com/f/awesome-chatgpt-prompts</a></p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/" class="post-title-link" itemprop="url">MidJourney初体验</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-03-18 15:32:20" itemprop="dateCreated datePublished" datetime="2023-03-18T15:32:20+08:00">2023-03-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-24 17:37:41" itemprop="dateModified" datetime="2023-04-24T17:37:41+08:00">2023-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="2023-04-11-MidJourney的免费账号已经无法再作画了"><a href="#2023-04-11-MidJourney的免费账号已经无法再作画了" class="headerlink" title="[2023-04-11] MidJourney的免费账号已经无法再作画了"></a>[2023-04-11] MidJourney的免费账号已经无法再作画了</h3><p>先贴2个详细的注册使用OpenAI的帖子(原文), 很详细了, 不需要我怎么再来写一个贴了</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://guxiaobei.com/51461">https://guxiaobei.com/51461</a><br><a target="_blank" rel="noopener" href="https://github.com/RockChinQ/QChatGPT">https://github.com/RockChinQ/QChatGPT</a></p>
-</blockquote>
-<p>但是还是有人说不知道sms-activation怎么用, 我尝试重新注册一个discord的账号来试试  </p>
-<p>首先是登录, sms-activation的网址是这个</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://sms-activate.org/#">https://sms-activate.org/#</a><br>原帖里的就是这个, 另外有一个 <code>smsactivate.org</code>的网站我没有用过不知道使用情况<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/001.png" alt="pages"><br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/002.png" alt="pages"><br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/003.png" alt="pages"></p>
-</blockquote>
-<p>结果发现discord手机号码不是必须的. 下面就学习一下怎么使用MidJourney吧</p>
-<p><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/004.png" alt="pages"></p>
-<p>安装Discord的桌面应用<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/005.png" alt="pages"></p>
-<p>打开MidJourney的Official Site, 点击下边的<code>join the beta</code><br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/006.png" alt="pages"><br>此时会唤起Discord的本地应用<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/007.png" alt="pages"><br>完成人机验证后, 就可以加入成功了.<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/008.png" alt="pages"></p>
-<p>在这个Home的channel里, 有很多很好看的图, 也是可以直接保存到本地的, 因为AI的图是没用版权的<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/009.png" alt="pages"></p>
-<p>在newbies频道,也就是新手频道里, 可以尝试做图<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/010.png" alt="pages"></p>
-<p>因为有很多人在同时做图, 最后是起一个Thread然后在里面做, 这样就不会被刷屏, 但是一个聊天室的Thread是有数量限制的.<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/011.png" alt="pages"><br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/012.png" alt="pages"></p>
-<p>输入关键字等待做图就可以了<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/013.png" alt="pages"></p>
-<p>关键词帖子: </p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="http://heizicao.gitee.io/novelai/#/home">http://heizicao.gitee.io/novelai/#/home</a></p>
-</blockquote>
-<p>然后也可以创建一个服务器, 引入MidJourney机器人<br>随便打开一个频道, 在里面找到MidJourney机器人并添加<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/014.png" alt="pages"><br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/015.png" alt="pages"><br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/016.png" alt="pages"><br>添加完成后就可以使用MidJourney的应用了<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/017.png" alt="pages"><br>生成一张图看看<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/018.png" alt="pages"></p>
-<p>然后就是如何白嫖时间了, 使用<code>invite people</code>功能<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/019.png" alt="pages"><br>生成一个链接<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/020.png" alt="pages"><br>在浏览器<code>private window</code>模式下打开, 注意这里要关闭本地的Discord应用, 否则它会唤出本地程序, 这样就会是用大号在登陆了<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/021.png" alt="pages"><br>这个方式除了一个简单的人机验证, 其他就很简单, 在这一步直接<code>x</code>掉就可以, 不需要真的填写地址进行注册 (这个帖子是时间是<code>2023-03-22</code>之后不知道还能不能这么用)<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/022.png" alt="pages"><br>就发现有新的使用25分钟的时间了<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/023.png" alt="pages"><br>尝试生成一张图, 没有问题<br><img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/024.png" alt="pages"></p>
-<p>不知道是不是因为的我是FireFox的原因, 我的LocalStorage里没有Token属性  </p>
-<p>可以看一下一个解决方案是这样的</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1uk4y187mN/?spm_id_from=333.880.my_history.page.click&amp;vd_source=cfbe808519ea188d379aa2527c839b4f">https://www.bilibili.com/video/BV1uk4y187mN/?spm_id_from=333.880.my_history.page.click&amp;vd_source=cfbe808519ea188d379aa2527c839b4f</a></p>
-</blockquote>
-<p>我试了试, 即使不在无痕模式下, Discord也是把localStorage给禁了, 可以通过清理Cookie的方式, 不在无痕模式下也能用小号登录<br> <img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/025.png" alt="pages"><br> 不过就是可能这个方法操作一次过后, 第二次就不能跳过了, 有免费的邮箱服务的话, 还是可以无限白嫖的<br> <img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/026.png" alt="pages"><br> <img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/027.png" alt="pages"><br> <img src="/2023/03/18/MidJourney%E5%88%9D%E4%BD%93%E9%AA%8C/028.png" alt="pages"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/03/15/github%E4%B8%8Egitee%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/03/15/github%E4%B8%8Egitee%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5/" class="post-title-link" itemprop="url">github与gitee代码自动同步</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-03-15 14:01:22" itemprop="dateCreated datePublished" datetime="2023-03-15T14:01:22+08:00">2023-03-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-06-14 16:43:56" itemprop="dateModified" datetime="2023-06-14T16:43:56+08:00">2023-06-14</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/236">https://github.com/mqyqingfeng/Blog/issues/236</a><br><a target="_blank" rel="noopener" href="https://gyx8899.gitbook.io/blog/share/syncgithubtogitee">https://gyx8899.gitbook.io/blog/share/syncgithubtogitee</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Ber_Bai/article/details/114484645">https://blog.csdn.net/Ber_Bai/article/details/114484645</a></p>
-</blockquote>
-<p><img src="/2023/03/15/github%E4%B8%8Egitee%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5/001.png" alt="pic"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

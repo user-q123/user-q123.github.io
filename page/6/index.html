@@ -113,7 +113,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -124,7 +124,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -141,6 +141,649 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/01/10/pip%E5%AE%89%E8%A3%85%E5%8C%85TLS-SSL%E6%8A%A5%E9%94%99%E8%87%AA%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/10/pip%E5%AE%89%E8%A3%85%E5%8C%85TLS-SSL%E6%8A%A5%E9%94%99%E8%87%AA%E7%94%A8/" class="post-title-link" itemprop="url">pip安装包TLS/SSL报错简单方案(自用) python基础知识拾遗</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-01-10 10:10:00" itemprop="dateCreated datePublished" datetime="2023-01-10T10:10:00+08:00">2023-01-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-05-23 13:51:43" itemprop="dateModified" datetime="2023-05-23T13:51:43+08:00">2023-05-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%B5%84%E6%BA%90%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">资源积累</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>用pip安装包时, 时不时会发生这样的问题:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">WARNING: pip is configured with locations that require TLS/SSL, however the ssl module <span class="token keyword">in</span> Python is not available.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>网上固然有很多帖子,但是找起来不方便, 加上CSDN还不能复制, 也不是每台电脑上我都装了油猴. 自己整理一下</p>
+<p>先这样</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> fastapi --trusted-host pypi.tuna.tsinghua.edu.cn<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>要是不行就这样</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> fastapi <span class="token parameter variable">-i</span> http://pypi.douban.com/simple/  pip <span class="token parameter variable">-U</span> --trusted-host pypi.douban.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>建议修改配置文件一劳永逸</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip config <span class="token builtin class-name">set</span> global.index-url http://pypi.douban.com/simple/ 
+
+pip config <span class="token builtin class-name">set</span> global.trusted-host pypi.douban.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>其他的方法比较麻烦</p>
+<hr>
+<p>关于python的知识的一些拾遗:</p>
+<ol>
+<li>类型声明: 是在python 3.5版本中加入的<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/485613803">https://zhuanlan.zhihu.com/p/485613803</a><br>可以如此声明形参与返回值:</p>
+</blockquote>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+    result <span class="token operator">=</span> x <span class="token operator">+</span> y
+    <span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> result <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+也可以在变量声明的时候声明类型:<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 以下两行是完全等价的</span>
+age<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">;</span> age <span class="token operator">=</span> <span class="token number">18</span>
+age<span class="token punctuation">:</span> <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">18</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<li>装饰器:<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44992737/article/details/125868592">https://blog.csdn.net/weixin_44992737/article/details/125868592</a></p>
+</blockquote>
+</li>
+</ol>
+<p>简单来说就是把一个函数, 这个函数本身(不是函数的返回值)作为参数传到另一个函数里去</p>
+<ol start="3">
+<li>requirements.txt<br><img src="/2023/01/10/pip%E5%AE%89%E8%A3%85%E5%8C%85TLS-SSL%E6%8A%A5%E9%94%99%E8%87%AA%E7%94%A8/002.png" alt="pages"><br>类似node中的package.json, java中的maven. 不过是把环境中的所有依赖, 不是项目中的所有依赖, 都放到里面. 会有很多无用的依赖, 如果没用配置虚拟环境的话.</li>
+</ol>
+<p>使用方法:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> <span class="token parameter variable">-r</span> ./requirements.txt
+pip freeze <span class="token operator">></span> requirements.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/01/09/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E5%9F%BA%E7%A1%80-cookie-HTTPS-%E5%AE%89%E5%85%A8%E6%80%A7%E7%AD%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/09/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E5%9F%BA%E7%A1%80-cookie-HTTPS-%E5%AE%89%E5%85%A8%E6%80%A7%E7%AD%89/" class="post-title-link" itemprop="url">前端面试基础-cookie HTTPS 安全性等</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-01-09 17:07:06" itemprop="dateCreated datePublished" datetime="2023-01-09T17:07:06+08:00">2023-01-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h3><p>缓存相关字段:</p>
+<ol>
+<li>expires<br> 有点过时的属性, 被cache-control替代, 表示一个绝对的过期时间.<br> 如果在请求资源时, </li>
+<li>cache-control</li>
+<li>etag/if-none-match</li>
+<li>last-modified/if-modified-since<br>强缓存:</li>
+</ol>
+<p>协商缓存:</p>
+<p>浏览器先检查强缓存, 再检查协商缓存</p>
+<p>参考了这里: </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://space.bilibili.com/15445514/channel/collectiondetail?sid=814942">https://space.bilibili.com/15445514/channel/collectiondetail?sid=814942</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/01/05/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/05/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F/" class="post-title-link" itemprop="url">前端跨域</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-01-05 16:19:13" itemprop="dateCreated datePublished" datetime="2023-01-05T16:19:13+08:00">2023-01-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>新增一个写的比我好的帖子</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/132534931">https://zhuanlan.zhihu.com/p/132534931</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1M84y1v7qH/">https://www.bilibili.com/video/BV1M84y1v7qH/</a></p>
+</blockquote>
+<p>文字版:<br>概念:跨域问题的发生本质:当前页面所在的源,和请求的目标地址所在的源不同,浏览器就会把请求挂掉.(这里是请求,不是响应,就是说发都发不出去) 具体来说, 请求的协议,域名,端口这3个都会导致这个问题. 英语简称是 CORS.</p>
+<p>跨域请求可能会额外触发OPTIONS请求(这个OPTIONS请求是浏览器层面的, 我们自己发的OPTIONS请求依然是当作非简单请求的), 通常是预检请求. 依据是否会触发OPTIONS, 把跨域请求分为简单请求和非简单请求. 预检请求不是我们能控制的, 是浏览器对于非简单跨域请求的一种探测行为</p>
+<p>简单请求: 如果发起的请求中, 只有请求方法和目标地址, 那就是一个简单请求(比如下面的例子). 简单请求只有GET, HEAD, POST这3个方法, 并且不允许添加自定义头. 特别注意 content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain, 而我们常用的 application/json是不在其中的. </p>
+<p>这个帖子里说的很好</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/javascript-tutorial/docs-bom-cors.md">https://www.bookstack.cn/read/javascript-tutorial/docs-bom-cors.md</a></p>
+</blockquote>
+<p>简单请求用xhr的例子</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> xhr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+xhr<span class="token punctuation">.</span>responseType <span class="token operator">=</span> <span class="token string">"json"</span><span class="token punctuation">;</span>
+xhr<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"get"</span><span class="token punctuation">,</span><span class="token string">"https://www.baidu.com"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+xhr<span class="token punctuation">.</span><span class="token function-variable function">onreadyStatechange</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>xhr<span class="token punctuation">.</span>readyState <span class="token operator">===</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>xhr<span class="token punctuation">.</span>response<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+xhr<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>结果是跨域的<br><img src="/2023/01/05/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F/001.png" alt="pages"><br>服务器可以正常返回, 但是浏览器会挂掉<br><img src="/2023/01/05/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F/002.png" alt="pages"><br>对于简单请求, 只需要在服务端返回的HTTP头里, 返回</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json">'access-control-allow-origin'<span class="token operator">:</span><span class="token string">"*"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>非简单请求需要服务端配置的东西就比较多, 比如说, Access-Control-Allow-Methods这个字段就要明确指明, 我允许的是什么方法.<br>access-control-max-age, 可以让一端时间内来自指定源的非简单请求不再发送预检请求</p>
+<hr>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Av4y1Q7UZ">https://www.bilibili.com/video/BV1Av4y1Q7UZ</a><br>偏技巧性的解决方案, jsonp</p>
+</blockquote>
+<p>用原文作者的例子:<br>前台</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">jsonpDemo1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> script <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'script'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    script<span class="token punctuation">.</span>src <span class="token operator">=</span> <span class="token string">"https://www.example.com/getUserInfo?functionName=jsonp&amp;uid=123456"</span><span class="token punctuation">;</span>
+
+    window<span class="token punctuation">.</span><span class="token function-variable function">jsonp</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"in jsonp:"</span><span class="token punctuation">,</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>script<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>后台:</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> app <span class="token operator">=</span> http<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span>res</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> urlInfo <span class="token operator">=</span> url<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>req<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> query <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    urlInfo<span class="token punctuation">.</span>query <span class="token operator">&amp;&amp;</span> urlInfo<span class="token punctuation">.</span>query<span class="token operator">?.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">"&amp;"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">const</span> <span class="token punctuation">[</span>k<span class="token punctuation">,</span>v<span class="token punctuation">]</span> <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'='</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        query<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> v
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">/**
+     * 这里解析query串的结果是
+     *     query:&#123;
+     *        functionName:"jsonp",
+     *        uid:"123456",
+     *     &#125;
+     */</span>
+    
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"query"</span><span class="token punctuation">,</span>query<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">uid</span><span class="token operator">:</span>query<span class="token punctuation">.</span>uid<span class="token punctuation">,</span>
+        <span class="token literal-property property">a</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">b</span><span class="token operator">:</span><span class="token number">2</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">c</span><span class="token operator">:</span><span class="token number">3</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+    res<span class="token punctuation">.</span><span class="token function">writeHead</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
+        <span class="token string-property property">'content-type'</span><span class="token operator">:</span><span class="token string">'text/javascript'</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    res<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>query<span class="token punctuation">.</span>functionName<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">(</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+
+    <span class="token comment">//这里返回的结果是 jsonp(&#123;uid:"123456",a:1,b:2,c:3&#125;), 有点类似于eval函数的意思</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>后台返回一个字符串: “jsonp({uid:”123456”,a:1,b:2,c:3})”, 而浏览器中, 因为字符串的”jsonp”对于浏览器而言, 是一个提前注册的函数jsonp(), 所以以字符串返回的response, 被当作函数运行了.  </p>
+<p>这里需要注意的是, 利用script标签的话, 是只能发get请求的, 所以就不能用body发json一样的大体量数据了. 解决办法是可以用cookie传数据, 就变成了这样:</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">jsonpDemo1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> script <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'script'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    script<span class="token punctuation">.</span>src <span class="token operator">=</span> <span class="token string">"https://www.example.com/getUserInfo?functionName=jsonp&amp;uid=123456"</span><span class="token punctuation">;</span>
+    script<span class="token punctuation">.</span>crossOrigin <span class="token operator">=</span> <span class="token string">'use-credentials'</span>
+    window<span class="token punctuation">.</span><span class="token function-variable function">jsonp</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"in jsonp:"</span><span class="token punctuation">,</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>script<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>使用cookie是需要加上crossOrigin属性的, 但是加了这个属性, 是会发生CORS error的, 依然需要后段添加</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json">'access-control-allow-origin'<span class="token operator">:</span><span class="token string">"*"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>所以用cookie+jsonp, 其实是没什么意义的.</p>
+<p>最后贴一个原作者的jsonp封装, 以防以后用得到:</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">jsonpRequest</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span> url<span class="token punctuation">,</span> params <span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//利用时间戳, 给每次请求生成不同的函数名</span>
+        <span class="token keyword">const</span> funName <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">jsonp</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>params<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            params <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+                <span class="token operator">...</span>params<span class="token punctuation">,</span>
+                <span class="token literal-property property">fun</span><span class="token operator">:</span> funName<span class="token punctuation">,</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            params <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+                <span class="token literal-property property">fun</span><span class="token operator">:</span> funName<span class="token punctuation">,</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">let</span> query <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> key <span class="token keyword">in</span> params<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            query<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>key<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>params<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">const</span> scriptElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">"script"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        scriptElement<span class="token punctuation">.</span>src <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>url<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">?</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>query<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">"&amp;"</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+
+        <span class="token comment">//这里的形参data就是后台返回的值了</span>
+        window<span class="token punctuation">[</span>funName<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            document<span class="token punctuation">.</span>body<span class="token operator">?.</span><span class="token function">removeChild</span><span class="token punctuation">(</span>scriptElement<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">//把后台的返回值返回出去</span>
+            <span class="token function">resolve</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+        document<span class="token punctuation">.</span>body<span class="token operator">?.</span><span class="token function">append</span><span class="token punctuation">(</span>scriptElement<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">//如何使用</span>
+<span class="token function">jsonpRequest</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">url</span><span class="token operator">:</span><span class="token string">"https://www.example.com"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">params</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">uid</span><span class="token operator">:</span><span class="token number">12345</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">username</span><span class="token operator">:</span><span class="token string">"Tony"</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'jsonResponse'</span><span class="token punctuation">,</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">//因为后台的函数名解析是动态的, 就这样使用就可以了</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/01/04/openAi%E7%9B%B8%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/04/openAi%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">openAi相关</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-01-04 17:17:20" itemprop="dateCreated datePublished" datetime="2023-01-04T17:17:20+08:00">2023-01-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这些都别用了, 用正版吧</p>
+<p>~~ 已发现的chatgpt网址 ~~  </p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://gpt.chatapi.art/">https://gpt.chatapi.art/</a> </li>
+<li><a target="_blank" rel="noopener" href="https://trychatgpt.ssi.plus/">https://trychatgpt.ssi.plus</a></li>
+<li>小程序<a target="_blank" rel="noopener" href="https://static.kandouyin.com/index5.html">https://static.kandouyin.com/index5.html</a></li>
+<li>公众号：人工智能chat</li>
+<li>官网需vpn：<a target="_blank" rel="noopener" href="https://openai.com/blog/chatgpt/">https://openai.com/blog/chatgpt/</a></li>
+<li>外国手机号注册<a target="_blank" rel="noopener" href="https://sms-activate.org/cn">https://sms-activate.org/cn</a><br>经过测试, 这里除了官网以外, 广告或者是挂掉的偏多 </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2023/01/04/js%E8%87%AA%E5%B8%A6%E6%A8%A1%E5%9D%97crypto/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/04/js%E8%87%AA%E5%B8%A6%E6%A8%A1%E5%9D%97crypto/" class="post-title-link" itemprop="url">js自带模块crypto</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-01-04 17:05:22" itemprop="dateCreated datePublished" datetime="2023-01-04T17:05:22+08:00">2023-01-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-04-24 17:37:41" itemprop="dateModified" datetime="2023-04-24T17:37:41+08:00">2023-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>uuid之前一般都要通过第三方模块来实现<br>事实上, js自带了这个功能</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>crypto<span class="token punctuation">.</span><span class="token function">randomUUID</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>即可实现</p>
+<p>在node中也是支持的</p>
+<p><img src="/2023/01/04/js%E8%87%AA%E5%B8%A6%E6%A8%A1%E5%9D%97crypto/001.png" alt="pic"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -665,600 +1308,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2022/12/05/%E4%BD%BF%E7%94%A8HTML%E6%9D%A5%E5%BD%95%E5%B1%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/12/05/%E4%BD%BF%E7%94%A8HTML%E6%9D%A5%E5%BD%95%E5%B1%8F/" class="post-title-link" itemprop="url">使用HTML来录屏</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-12-05 10:58:41" itemprop="dateCreated datePublished" datetime="2022-12-05T10:58:41+08:00">2022-12-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B0%8F%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">小工具</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>X-UA-Compatible<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>IE=edge<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1.0<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Document<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>video</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>video<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>600px<span class="token punctuation">"</span></span> <span class="token attr-name">controls</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>video</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>record-btn<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Click Me<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-            <span class="token keyword">let</span> btn <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">".record-btn"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            btn<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"click"</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-                <span class="token comment">//询问,你要录哪个对象</span>
-                <span class="token keyword">let</span> stream <span class="token operator">=</span> <span class="token keyword">await</span> navigator<span class="token punctuation">.</span>mediaDevices<span class="token punctuation">.</span><span class="token function">getDisplayMedia</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-                    <span class="token literal-property property">video</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-                <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                <span class="token comment">//better browser support</span>
-                <span class="token keyword">const</span> mime <span class="token operator">=</span> MediaRecorder<span class="token punctuation">.</span><span class="token function">isTypeSupported</span><span class="token punctuation">(</span>
-                    <span class="token string">"video/webm; codecs=vp9"</span>
-                <span class="token punctuation">)</span>
-                    <span class="token operator">?</span> <span class="token string">"video/webm; codecs=vp9"</span>
-                    <span class="token operator">:</span> <span class="token string">"video/webm;"</span><span class="token punctuation">;</span>
-
-                <span class="token comment">// 录制流对象</span>
-                <span class="token keyword">let</span> mediaRecorder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MediaRecorder</span><span class="token punctuation">(</span>stream<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
-                    <span class="token literal-property property">mimeType</span><span class="token operator">:</span> mime<span class="token punctuation">,</span>
-                <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                <span class="token keyword">let</span> chunks <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-                mediaRecorder<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"dataavailable"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                    chunks<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                mediaRecorder<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"stop"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-                    <span class="token keyword">let</span> blob <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Blob</span><span class="token punctuation">(</span>chunks<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
-                        <span class="token literal-property property">type</span><span class="token operator">:</span> chunks<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>type<span class="token punctuation">,</span>
-                    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                    <span class="token keyword">let</span> url <span class="token operator">=</span> <span class="token constant">URL</span><span class="token punctuation">.</span><span class="token function">createObjectURL</span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token keyword">let</span> video <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">"video"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    video<span class="token punctuation">.</span>src <span class="token operator">=</span> url<span class="token punctuation">;</span>
-
-                    <span class="token keyword">let</span> a <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">"a"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    a<span class="token punctuation">.</span>href <span class="token operator">=</span> url<span class="token punctuation">;</span>
-                    a<span class="token punctuation">.</span>download <span class="token operator">=</span> <span class="token string">"video.webm"</span><span class="token punctuation">;</span>
-                    a<span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                mediaRecorder<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/" class="post-title-link" itemprop="url">使用暗网tor的zlibrary</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-11-19 17:56:16" itemprop="dateCreated datePublished" datetime="2022-11-19T17:56:16+08:00">2022-11-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>科学上网很多年了,不过事先申明一下,不是每个人都是反骨仔哈哈. 我是参加工作后, 从事安卓开发的工作, SDK实在下不下来(google被封的原因), 才开始每年都使用的.</p>
-<p>但是我从来没接触过暗网,因为我不是特别会折腾的那种人.</p>
-<p>但是最近zlibrary被封了, 实在是难定, 那些镜像站和zlibrary相比差太远了. 虽然有人给出了以下一些解决方案</p>
-<ul>
-<li><blockquote>
-<p><a target="_blank" rel="noopener" href="https://libgena.ee/">https://libgena.ee</a></p>
-</blockquote>
-</li>
-<li><blockquote>
-<p><a target="_blank" rel="noopener" href="https://libgen.rocks/">https://libgen.rocks</a></p>
-</blockquote>
-</li>
-<li><blockquote>
-<p><a target="_blank" rel="noopener" href="https://cdn1.booksdl.org/">https://cdn1.booksdl.org</a></p>
-</blockquote>
-</li>
-<li><blockquote>
-<p><a target="_blank" rel="noopener" href="https://libgen.unblockit.nz/">https://libgen.unblockit.nz</a></p>
-</blockquote>
-</li>
-<li><blockquote>
-<p>telegram方案 <a target="_blank" rel="noopener" href="https://find.looks.wang/">https://find.looks.wang/</a></p>
-</blockquote>
-</li>
-<li><blockquote>
-<p><a target="_blank" rel="noopener" href="https://1lib.ink/">https://1lib.ink/</a></p>
-</blockquote>
-</li>
-<li><blockquote>
-<p><a target="_blank" rel="noopener" href="https://zlib.ren/">https://zlib.ren/</a></p>
-</blockquote>
-</li>
-<li><blockquote>
-<p><a target="_blank" rel="noopener" href="https://1lib.ren/">https://1lib.ren/</a></p>
-</blockquote>
-</li>
-<li><blockquote>
-<p><a target="_blank" rel="noopener" href="https://zlib.ink/">https://zlib.ink/</a></p>
-</blockquote>
-</li>
-<li><blockquote>
-<p><a target="_blank" rel="noopener" href="https://en.booksee.org/">https://en.booksee.org/</a>  需国际网络</p>
-</blockquote>
-</li>
-<li><blockquote>
-<p><a target="_blank" rel="noopener" href="https://libcats.org/">https://libcats.org/</a> 需国际网络</p>
-</blockquote>
-</li>
-<li><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bookzz.ren/">https://www.bookzz.ren/</a> 需国际网络</p>
-</blockquote>
-</li>
-<li><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.ooopn.com/tool/zlibrary/">https://www.ooopn.com/tool/zlibrary/</a> 镜像集</p>
-</blockquote>
-</li>
-<li><blockquote>
-<p><a target="_blank" rel="noopener" href="http://pilimi.org/">http://pilimi.org/</a></p>
-</blockquote>
-</li>
-<li><blockquote>
-<p><a target="_blank" rel="noopener" href="https://aliyundrive.com/s/t8ry1r6ieuk">https://aliyundrive.com/s/t8ry1r6ieuk</a></p>
-</blockquote>
-</li>
-<li><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/78jWjEkyCV1">https://www.aliyundrive.com/s/78jWjEkyCV1</a></p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<p>但是, 这些都不好使, 和zlibrary没法比(包括网传的zhelper,也已经停止服务了,怕被抓)</p>
-<p>无意间看见说, zlibrary的tor链接还可以使用,就觉得很好奇, 了解了一下, 原来tor就是暗网.</p>
-<p>关于tor网络的介绍:</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1KZ4y1T7YE">https://www.bilibili.com/video/BV1KZ4y1T7YE</a></p>
-</blockquote>
-<p>那暗网或者说tor可以干什么呢?可以直接购买信用卡,别人的电话卡,买别人的数据…这些我早有耳闻,反正就是我把握不住的东西,目前还只是听说,以后有机会看看有点什么.</p>
-<p>而我,只是一个复习线性代数忘记带书,想搞本电子书的善良青年.</p>
-<p><strong>首先,要有一级代理,也就是科学上网</strong></p>
-<p>第一,要能上暗网在表网络中的url: </p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.torproject.org/zh-CN/">https://www.torproject.org/zh-CN/</a><br>第二,在中国tor节点分配的网桥基本就没法用,速度太慢(白嫖的总共是慢的,因为我是要下载pdf的电子书,如果是仅仅浏览网页的话,自带的也能接受)</p>
-</blockquote>
-<p>网桥是这些:</p>
-<p><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/002.png" alt="pages"><br>网上一直有教程告诉你,如果你所在的国家或者地区被网络审查了怎么怎么办, 官网(<a target="_blank" rel="noopener" href="https://tb-manual.torproject.org/zh-CN/circumvention/)%E5%92%8C%E5%85%B6%E4%BB%96%E7%9A%84%E6%95%99%E7%A8%8B%E7%9A%84%E5%8A%9E%E6%B3%95%E6%98%AF%E7%94%A8%E6%9B%B4%E5%BC%BA%E7%9A%84%E5%8A%A0%E5%AF%86%E5%8D%8F%E8%AE%AE,%E4%B9%9F%E5%B0%B1%E6%98%AF%E9%85%8D%E7%BD%AE%E4%B8%8B%E9%9D%A2%E8%BF%99%E5%BC%A0%E5%9B%BE">https://tb-manual.torproject.org/zh-CN/circumvention/)和其他的教程的办法是用更强的加密协议,也就是配置下面这张图</a><br><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/003.png" alt="pages"></p>
-<p>可能我的网络环境不大好,我实测还是连不上网桥.</p>
-<p><strong>然后配置代理就可以了</strong></p>
-<p><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/004.png" alt="pages"></p>
-<p>这里的端口在自己的科学上网代理软件中查看,比如我这里用的是clash, 默认就是7890</p>
-<p><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/005.png" alt="pages"></p>
-<p><strong>然后就可以连上了</strong></p>
-<p>zlibrary的tor链接如下:</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="http://loginzlib2vrak5zzpcocc3ouizykn6k5qecgj2tzlnab5wcbqhembyd.onion/">http://loginzlib2vrak5zzpcocc3ouizykn6k5qecgj2tzlnab5wcbqhembyd.onion/</a></p>
-</blockquote>
-<p>至少在我写这个文章的时候,zlibrary还是可以访问的<br><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/001.png" alt="pages"></p>
-<p>访问资源也没有问题:</p>
-<p><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/006.png" alt="pages"></p>
-<p>最后,忘记说了, 这个torproject也是有手机版的,<br>手机版的网桥连接就很快. 比电脑少去了不少折腾的步骤</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2022/10/10/%E4%B8%80%E4%B8%AA%E4%BF%84%E8%AF%AD%E6%96%87%E7%AB%A0%E6%A3%80%E6%9F%A5%E7%BD%91%E7%AB%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/10/%E4%B8%80%E4%B8%AA%E4%BF%84%E8%AF%AD%E6%96%87%E7%AB%A0%E6%A3%80%E6%9F%A5%E7%BD%91%E7%AB%99/" class="post-title-link" itemprop="url">一个俄语文章检查网站</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-10 18:05:09" itemprop="dateCreated datePublished" datetime="2022-10-10T18:05:09+08:00">2022-10-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%B5%84%E6%BA%90%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">资源积累</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>一个俄语文章纠错软件.</p>
-<p>把文字粘贴到里面,然后它可以对你的时态, 词性等等进行分析. </p>
-<p>可能属于高阶水平者的应用了.</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://orfogrammka.ru/">https://orfogrammka.ru/</a></p>
-</blockquote>
-<p>然后是需要收费的, 不过还是比较便宜, 500卢布600万字的样子.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2022/10/10/%E4%B8%80%E4%BA%9B%E7%BA%AFhtml%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BD%91%E7%AB%99%E6%A8%A1%E6%9D%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/10/%E4%B8%80%E4%BA%9B%E7%BA%AFhtml%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BD%91%E7%AB%99%E6%A8%A1%E6%9D%BF/" class="post-title-link" itemprop="url">一些纯html响应式网站模板</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-10 16:48:55" itemprop="dateCreated datePublished" datetime="2022-10-10T16:48:55+08:00">2022-10-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%B5%84%E6%BA%90%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">资源积累</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>(其实里面只有一个网址, 整理自己的B站稍后观看中发现的)<br>网址如下</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://html5up.net/">https://html5up.net/</a></p>
-</blockquote>
-<p>不需要注册也能下载, 效果如下<br><img src="/2022/10/10/%E4%B8%80%E4%BA%9B%E7%BA%AFhtml%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BD%91%E7%AB%99%E6%A8%A1%E6%9D%BF/001.png" alt="pages"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2022/10/10/%E6%9F%A5%E6%89%BE%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6%E6%95%B0%E6%8D%AE%E6%89%8B%E5%86%8C%E7%9A%84%E7%BD%91%E7%AB%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/10/%E6%9F%A5%E6%89%BE%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6%E6%95%B0%E6%8D%AE%E6%89%8B%E5%86%8C%E7%9A%84%E7%BD%91%E7%AB%99/" class="post-title-link" itemprop="url">查找电子元器件数据手册的网站</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-10 16:48:55" itemprop="dateCreated datePublished" datetime="2022-10-10T16:48:55+08:00">2022-10-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%B5%84%E6%BA%90%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">资源积累</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>网址如下</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.semiee.com/">https://www.semiee.com/</a></p>
-</blockquote>
-<p>网站截图如下<br><img src="/2022/10/10/%E6%9F%A5%E6%89%BE%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6%E6%95%B0%E6%8D%AE%E6%89%8B%E5%86%8C%E7%9A%84%E7%BD%91%E7%AB%99/001.png" alt="pages"></p>
-<p>也可以下载手机端APP.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

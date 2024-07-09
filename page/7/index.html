@@ -113,7 +113,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -124,7 +124,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -141,6 +141,598 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2022/12/05/%E4%BD%BF%E7%94%A8HTML%E6%9D%A5%E5%BD%95%E5%B1%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/12/05/%E4%BD%BF%E7%94%A8HTML%E6%9D%A5%E5%BD%95%E5%B1%8F/" class="post-title-link" itemprop="url">使用HTML来录屏</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-12-05 10:58:41" itemprop="dateCreated datePublished" datetime="2022-12-05T10:58:41+08:00">2022-12-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B0%8F%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">小工具</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>X-UA-Compatible<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>IE=edge<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1.0<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Document<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>video</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>video<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>600px<span class="token punctuation">"</span></span> <span class="token attr-name">controls</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>video</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>record-btn<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Click Me<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+            <span class="token keyword">let</span> btn <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">".record-btn"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            btn<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"click"</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+                <span class="token comment">//询问,你要录哪个对象</span>
+                <span class="token keyword">let</span> stream <span class="token operator">=</span> <span class="token keyword">await</span> navigator<span class="token punctuation">.</span>mediaDevices<span class="token punctuation">.</span><span class="token function">getDisplayMedia</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+                    <span class="token literal-property property">video</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">//better browser support</span>
+                <span class="token keyword">const</span> mime <span class="token operator">=</span> MediaRecorder<span class="token punctuation">.</span><span class="token function">isTypeSupported</span><span class="token punctuation">(</span>
+                    <span class="token string">"video/webm; codecs=vp9"</span>
+                <span class="token punctuation">)</span>
+                    <span class="token operator">?</span> <span class="token string">"video/webm; codecs=vp9"</span>
+                    <span class="token operator">:</span> <span class="token string">"video/webm;"</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// 录制流对象</span>
+                <span class="token keyword">let</span> mediaRecorder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MediaRecorder</span><span class="token punctuation">(</span>stream<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+                    <span class="token literal-property property">mimeType</span><span class="token operator">:</span> mime<span class="token punctuation">,</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token keyword">let</span> chunks <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+                mediaRecorder<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"dataavailable"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    chunks<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                mediaRecorder<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"stop"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">let</span> blob <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Blob</span><span class="token punctuation">(</span>chunks<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+                        <span class="token literal-property property">type</span><span class="token operator">:</span> chunks<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>type<span class="token punctuation">,</span>
+                    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token keyword">let</span> url <span class="token operator">=</span> <span class="token constant">URL</span><span class="token punctuation">.</span><span class="token function">createObjectURL</span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">let</span> video <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">"video"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    video<span class="token punctuation">.</span>src <span class="token operator">=</span> url<span class="token punctuation">;</span>
+
+                    <span class="token keyword">let</span> a <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">"a"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    a<span class="token punctuation">.</span>href <span class="token operator">=</span> url<span class="token punctuation">;</span>
+                    a<span class="token punctuation">.</span>download <span class="token operator">=</span> <span class="token string">"video.webm"</span><span class="token punctuation">;</span>
+                    a<span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                mediaRecorder<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/" class="post-title-link" itemprop="url">使用暗网tor的zlibrary</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-11-19 17:56:16" itemprop="dateCreated datePublished" datetime="2022-11-19T17:56:16+08:00">2022-11-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>科学上网很多年了,不过事先申明一下,不是每个人都是反骨仔哈哈. 我是参加工作后, 从事安卓开发的工作, SDK实在下不下来(google被封的原因), 才开始每年都使用的.</p>
+<p>但是我从来没接触过暗网,因为我不是特别会折腾的那种人.</p>
+<p>但是最近zlibrary被封了, 实在是难定, 那些镜像站和zlibrary相比差太远了. 虽然有人给出了以下一些解决方案</p>
+<ul>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://libgena.ee/">https://libgena.ee</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://libgen.rocks/">https://libgen.rocks</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://cdn1.booksdl.org/">https://cdn1.booksdl.org</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://libgen.unblockit.nz/">https://libgen.unblockit.nz</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>telegram方案 <a target="_blank" rel="noopener" href="https://find.looks.wang/">https://find.looks.wang/</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://1lib.ink/">https://1lib.ink/</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zlib.ren/">https://zlib.ren/</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://1lib.ren/">https://1lib.ren/</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://zlib.ink/">https://zlib.ink/</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://en.booksee.org/">https://en.booksee.org/</a>  需国际网络</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://libcats.org/">https://libcats.org/</a> 需国际网络</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bookzz.ren/">https://www.bookzz.ren/</a> 需国际网络</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.ooopn.com/tool/zlibrary/">https://www.ooopn.com/tool/zlibrary/</a> 镜像集</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="http://pilimi.org/">http://pilimi.org/</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://aliyundrive.com/s/t8ry1r6ieuk">https://aliyundrive.com/s/t8ry1r6ieuk</a></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/78jWjEkyCV1">https://www.aliyundrive.com/s/78jWjEkyCV1</a></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<p>但是, 这些都不好使, 和zlibrary没法比(包括网传的zhelper,也已经停止服务了,怕被抓)</p>
+<p>无意间看见说, zlibrary的tor链接还可以使用,就觉得很好奇, 了解了一下, 原来tor就是暗网.</p>
+<p>关于tor网络的介绍:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1KZ4y1T7YE">https://www.bilibili.com/video/BV1KZ4y1T7YE</a></p>
+</blockquote>
+<p>那暗网或者说tor可以干什么呢?可以直接购买信用卡,别人的电话卡,买别人的数据…这些我早有耳闻,反正就是我把握不住的东西,目前还只是听说,以后有机会看看有点什么.</p>
+<p>而我,只是一个复习线性代数忘记带书,想搞本电子书的善良青年.</p>
+<p><strong>首先,要有一级代理,也就是科学上网</strong></p>
+<p>第一,要能上暗网在表网络中的url: </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.torproject.org/zh-CN/">https://www.torproject.org/zh-CN/</a><br>第二,在中国tor节点分配的网桥基本就没法用,速度太慢(白嫖的总共是慢的,因为我是要下载pdf的电子书,如果是仅仅浏览网页的话,自带的也能接受)</p>
+</blockquote>
+<p>网桥是这些:</p>
+<p><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/002.png" alt="pages"><br>网上一直有教程告诉你,如果你所在的国家或者地区被网络审查了怎么怎么办, 官网(<a target="_blank" rel="noopener" href="https://tb-manual.torproject.org/zh-CN/circumvention/)%E5%92%8C%E5%85%B6%E4%BB%96%E7%9A%84%E6%95%99%E7%A8%8B%E7%9A%84%E5%8A%9E%E6%B3%95%E6%98%AF%E7%94%A8%E6%9B%B4%E5%BC%BA%E7%9A%84%E5%8A%A0%E5%AF%86%E5%8D%8F%E8%AE%AE,%E4%B9%9F%E5%B0%B1%E6%98%AF%E9%85%8D%E7%BD%AE%E4%B8%8B%E9%9D%A2%E8%BF%99%E5%BC%A0%E5%9B%BE">https://tb-manual.torproject.org/zh-CN/circumvention/)和其他的教程的办法是用更强的加密协议,也就是配置下面这张图</a><br><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/003.png" alt="pages"></p>
+<p>可能我的网络环境不大好,我实测还是连不上网桥.</p>
+<p><strong>然后配置代理就可以了</strong></p>
+<p><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/004.png" alt="pages"></p>
+<p>这里的端口在自己的科学上网代理软件中查看,比如我这里用的是clash, 默认就是7890</p>
+<p><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/005.png" alt="pages"></p>
+<p><strong>然后就可以连上了</strong></p>
+<p>zlibrary的tor链接如下:</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://loginzlib2vrak5zzpcocc3ouizykn6k5qecgj2tzlnab5wcbqhembyd.onion/">http://loginzlib2vrak5zzpcocc3ouizykn6k5qecgj2tzlnab5wcbqhembyd.onion/</a></p>
+</blockquote>
+<p>至少在我写这个文章的时候,zlibrary还是可以访问的<br><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/001.png" alt="pages"></p>
+<p>访问资源也没有问题:</p>
+<p><img src="/2022/11/19/%E4%BD%BF%E7%94%A8%E6%9A%97%E7%BD%91tor%E7%9A%84zlibrary/006.png" alt="pages"></p>
+<p>最后,忘记说了, 这个torproject也是有手机版的,<br>手机版的网桥连接就很快. 比电脑少去了不少折腾的步骤</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2022/10/10/%E4%B8%80%E4%B8%AA%E4%BF%84%E8%AF%AD%E6%96%87%E7%AB%A0%E6%A3%80%E6%9F%A5%E7%BD%91%E7%AB%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/10/%E4%B8%80%E4%B8%AA%E4%BF%84%E8%AF%AD%E6%96%87%E7%AB%A0%E6%A3%80%E6%9F%A5%E7%BD%91%E7%AB%99/" class="post-title-link" itemprop="url">一个俄语文章检查网站</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-10 18:05:09" itemprop="dateCreated datePublished" datetime="2022-10-10T18:05:09+08:00">2022-10-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%B5%84%E6%BA%90%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">资源积累</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>一个俄语文章纠错软件.</p>
+<p>把文字粘贴到里面,然后它可以对你的时态, 词性等等进行分析. </p>
+<p>可能属于高阶水平者的应用了.</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://orfogrammka.ru/">https://orfogrammka.ru/</a></p>
+</blockquote>
+<p>然后是需要收费的, 不过还是比较便宜, 500卢布600万字的样子.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2022/10/10/%E4%B8%80%E4%BA%9B%E7%BA%AFhtml%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BD%91%E7%AB%99%E6%A8%A1%E6%9D%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/10/%E4%B8%80%E4%BA%9B%E7%BA%AFhtml%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BD%91%E7%AB%99%E6%A8%A1%E6%9D%BF/" class="post-title-link" itemprop="url">一些纯html响应式网站模板</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-10 16:48:55" itemprop="dateCreated datePublished" datetime="2022-10-10T16:48:55+08:00">2022-10-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%B5%84%E6%BA%90%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">资源积累</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>(其实里面只有一个网址, 整理自己的B站稍后观看中发现的)<br>网址如下</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://html5up.net/">https://html5up.net/</a></p>
+</blockquote>
+<p>不需要注册也能下载, 效果如下<br><img src="/2022/10/10/%E4%B8%80%E4%BA%9B%E7%BA%AFhtml%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BD%91%E7%AB%99%E6%A8%A1%E6%9D%BF/001.png" alt="pages"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2022/10/10/%E6%9F%A5%E6%89%BE%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6%E6%95%B0%E6%8D%AE%E6%89%8B%E5%86%8C%E7%9A%84%E7%BD%91%E7%AB%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/10/%E6%9F%A5%E6%89%BE%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6%E6%95%B0%E6%8D%AE%E6%89%8B%E5%86%8C%E7%9A%84%E7%BD%91%E7%AB%99/" class="post-title-link" itemprop="url">查找电子元器件数据手册的网站</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-10 16:48:55" itemprop="dateCreated datePublished" datetime="2022-10-10T16:48:55+08:00">2022-10-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%B5%84%E6%BA%90%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">资源积累</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>网址如下</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.semiee.com/">https://www.semiee.com/</a></p>
+</blockquote>
+<p>网站截图如下<br><img src="/2022/10/10/%E6%9F%A5%E6%89%BE%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6%E6%95%B0%E6%8D%AE%E6%89%8B%E5%86%8C%E7%9A%84%E7%BD%91%E7%AB%99/001.png" alt="pages"></p>
+<p>也可以下载手机端APP.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1686,686 +2278,8 @@ git clone https:&#x2F;&#x2F;github.com&#x2F;next-theme&#x2F;hexo-theme-next them
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2022/06/02/sql%E4%B8%80%E4%BE%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/02/sql%E4%B8%80%E4%BE%8B/" class="post-title-link" itemprop="url">sql一例</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-06-02 15:13:50" itemprop="dateCreated datePublished" datetime="2022-06-02T15:13:50+08:00">2022-06-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%A2%98%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">题目</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>(sql复习向)<br>有个需求:<br>现在有2张表:</p>
-<ul>
-<li>债券要素表 - 含到期日信息；</li>
-<li>行情表 - 含每日成交额</li>
-</ul>
-<p>要找出比如从某个时间点开始, 一个债券如果在1年以上到期的话, 这个债券的成交总额.</p>
-<p>比如一个债券在2021-02-01号的时候, 它的到期日是2022-10-01 那么2021-02-01到2022-02-01的每日交易量就都统计进来, 2022-02-02到目前的2022-06-01的交易量就不要计入.<br>sql中时间计算函数如下:</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/super_qing_/article/details/104018370">https://blog.csdn.net/super_qing_/article/details/104018370</a><br>然后搞一个汇总.</p>
-</blockquote>
-<p>这个汇总, 一开始让我有点迷惑, 其实就是group by.<br>SQL如下:</p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">--建表阶段</span>
-<span class="token keyword">CREATE</span> <span class="token keyword">DATABASE</span> <span class="token keyword">IF</span> <span class="token operator">NOT</span> <span class="token keyword">EXISTS</span> test_db <span class="token keyword">DEFAULT</span> <span class="token keyword">CHARACTER</span> <span class="token keyword">SET</span> utf8<span class="token punctuation">;</span>
-
-<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token operator">NOT</span> <span class="token keyword">EXISTS</span> <span class="token identifier"><span class="token punctuation">`</span>overall_table<span class="token punctuation">`</span></span><span class="token punctuation">(</span>
-   <span class="token identifier"><span class="token punctuation">`</span>item_id<span class="token punctuation">`</span></span> <span class="token keyword">INT</span> <span class="token keyword">UNSIGNED</span> <span class="token keyword">AUTO_INCREMENT</span><span class="token punctuation">,</span>
-   <span class="token identifier"><span class="token punctuation">`</span>item_title<span class="token punctuation">`</span></span> <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
-   <span class="token identifier"><span class="token punctuation">`</span>expire_date<span class="token punctuation">`</span></span> <span class="token keyword">DATE</span><span class="token punctuation">,</span>
-   <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span> <span class="token identifier"><span class="token punctuation">`</span>item_id<span class="token punctuation">`</span></span> <span class="token punctuation">)</span>
-<span class="token punctuation">)</span><span class="token keyword">ENGINE</span><span class="token operator">=</span><span class="token keyword">InnoDB</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CHARSET</span><span class="token operator">=</span>utf8<span class="token punctuation">;</span>
-
-<span class="token comment">-- 给 债券要素表 插入记录</span>
-<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> overall_table<span class="token punctuation">(</span>item_title<span class="token punctuation">,</span>expire_date<span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token string">'测试1'</span><span class="token punctuation">,</span><span class="token string">'2021-10-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> overall_table<span class="token punctuation">(</span>item_title<span class="token punctuation">,</span>expire_date<span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token string">'测试2'</span><span class="token punctuation">,</span><span class="token string">'2022-10-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> overall_table<span class="token punctuation">(</span>item_title<span class="token punctuation">,</span>expire_date<span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token string">'测试3'</span><span class="token punctuation">,</span><span class="token string">'2022-1-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> overall_table<span class="token punctuation">;</span>
-
-<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token operator">NOT</span> <span class="token keyword">EXISTS</span> <span class="token identifier"><span class="token punctuation">`</span>detail_table<span class="token punctuation">`</span></span><span class="token punctuation">(</span>
-   <span class="token identifier"><span class="token punctuation">`</span>id<span class="token punctuation">`</span></span> <span class="token keyword">INT</span> <span class="token keyword">UNSIGNED</span> <span class="token keyword">AUTO_INCREMENT</span><span class="token punctuation">,</span>
-   <span class="token identifier"><span class="token punctuation">`</span>item_id<span class="token punctuation">`</span></span> <span class="token keyword">INT</span><span class="token punctuation">,</span>
-   <span class="token identifier"><span class="token punctuation">`</span>value<span class="token punctuation">`</span></span> <span class="token keyword">BIGINT</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">DEFAULT</span> <span class="token number">100</span><span class="token punctuation">,</span>
-   <span class="token identifier"><span class="token punctuation">`</span>date<span class="token punctuation">`</span></span> <span class="token keyword">DATE</span><span class="token punctuation">,</span>
-   <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span> <span class="token identifier"><span class="token punctuation">`</span>id<span class="token punctuation">`</span></span> <span class="token punctuation">)</span><span class="token punctuation">,</span>
-   <span class="token keyword">UNIQUE</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span><span class="token identifier"><span class="token punctuation">`</span>item_id<span class="token punctuation">`</span></span><span class="token punctuation">,</span><span class="token identifier"><span class="token punctuation">`</span>date<span class="token punctuation">`</span></span><span class="token punctuation">)</span>
-<span class="token punctuation">)</span><span class="token keyword">ENGINE</span><span class="token operator">=</span><span class="token keyword">InnoDB</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CHARSET</span><span class="token operator">=</span>utf8<span class="token punctuation">;</span>
-
-<span class="token comment">-- 复习一下Alter语句, 一开始写出varchar了</span>
-<span class="token comment">-- ALTER TABLE detail_table MODIFY value BIGINT NOT NULL DEFAULT 100;</span>
-
-<span class="token comment">-- 给 行情表 插入记录</span>
-
-<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token string">'2021-1-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token string">'2021-1-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token string">'2021-1-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">60</span><span class="token punctuation">,</span><span class="token string">'2021-6-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">70</span><span class="token punctuation">,</span><span class="token string">'2021-6-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">,</span><span class="token string">'2021-6-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token string">'2021-9-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">12</span><span class="token punctuation">,</span><span class="token string">'2021-9-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> detail_table<span class="token punctuation">(</span>item_id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">13</span><span class="token punctuation">,</span><span class="token string">'2021-9-1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">-- 看看对不对</span>
-<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> detail_table<span class="token punctuation">;</span>
-
-<span class="token comment">-- 先取个数据看看</span>
-
-<span class="token keyword">SELECT</span> 
-d<span class="token punctuation">.</span><span class="token keyword">value</span>  <span class="token string">'当天成交额'</span><span class="token punctuation">,</span>
-d<span class="token punctuation">.</span><span class="token keyword">date</span> <span class="token string">'当天成交日'</span><span class="token punctuation">,</span>
-d<span class="token punctuation">.</span>item_id <span class="token string">'债券代码号'</span><span class="token punctuation">,</span>
-o<span class="token punctuation">.</span>expire_date <span class="token string">'债券到期日'</span><span class="token punctuation">,</span>
-o<span class="token punctuation">.</span>item_title <span class="token string">'债券中文名'</span> 
-<span class="token keyword">FROM</span> detail_table d <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>  overall_table o <span class="token keyword">ON</span> o<span class="token punctuation">.</span>item_id <span class="token operator">=</span>d<span class="token punctuation">.</span>item_id<span class="token punctuation">;</span>
-
-<span class="token comment">-- 再看看日期计算</span>
-<span class="token keyword">SELECT</span> 
-d<span class="token punctuation">.</span><span class="token keyword">value</span>  <span class="token string">'当天成交额'</span><span class="token punctuation">,</span>
-d<span class="token punctuation">.</span><span class="token keyword">date</span> <span class="token string">'当天成交日'</span><span class="token punctuation">,</span>
-d<span class="token punctuation">.</span>item_id <span class="token string">'债券代码号'</span><span class="token punctuation">,</span>
-o<span class="token punctuation">.</span>expire_date <span class="token string">'债券到期日'</span><span class="token punctuation">,</span>
-o<span class="token punctuation">.</span>item_title <span class="token string">'债券中文名'</span><span class="token punctuation">,</span>
-DATEDIFF<span class="token punctuation">(</span>o<span class="token punctuation">.</span>expire_date<span class="token punctuation">,</span>d<span class="token punctuation">.</span><span class="token keyword">date</span><span class="token punctuation">)</span> <span class="token string">'日期差值'</span>
-<span class="token keyword">FROM</span> detail_table d <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>  overall_table o <span class="token keyword">ON</span> o<span class="token punctuation">.</span>item_id <span class="token operator">=</span>d<span class="token punctuation">.</span>item_id <span class="token punctuation">;</span> 
-
-<span class="token comment">-- 我就以300天当一年了, 看看能不能过滤出数据</span>
-<span class="token keyword">SELECT</span> 
-d<span class="token punctuation">.</span><span class="token keyword">value</span>  <span class="token string">'当天成交额'</span><span class="token punctuation">,</span>
-d<span class="token punctuation">.</span><span class="token keyword">date</span> <span class="token string">'当天成交日'</span><span class="token punctuation">,</span>
-d<span class="token punctuation">.</span>item_id <span class="token string">'债券代码号'</span><span class="token punctuation">,</span>
-o<span class="token punctuation">.</span>expire_date <span class="token string">'债券到期日'</span><span class="token punctuation">,</span>
-o<span class="token punctuation">.</span>item_title <span class="token string">'债券中文名'</span><span class="token punctuation">,</span>
-DATEDIFF<span class="token punctuation">(</span>o<span class="token punctuation">.</span>expire_date<span class="token punctuation">,</span>d<span class="token punctuation">.</span><span class="token keyword">date</span><span class="token punctuation">)</span> date_diff
-<span class="token keyword">FROM</span> detail_table d <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>  overall_table o <span class="token keyword">ON</span> o<span class="token punctuation">.</span>item_id <span class="token operator">=</span>d<span class="token punctuation">.</span>item_id
-<span class="token keyword">WHERE</span> date_diff <span class="token operator">></span> <span class="token number">300</span><span class="token punctuation">;</span>
-
-<span class="token comment">-- 汇总一下看看, 这个一开始犯了个错, Having group by 是不能放在 Having 后面的</span>
-<span class="token keyword">SELECT</span> 
-d<span class="token punctuation">.</span><span class="token keyword">value</span>  <span class="token string">'当天成交额'</span><span class="token punctuation">,</span>
-d<span class="token punctuation">.</span><span class="token keyword">date</span> <span class="token string">'当天成交日'</span><span class="token punctuation">,</span>
-d<span class="token punctuation">.</span>item_id <span class="token string">'债券代码号'</span><span class="token punctuation">,</span>
-o<span class="token punctuation">.</span>expire_date <span class="token string">'债券到期日'</span><span class="token punctuation">,</span>
-o<span class="token punctuation">.</span>item_title <span class="token string">'债券中文名'</span><span class="token punctuation">,</span>
-DATEDIFF<span class="token punctuation">(</span>o<span class="token punctuation">.</span>expire_date<span class="token punctuation">,</span>d<span class="token punctuation">.</span><span class="token keyword">date</span><span class="token punctuation">)</span> date_diff
-<span class="token keyword">FROM</span> detail_table d <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>  overall_table o <span class="token keyword">ON</span> o<span class="token punctuation">.</span>item_id <span class="token operator">=</span>d<span class="token punctuation">.</span>item_id
-<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> d<span class="token punctuation">.</span>item_id <span class="token keyword">HAVING</span> date_diff <span class="token operator">></span> <span class="token number">300</span> 
-
-<span class="token comment">-- 发现直接sum, 会把300天以上的数据也给加上去,</span>
-<span class="token comment">-- 没办法, 使用类似视图的方式吧. 这里生成的表得给一个名字</span>
-<span class="token keyword">SELECT</span> <span class="token function">SUM</span><span class="token punctuation">(</span><span class="token keyword">value</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> <span class="token string">'总成交量'</span><span class="token punctuation">,</span>
-code <span class="token keyword">AS</span> <span class="token string">'债券代码'</span> <span class="token punctuation">,</span>
-item_title <span class="token keyword">AS</span> <span class="token string">'债券中文名'</span> 
-<span class="token keyword">FROM</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> 
-d<span class="token punctuation">.</span><span class="token keyword">value</span> <span class="token keyword">AS</span> <span class="token keyword">value</span><span class="token punctuation">,</span>
-d<span class="token punctuation">.</span><span class="token keyword">date</span> <span class="token keyword">AS</span>  history_date<span class="token punctuation">,</span>
-d<span class="token punctuation">.</span>item_id <span class="token keyword">AS</span> code<span class="token punctuation">,</span>
-o<span class="token punctuation">.</span>expire_date <span class="token keyword">AS</span> expire_date<span class="token punctuation">,</span>
-o<span class="token punctuation">.</span>item_title <span class="token keyword">AS</span> item_title<span class="token punctuation">,</span>
-DATEDIFF<span class="token punctuation">(</span>o<span class="token punctuation">.</span>expire_date<span class="token punctuation">,</span>d<span class="token punctuation">.</span><span class="token keyword">date</span><span class="token punctuation">)</span> date_diff
-<span class="token keyword">FROM</span> detail_table d <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>  overall_table o <span class="token keyword">ON</span> o<span class="token punctuation">.</span>item_id <span class="token operator">=</span>d<span class="token punctuation">.</span>item_id
-<span class="token keyword">HAVING</span> date_diff <span class="token operator">></span> <span class="token number">300</span><span class="token punctuation">)</span> 
-<span class="token keyword">AS</span> temp_table <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> code<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">hexo新手配置</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-06-01 15:19:02" itemprop="dateCreated datePublished" datetime="2022-06-01T15:19:02+08:00">2022-06-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-24 17:37:41" itemprop="dateModified" datetime="2023-04-24T17:37:41+08:00">2023-04-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>(可能是本贴对其他人有用的部分可能就在git配置那边了,其他的hexo相关教程其实挺多的, git/gitee的规约有效期参考这篇文章的发文时间)</p>
-<hr>
-<p>这篇文章其实算是我跟着这个教程走了一遍. 当然这过程中也遇到了一些其他的问题. 原地址在这里:</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://kaiter-plus.gitee.io/2020/03/07/How_To_Freely_Build_Blog/">https://kaiter-plus.gitee.io/2020/03/07/How_To_Freely_Build_Blog/</a></p>
-</blockquote>
-<h2 id="1-安装本地Hexo环境"><a href="#1-安装本地Hexo环境" class="headerlink" title="1. 安装本地Hexo环境"></a>1. 安装本地Hexo环境</h2><p>npm镜像源的配置, 可有可无, 因为我挂着梯子, 所以不用淘宝的源也没什么关系.</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">-g</span> hexo
-<span class="token comment">#这里稍微提一句, -g就是全局安装, 类似cnpm和ts的命令都是这样, 全局安装了在windows下就类似应用程序用名字就可以在控制台中使用了</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>然后是初始化工程:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo init blog      <span class="token comment"># 初始化创建，会在你所在位置创建 blog 文件夹</span>
-<span class="token builtin class-name">cd</span> blog             <span class="token comment"># 进入 blog 目录</span>
-<span class="token function">npm</span> <span class="token function">install</span>         <span class="token comment"># 进一步安装hexo所需文件</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>这里可能会发现脚本无法运行的问题, 可以参考这个帖子管理windows的执行策略</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43874301/article/details/111102493">https://blog.csdn.net/weixin_43874301/article/details/111102493</a></p>
-</blockquote>
-<p>或者用命令行</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">set-ExecutionPolicy RemoteSigned<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>然后是使用hexo的命令生成静态文件和启动服务</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo clean          <span class="token comment"># 清除所有记录</span>
-hexo generate       <span class="token comment"># 生成静态网页, 静态资源在这一步的编译后会放在public下</span>
-hexo server <span class="token parameter variable">-p</span> <span class="token number">80</span>   <span class="token comment"># 启动服务, -p 80 表示端口号为 80，默认不加端口号是 4000</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>然后就可以通过 <a target="_blank" rel="noopener" href="http://localhost/">http://localhost:80</a> 来访问了</p>
-<h2 id="2-安装Hexo主题"><a href="#2-安装Hexo主题" class="headerlink" title="2. 安装Hexo主题"></a>2. 安装Hexo主题</h2><p>可以在官方主题商城里找: <a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a></p>
-<blockquote>
-<p>我也试了很多个主题, 包括one-page, Nlvi, yilia, yilia-plus, 3-hexo, matery, shoku, hermes,fluid等等<br>里面也有挺多挺好的主题</p>
-</blockquote>
-<p>对于这些我试过的 我评论一下:</p>
-<ul>
-<li>one-page: 很干净, 不过对字体的支持和代码的高亮, 我调了调还是有问题, 一开始选择的这个, 如果是用这个主题的话需要把 highlight.enable 和 prismjs.enable都设为 false. 因为这个主题自带了这2个组件.</li>
-<li>Nlvi: 看起来挺好的, 不过我怎么设置都会出问题</li>
-<li>yilia, yilia-plus: 有个头像侧边栏, 感觉不大好, yilia-plus的话, 作为熟悉设置还是不错的, 可能以后会换吧, 不过我暂时不用评论/RSS等功能</li>
-<li>3-hexo: 也是侧边栏感觉不大好</li>
-<li>shoku: 太二次元了</li>
-<li>matery: 很庞大的一个主题, 做的很漂亮, 不过我先从简单的开始学起了</li>
-<li>fluid: 感觉还是不错的, 而且还在实时更新, 我还没用, 不过先用next了</li>
-<li>hermes: 在官网主题首页上就有, 我感觉应该还是不错的,不过先使用next试试了. 这个集成的功能很少, 不过很少意味着不大会报错</li>
-</ul>
-<h2 id="这一步也很重要-现在新的主题基本都需要"><a href="#这一步也很重要-现在新的主题基本都需要" class="headerlink" title="这一步也很重要, 现在新的主题基本都需要"></a>这一步也很重要, 现在新的主题基本都需要</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 如果出现类似eggjs的那种 &lt;% xxx>的问题, 多半是这个插件没装上</span>
-<span class="token function">npm</span> i hexo-renderer-swig<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>主题的配置基本上是在 <em><strong>_config.yml</strong></em>下配置的.<br>next的帮助页面在这里:</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/theme-settings.html">http://theme-next.iissnan.com/theme-settings.html</a></p>
-</blockquote>
-<p>另外 我在clone主题的时候, 发现了这个问题:</p>
-<blockquote>
-<p>error: RPC failed； curl 56 OpenSSL SSL_read: Connection was reset, errno 10054<br>因为我之前git指令都用的好好的, 不知道为什么这里不行.<br>可能原因是我没有实现构建好git目录?<br>不过用下面的方法是可以解决问题的:</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> config http.sslVerify <span class="token string">"false"</span>
-<span class="token comment"># 如果输入上面命令提示报“ fatal: not in a git directory  ”，则输入如下命令：git init</span>
-<span class="token comment"># 之后就可以重新下载了</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>另外一个问题是: </p>
-<blockquote>
-<p>OpenSSL SSL_read: Connection was reset, errno 10054<br>这个问题是由于. 在国内github容易上不去, 所以我们经常会挂着梯子, 把梯子开开关关就可以了.</p>
-</blockquote>
-<h2 id="3-安装hexo-asset-image-插件"><a href="#3-安装hexo-asset-image-插件" class="headerlink" title="3.安装hexo-asset-image 插件"></a>3.安装hexo-asset-image 插件</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> https://github.com/7ym0n/hexo-asset-image <span class="token parameter variable">--save</span>  <span class="token comment">#安装 hexo-asset-image 插件</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>我直接从github上克隆没什么问题, 用原帖子里的第一个仓库地址反而不行.</p>
-<p>这个插件给我的直接感觉是: 在使用命令生成新的文章时, 会自动生成放图片的文件夹</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo new <span class="token builtin class-name">test</span>       <span class="token comment"># 生成新的网页</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="4-配置Git"><a href="#4-配置Git" class="headerlink" title="4.配置Git"></a>4.配置Git</h2><p>这里就是坑开始的地方的. 我也不怎么好顺序说. 如果你看见了这个帖子, 那这一部分需要你对Git有基本的了解.</p>
-<p>首先, 我们是想白嫖服务器的, 所以省力的选择+教程推荐的选择,是用 github或者是gitee.<br>为了让国人访问的方便, 我一开始选择了gitee做服务器, 包括我的这个hexo工程也是放在gitee上的.</p>
-<p>第一点坑的是, 类似gitee/github, 他们的静态页面托管服务, 类似他们这2个服务中的 Pages/Gitee Pages功能, 和代码仓库有类似的地方却又不完全一样, 简单的说, 你首先要创建一个repository, 用于页面托管, 但是和代码仓库不一样, 还有额外要求</p>
-<h3 id="gitee的Pages功能"><a href="#gitee的Pages功能" class="headerlink" title="gitee的Pages功能:"></a>gitee的Pages功能:</h3><ol>
-<li>你得先创建一个repo</li>
-<li>如果你想要他变成public/启动它的Pages功能, 那你得首先随便上传些什么东西激活它, 这就比较麻烦, 因为静态页面托管服务其实我们以后里面只放hexo自动上传的东西, 不过可以通过上传了些再覆盖, 问题不大</li>
-<li>gitee中, 只有把这个repo设置为了 Pages 才能进行静态页面托管, 具体的大家自己搜 gitee+pages功能吧.<br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/001.png" alt="pages"></li>
-<li>然后这个Gitee Pages功能是需要实名制的, 上传身份证啥的, 虽然这个比申请服务器和域名简单多了(申请域名要读保证书什么的比较麻烦).<br>但还是麻烦, 我就选择放弃了<br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/002.png" alt="pages"></li>
-</ol>
-<h3 id="github的page功能"><a href="#github的page功能" class="headerlink" title="github的page功能"></a>github的page功能</h3><ol>
-<li>你得创建一个符合命名规约的repo, 参见这个网站<blockquote>
-<p><a target="_blank" rel="noopener" href="https://pages.github.com/">https://pages.github.com/</a><br><a target="_blank" rel="noopener" href="https://docs.github.com/cn/pages/quickstart">https://docs.github.com/cn/pages/quickstart</a><br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/003.png" alt="pages"></p>
-</blockquote>
-</li>
-<li>简而言之如果你符合命名规约了, 那这个repo就可以当网页服务器用了, 比gitee省事很多</li>
-<li>至于Github官网上推荐的 生成一个read.md啦 使用Jekyll啦 都可以忽略不计. 因为<ul>
-<li>如果是用hexo, 那所有的markdown文件都会被转译成html, 加了也没用</li>
-<li>Jekyll是用ruby命令的, 那还是js和npm来的方便, 毕竟你都用vscode了, 那我默认你会js</li>
-</ul>
-</li>
-<li>仓库合理创建完毕</li>
-</ol>
-<p>然后接下来坑的地方在于, 我的hexo工程代码是在gitee上的, 我想要发布的地址是在github上的.虽然多环境git config我之前也使用过, 不过这次还是翻车了. 翻车点如下:</p>
-<ol>
-<li><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo deploy <span class="token comment"># 或者是hexo d</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>这个命令, 不是一个git命令, 所以之前的简单使用 git config user.username这个命令是没用的<br>必须使用 </p>
-<pre class="line-numbers language-none"><code class="language-none">git config --global  user.username &#39;xxxxx&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>因为我猜, hexo是从 .deploy_git下进行配置的而不是从 我们熟悉的 .git目录下<br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/004.png" alt="pages"><br>这导致不配全局git的config就git会一直告诉你: 我不知道你的身份, 不论是使用https的push方式还是使用ssh的方式<br>我一开始觉得我配置了, 然后使用ssh的方式是不是就可以了. 和这个没有关系</p>
-</li>
-<li><p>以上这个问题解决了后, 我们就可以在.git里配置到代码仓库的东西<br>然后.deploy_git的话, 那就只能是读全局的git配置了</p>
-</li>
-<li><p>在**_config.yml**的deploy部分, repo属性也是有2种写法, 如果是<a href="mailto:&#x67;&#105;&#x74;&#64;&#103;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;">&#x67;&#105;&#x74;&#64;&#103;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;</a>: xxx/xxxx的方式的话, 那是ssh的方式, 得在git仓库里添加ssh, 同时本地也得存在ssh的本地文件. 如果是<a target="_blank" rel="noopener" href="https://github.com/xxxx%E7%9A%84%E6%96%B9%E5%BC%8F%E7%9A%84%E8%AF%9D">https://github.com/xxxx的方式的话</a>, 基本上会跳出来让你输用户名和密码, 就可以了</p>
-</li>
-<li><p>让我头疼的是, 我一开始不想配global git config, 加之我之前工作的电脑有配好git的ssh过 (那个时候公司电脑用http拉git会失败, 但是ssh就可以), 所以我选择到我公司的电脑上去进行hexo deploy到github的操作.<br>试了半天, 都是 connection reset. 非常郁闷, 后来迁移到自己电脑上, 一下子就成功了(第三步的内容).<br>内心明白了, 公司电脑应该是block了 GitHub的push功能, 可能防止员工乱传代码.<br>这一步的意义是: git的配置基本上就我们熟悉的哪些, 不会因为hexo的额外配置而出错, 如果出错, 那大概率是我们电脑的网络环境有问题<br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/005.png" alt="pages"><br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/006.png" alt="pages"><br>基本上就可以正常走完了</p>
-</li>
-</ol>
-<p>上传完到github的repo中, 就可以访问了, 更新速度挺快的, 完全没有git自己说的可能会出现的20分钟的延迟什么的</p>
-<h2 id="5-生产内容"><a href="#5-生产内容" class="headerlink" title="5.生产内容"></a>5.生产内容</h2><p>用命令自动生成md文件和对应的图片文件夹</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo n <span class="token operator">==</span> hexo new
-hexo g <span class="token operator">==</span> hexo generate
-hexo s <span class="token operator">==</span> hexo server
-hexo d <span class="token operator">==</span> hexo deploy
-
-hexo s <span class="token parameter variable">-g</span> <span class="token comment">#生成并本地预览</span>
-hexo d <span class="token parameter variable">-g</span> <span class="token comment">#生成并上传</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>按照Markdown规范来书写就可以</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2022/06/01/test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/01/test/" class="post-title-link" itemprop="url">纪念第一次使用Hexo</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-06-01 15:12:15" itemprop="dateCreated datePublished" datetime="2022-06-01T15:12:15+08:00">2022-06-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-24 17:37:42" itemprop="dateModified" datetime="2023-04-24T17:37:42+08:00">2023-04-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="/2022/06/01/test/001.png" alt="我电脑桌面的截图"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2021/11/13/tencent_cloud/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/11/13/tencent_cloud/" class="post-title-link" itemprop="url">腾讯云折腾日记</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-11-13 15:13:50" itemprop="dateCreated datePublished" datetime="2021-11-13T15:13:50+08:00">2021-11-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-25 10:06:45" itemprop="dateModified" datetime="2023-04-25T10:06:45+08:00">2023-04-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="腾讯云折腾日记1"><a href="#腾讯云折腾日记1" class="headerlink" title="腾讯云折腾日记1"></a>腾讯云折腾日记1</h3><p>首先是购买腾讯云,<br>首先要注册账号, 期间会要求你实名制认证. 要和微信号绑定</p>
-<p>实名制认证结束后, 就可以购买云服务器了. 我这里是买了一个最便宜的.<br><img src="/2021/11/13/tencent_cloud/001.png" alt="这是图片"><br>我这里还不知道镜像能不能换的,按理说应该可以换的吧,还没研究到</p>
-<p>买完后, 一时蒙蔽. 介绍一下它的功能</p>
-<p>首先是关于这个宝塔面板是什么,可以参考这个文章</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="http://tencent.yundashi168.com/558.html">http://tencent.yundashi168.com/558.html</a></p>
-</blockquote>
-<p>总而言之就是登录,然后这里是自己的服务器实例<br><img src="/2021/11/13/tencent_cloud/002.png" alt="这是图片"></p>
-<p>这里点登录的话,是登录到自己的root文件夹<br><img src="/2021/11/13/tencent_cloud/003.png" alt="这是图片"></p>
-<p>看起来什么都没有, cd .. 网上就能发现是一个Linux系统了</p>
-<p>点击,更多-&gt; 管理. 就到了服务器实例的具体管理界面<br><img src="/2021/11/13/tencent_cloud/004.png" alt="这是图片"></p>
-<p>可以开关机, 看看内存分配什么的.<br>然后讲一下这里的主要功能.</p>
-<ul>
-<li><p>1<br>  一键登录<br>  <img src="/2021/11/13/tencent_cloud/005.png" alt="这是图片"><br>  其实还是用默认的窗口内悬浮工具登录</p>
-</li>
-<li><p>2<br>  VNC登录<br>  相当于新开了一个tab页面，里面是命令行，没什么用，而且会卡。<br>  但是这里是要你输入用户名密码的，在&lt;1&gt;里不用，&lt;1&gt;里默认登录了<br>  <img src="/2021/11/13/tencent_cloud/006.png" alt="这是图片"></p>
-</li>
-<li><p>3<br>  SSH登录<br>  使用putty. ssh默认是关闭的，很讨厌。查了攻略才搞定。<br>  攻略基本如下，在&lt;1&gt;里</p>
-  <pre class="line-numbers language-none"><code class="language-none">&#x2F;etc&#x2F;ssh&#x2F;sshd_config #找到ssh文件
-
-vi sshd_config #修改config
-
-systemctl restart sshd #重启ssh服务，保险点也可以关机重启服务器<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>  这里复习一下vim的操作<br>  i进入插入模式，把注释打开后，esc退回命令模式，在命令模式中</p>
-  <pre class="line-numbers language-none"><code class="language-none">:wq<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>  保存并退出</p>
-<p>  然后就可以使用putty登录了.<br>  我这里没用密钥，先用最简单的用户名密码配置<br>  用户名固定是：root，密码是你登录腾讯云的密码</p>
-</li>
-</ul>
-<p>然后在应用管理这个tab中<br><img src="/2021/11/13/tencent_cloud/007.png" alt="这是图片"><br>这个应用管理其实是宝塔面板的内容<br>1:是在浏览器中访问自己这个服务器实例的宝塔面板，这里这个8888是要手动打开添加的，默认没有的<br>2：是宝塔面板的登录信息，虽然进到宝塔面板后还需注册宝塔的账号（bt应该就是宝塔的意思）<br>3：是宝塔面板存在你这个linux服务器实例里的位置，在以后如果通过宝塔安装的php,node环境，都在这个文件内</p>
-<p>在防火墙这个tab中<br><img src="/2021/11/13/tencent_cloud/008.png" alt="这是图片"><br>为了访问宝塔面板，需要添加8888端口，当然之后要是面板改了端口，那这里同步要修改</p>
-<p>添加了之后，就可以访问宝塔面板了<br><img src="/2021/11/13/tencent_cloud/009.png" alt="这是图片"></p>
-<p>最后付一下putty和winscp的图<br><img src="/2021/11/13/tencent_cloud/010.png" alt="这是图片"><br><img src="/2021/11/13/tencent_cloud/011.png" alt="这是图片"></p>
-<p>建站,域名,换一个镜像之类的,再慢慢折腾</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2021/10/28/%E9%85%8D%E7%BD%AE%E6%9B%B4%E5%A5%BD%E7%9A%84powershell/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Petro">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | My blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/28/%E9%85%8D%E7%BD%AE%E6%9B%B4%E5%A5%BD%E7%9A%84powershell/" class="post-title-link" itemprop="url">配置更好的powershell</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-10-28 16:19:13" itemprop="dateCreated datePublished" datetime="2021-10-28T16:19:13+08:00">2021-10-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-25 10:25:28" itemprop="dateModified" datetime="2023-04-25T10:25:28+08:00">2023-04-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/351281543">https://zhuanlan.zhihu.com/p/351281543</a></p>
-</blockquote>
-<p>winget install –id=Microsoft.WindowsTerminal -e</p>
-<p>Install-Module posh-git -Scope CurrentUser<br>Install-Module oh-my-posh -Scope CurrentUser</p>
-<p>如果有admin权限,则使用admin权限进powershell</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
