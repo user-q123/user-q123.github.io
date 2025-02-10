@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="首先, 搜索并安装插件continue选择ollama作为模型提供者. 然后选择你本地部署的模型. 注意, 这里要让ollama跑起来, 光光使用ollama serve命令是不行的, 要使用ollama run xxx命令然后就可以对话了在具体的工程文件中, 也可以使用ctrl+I来进行代码提示 整体使用来说, 比豆包的Marscode AI要快很多, 很适合个人电脑在写代码时调用闲置的显卡资源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="202501-deepseek与VSCODE一起使用">
+<meta property="og:url" content="https://user-q123.github.io/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="My blog">
+<meta property="og:description" content="首先, 搜索并安装插件continue选择ollama作为模型提供者. 然后选择你本地部署的模型. 注意, 这里要让ollama跑起来, 光光使用ollama serve命令是不行的, 要使用ollama run xxx命令然后就可以对话了在具体的工程文件中, 也可以使用ctrl+I来进行代码提示 整体使用来说, 比豆包的Marscode AI要快很多, 很适合个人电脑在写代码时调用闲置的显卡资源">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/001.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/002.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/003.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/004.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/005.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/006.png">
+<meta property="article:published_time" content="2025-02-09T11:02:23.000Z">
+<meta property="article:modified_time" content="2025-02-10T05:57:45.616Z">
+<meta property="article:author" content="Petro">
+<meta property="article:tag" content="部署">
+<meta property="article:tag" content="ai">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-q123.github.io/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/001.png">
+
+
+<link rel="canonical" href="https://user-q123.github.io/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/","path":"2025/02/09/202501-deepseek与VSCODE一起使用/","title":"202501-deepseek与VSCODE一起使用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>202501-deepseek与VSCODE一起使用 | My blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">My blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Viva la vida</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Petro</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="202501-deepseek与VSCODE一起使用 | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          202501-deepseek与VSCODE一起使用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-02-09 19:02:23" itemprop="dateCreated datePublished" datetime="2025-02-09T19:02:23+08:00">2025-02-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-02-10 13:57:45" itemprop="dateModified" datetime="2025-02-10T13:57:45+08:00">2025-02-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>首先, 搜索并安装插件<code>continue</code><br><img src="/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/001.png" alt="pic"><br><img src="/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/002.png" alt="pic"><br>选择<code>ollama</code>作为模型提供者. 然后选择你本地部署的模型. 注意, 这里要让<code>ollama</code>跑起来, 光光使用<code>ollama serve</code>命令是不行的, 要使用<code>ollama run xxx</code>命令<br><img src="/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/003.png" alt="pic"><br>然后就可以对话了<br><img src="/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/004.png" alt="pic"><br><img src="/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/005.png" alt="pic"><br>在具体的工程文件中, 也可以使用<code>ctrl+I</code>来进行代码提示<br><img src="/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/006.png" alt="pic"></p>
+<p>整体使用来说, 比豆包的<code>Marscode AI</code>要快很多, 很适合个人电脑在写代码时调用闲置的显卡资源</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag"># 部署</a>
+              <a href="/tags/ai/" rel="tag"># ai</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/" rel="prev" title="202501-deepseek安装">
+                  <i class="fa fa-angle-left"></i> 202501-deepseek安装
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Petro</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

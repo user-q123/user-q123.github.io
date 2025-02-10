@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="下载下载并安装ollama安装安装完成后自动退出安装界面, 并且会隐藏到系统托盘中在命令行中, 查看ollama命令是否存在 也可以在浏览器中访问http:&#x2F;&#x2F;localhost:11434&#x2F;来查看ollama是否已经正常运行 此外, 安装完ollama后, 它会开机启动. 通过把启动项删掉的方法, 取消开机启动C:\Users\Administrator\AppData\Roaming\Micr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="202501-deepseek安装">
+<meta property="og:url" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="My blog">
+<meta property="og:description" content="下载下载并安装ollama安装安装完成后自动退出安装界面, 并且会隐藏到系统托盘中在命令行中, 查看ollama命令是否存在 也可以在浏览器中访问http:&#x2F;&#x2F;localhost:11434&#x2F;来查看ollama是否已经正常运行 此外, 安装完ollama后, 它会开机启动. 通过把启动项删掉的方法, 取消开机启动C:\Users\Administrator\AppData\Roaming\Micr">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/001.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/002.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/003.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/004.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/012.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/018.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/005.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/006.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/008.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/013.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/014.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/015.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/009.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/010.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/011.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/016.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/017.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/019.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/020.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/021.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/022.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/023.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/024.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/025.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/027.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/028.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/029.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/026.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/038.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/030.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/031.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/032.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/033.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/034.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/035.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/036.png">
+<meta property="og:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/037.png">
+<meta property="article:published_time" content="2025-02-06T11:26:28.000Z">
+<meta property="article:modified_time" content="2025-02-10T06:03:03.512Z">
+<meta property="article:author" content="Petro">
+<meta property="article:tag" content="部署">
+<meta property="article:tag" content="ai">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/001.png">
+
+
+<link rel="canonical" href="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/","path":"2025/02/06/202501-deepseek安装/","title":"202501-deepseek安装"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>202501-deepseek安装 | My blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">My blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Viva la vida</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%95%8C%E9%9D%A2"><span class="nav-number">3.</span> <span class="nav-text">界面</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Petro</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://user-q123.github.io/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Petro">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="202501-deepseek安装 | My blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          202501-deepseek安装
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-02-06 19:26:28" itemprop="dateCreated datePublished" datetime="2025-02-06T19:26:28+08:00">2025-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-02-10 14:03:03" itemprop="dateModified" datetime="2025-02-10T14:03:03+08:00">2025-02-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">开发随笔</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>下载并安装<code>ollama</code><br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/001.png" alt="pic"><br>安装<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/002.png" alt="pic"><br>安装完成后自动退出安装界面, 并且会隐藏到系统托盘中<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/003.png" alt="pic"><br>在命令行中, 查看<code>ollama</code>命令是否存在<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/004.png" alt="pic"></p>
+<p>也可以在浏览器中访问<code>http://localhost:11434/</code>来查看<code>ollama</code>是否已经正常运行<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/012.png" alt="pic"></p>
+<p>此外, 安装完<code>ollama</code>后, 它会开机启动. 通过把启动项删掉的方法, 取消开机启动<br><code>C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup</code><br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/018.png" alt="pic"></p>
+<p>搜索你想要安装的模型, 并且下载对应的版本, 我这里16G的4060ti, 最好安装的9G的版本, 通常来说, 如果显存装不下, 那么会占用一定的内存来弥补.<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/005.png" alt="pic"></p>
+<p>执行命令, 这里<code>run</code>命令是下载并运行, <code>pull</code>命令是下载<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/006.png" alt="pic"><br>默认情况下, 它的模型下载特别慢. 我花了差不多4个小时, 主要是下了一会儿就会停顿住<br>停顿的话, 可以<code>ctrl+c</code>终止脚本, 然后重新pull, 它会断点续传的,如下图<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/008.png" alt="pic"><br>终于将要下载完毕<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/013.png" alt="pic"><br>下载完毕后, 它会进行<code>sha256</code>校验文件完整性<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/014.png" alt="pic"><br>如果校验通过, 会出现<code>success</code>.<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/015.png" alt="pic"></p>
+<p>此外还有一个下载模型的方法, 如果你的网络实在是差.可以去阿里的魔搭社区<code>https://www.modelscope.cn/models/</code>下载模型文件.<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/009.png" alt="pic"><br>要注意, 这里选择<code>GUFF</code>格式的模型, 否则<code>ollama</code>不认识, 还需要做额外的模型转换步骤<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/010.png" alt="pic"><br>挑一个量化模型下载,这里的<code>Qxx</code>是各种量化程度, 不过这个网站的下载速度不快, 所以这里选择一个<code>14b</code>的模型(对应9GB显存)<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/011.png" alt="pic"></p>
+<p>然后在<code>guff</code>的文件同一级目录下, 创建一个配置文件, 比如这里:<br><code>ds-14B.txt</code></p>
+<pre class="line-numbers language-txt" data-language="txt"><code class="language-txt"># 原始文件从哪里来
+FROM ./DeepSeek-R1-Distill-Qwen-14B-Q8_0.gguf    
+PARAMETER temperature 0.7                       
+PARAMETER top_p 0.95
+PARAMETER top_k 40
+PARAMETER repeat_penalty 1.1
+PARAMETER min_p 0.05
+PARAMETER num_ctx 1024                 
+PARAMETER num_thread 4                  
+PARAMETER num_gpu 8                     
+
+
+# 设置对话终止符
+PARAMETER stop "&lt;｜begin▁of▁sentence｜>"
+PARAMETER stop "&lt;｜end▁of▁sentence｜>"
+PARAMETER stop "&lt;｜User｜>"
+PARAMETER stop "&lt;｜Assistant｜>"
+
+
+SYSTEM """
+"""
+
+TEMPLATE """&#123;&#123;- if .System &#125;&#125;&#123;&#123; .System &#125;&#125;&#123;&#123; end &#125;&#125; 
+&#123;&#123;- range $i, $_ := .Messages &#125;&#125; 
+&#123;&#123;- $last := eq (len (slice $.Messages $i)) 1&#125;&#125;
+&#123;&#123;- if eq .Role "user" &#125;&#125;&lt;｜User｜>&#123;&#123; .Content &#125;&#125;
+&#123;&#123;- else if eq .Role "assistant" &#125;&#125;&lt;｜Assistant｜>&#123;&#123; .Content &#125;&#125;&#123;&#123;- if not $last &#125;&#125;&lt;｜end▁of▁sentence｜>&#123;&#123;- end &#125;&#125;
+&#123;&#123;- end &#125;&#125;
+&#123;&#123;- if and $last (ne .Role "assistant") &#125;&#125;&lt;｜Assistant｜>&#123;&#123;- end &#125;&#125; 
+&#123;&#123;- end &#125;&#125;"""<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>然后使用这个<code>txt</code>的内容, 创建模型. </p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ollama create mymodel-14b <span class="token parameter variable">-f</span> ./ds-14B.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这样, 再使用<code>ollama list</code>的时候, 就有一个<code>mymodel-14b</code>的模型会出现了</p>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>通过<code>ollama</code>run命令运行模型.<br><code>ollama run deepseek-r1:32b</code><br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/016.png" alt="pic"><br>会发现, 显存被完全占有, 然后内存占用也很多. 模型的输出有明显卡顿<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/017.png" alt="pic"><br>彻底退出<code>ollama</code>,也就是把任务栏托盘的羊驼退出后, 资源才会被释放, 光光在命令行里结束会话没用.<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/019.png" alt="pic"></p>
+<p>此外, <code>ollama</code>没用配置, 模型文件又很大. 要怎么才能转移文件位置呢?<br><code>ollama</code>的文件位置放在: <code>C:\Users\Administrator\.ollama</code><br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/020.png" alt="pic"><br>可以看到, 这个文件很大, 就是我们的模型文件<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/021.png" alt="pic"><br>把模型移到你想放置的磁盘的位置<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/022.png" alt="pic"><br>然后配置环境变量,<code>win+r</code>打开运行窗口, 输入<code>rundll32 sysdm.cpl,EditEnvironmentVariables</code><br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/023.png" alt="pic"><br>更多环境变量可以参考: </p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/datawhalechina/handy-ollama/blob/main/docs/C2/2.%20Ollama%20%E5%9C%A8%20Windows%20%E4%B8%8B%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE.md">https://github.com/datawhalechina/handy-ollama/blob/main/docs/C2/2.%20Ollama%20%E5%9C%A8%20Windows%20%E4%B8%8B%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE.md</a><br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/024.png" alt="pic"><br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/025.png" alt="pic"></p>
+</blockquote>
+<p>如果要删除模型, 使用:<br><code>ollama rm deepseek-r1:32b</code><br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/027.png" alt="pic"><br>事实证明, 16G的显存运行<code>32b</code>的模型, 太卡了. 还是安装<code>14b</code>的模型比较好<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/028.png" alt="pic"><br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/029.png" alt="pic"></p>
+<h2 id="界面"><a href="#界面" class="headerlink" title="界面"></a>界面</h2><p>然后是在命令行中使用对话不是很美观, 安装<code>open-webui</code><br><code>git clone https://github.com/open-webui/open-webui.git</code><br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/026.png" alt="pic"></p>
+<p>经过我的各种尝试, 我觉得使用<code>miniconda</code>是最优的(因为在windows下, <code>docker</code>依赖于<code>docker desktop</code>, 而<code>ollama</code>本来就很吃内存了, 再运行一个<code>docker desktop</code>卡死)<br>去清华源下载<code>miniconda</code></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/</a><br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/038.png" alt="pic"></p>
+</blockquote>
+<hr>
+<p>如果觉得<code>python</code>安装的方法太麻烦的话, 可以通过浏览器插件<code>Page Assist</code>的方式完成:<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/030.png" alt="pic"><br>它会自动和<code>ollama</code>的默认端口<code>11434</code>通信.<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/031.png" alt="pic"><br>找到模型后张这样:<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/032.png" alt="pic"><br>修改显示语言<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/033.png" alt="pic"><br>选择模型<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/034.png" alt="pic"><br>可以使用联网功能<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/035.png" alt="pic"><br>联网搜索设置<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/036.png" alt="pic"><br>比如问一个新的问题, 因为<code>deepseek-r1</code>的语料库应该是在<code>2023年10月</code>的<br><img src="/2025/02/06/202501-deepseek%E5%AE%89%E8%A3%85/037.png" alt="pic"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag"># 部署</a>
+              <a href="/tags/ai/" rel="tag"># ai</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/08/02/202408-magento%E5%88%9D%E6%AD%A5%E4%BD%93%E9%AA%8C/" rel="prev" title="202408-magento初步体验">
+                  <i class="fa fa-angle-left"></i> 202408-magento初步体验
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/02/09/202501-deepseek%E4%B8%8EVSCODE%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8/" rel="next" title="202501-deepseek与VSCODE一起使用">
+                  202501-deepseek与VSCODE一起使用 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Petro</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

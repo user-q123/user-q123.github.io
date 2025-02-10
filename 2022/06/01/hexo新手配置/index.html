@@ -14,10 +14,10 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="(可能是本贴对其他人有用的部分可能就在git配置那边了,其他的hexo相关教程其实挺多的, git&#x2F;gitee的规约有效期参考这篇文章的发文时间)  这篇文章其实算是我跟着这个教程走了一遍. 当然这过程中也遇到了一些其他的问题. 原地址在这里:  https:&#x2F;&#x2F;kaiter-plus.gitee.io&#x2F;2020&#x2F;03&#x2F;07&#x2F;How_To_Freely_Build_Blog&#x2F;  1. 安装本地He">
 <meta property="og:type" content="article">
@@ -41,7 +41,6 @@
 
 
 <link rel="canonical" href="https://user-q123.github.io/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/">
-
 
 
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/","path":"2022/06/01/hexo新手配置/","title":"hexo新手配置"}</script>
@@ -126,7 +125,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">79</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -137,7 +136,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">48</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -319,7 +318,7 @@ hexo server <span class="token parameter variable">-p</span> <span class="token 
 </li>
 <li><p>以上这个问题解决了后, 我们就可以在.git里配置到代码仓库的东西<br>然后.deploy_git的话, 那就只能是读全局的git配置了</p>
 </li>
-<li><p>在**_config.yml**的deploy部分, repo属性也是有2种写法, 如果是<a href="mailto:&#x67;&#105;&#x74;&#64;&#103;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;">&#x67;&#105;&#x74;&#64;&#103;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;</a>: xxx/xxxx的方式的话, 那是ssh的方式, 得在git仓库里添加ssh, 同时本地也得存在ssh的本地文件. 如果是<a target="_blank" rel="noopener" href="https://github.com/xxxx%E7%9A%84%E6%96%B9%E5%BC%8F%E7%9A%84%E8%AF%9D">https://github.com/xxxx的方式的话</a>, 基本上会跳出来让你输用户名和密码, 就可以了</p>
+<li><p>在**_config.yml**的deploy部分, repo属性也是有2种写法, 如果是<a href="mailto:&#x67;&#105;&#x74;&#x40;&#103;&#105;&#116;&#x68;&#x75;&#x62;&#46;&#x63;&#111;&#109;">&#x67;&#105;&#x74;&#x40;&#103;&#105;&#116;&#x68;&#x75;&#x62;&#46;&#x63;&#111;&#109;</a>: xxx/xxxx的方式的话, 那是ssh的方式, 得在git仓库里添加ssh, 同时本地也得存在ssh的本地文件. 如果是<a target="_blank" rel="noopener" href="https://github.com/xxxx%E7%9A%84%E6%96%B9%E5%BC%8F%E7%9A%84%E8%AF%9D">https://github.com/xxxx的方式的话</a>, 基本上会跳出来让你输用户名和密码, 就可以了</p>
 </li>
 <li><p>让我头疼的是, 我一开始不想配global git config, 加之我之前工作的电脑有配好git的ssh过 (那个时候公司电脑用http拉git会失败, 但是ssh就可以), 所以我选择到我公司的电脑上去进行hexo deploy到github的操作.<br>试了半天, 都是 connection reset. 非常郁闷, 后来迁移到自己电脑上, 一下子就成功了(第三步的内容).<br>内心明白了, 公司电脑应该是block了 GitHub的push功能, 可能防止员工乱传代码.<br>这一步的意义是: git的配置基本上就我们熟悉的哪些, 不会因为hexo的额外配置而出错, 如果出错, 那大概率是我们电脑的网络环境有问题<br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/005.png" alt="pages"><br><img src="/2022/06/01/hexo%E6%96%B0%E6%89%8B%E9%85%8D%E7%BD%AE/006.png" alt="pages"><br>基本上就可以正常走完了</p>
 </li>
@@ -377,7 +376,7 @@ hexo d <span class="token parameter variable">-g</span> <span class="token comme
 
   <div class="copyright">
     &copy; 
-    <span itemprop="copyrightYear">2024</span>
+    <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
@@ -408,7 +407,7 @@ hexo d <span class="token parameter variable">-g</span> <span class="token comme
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
   
 

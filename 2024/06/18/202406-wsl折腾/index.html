@@ -14,34 +14,37 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"user-q123.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="安装wsl, 没有centos的镜像, 装个默认的ubuntu吧然后发现报错: wsl: 检测到 localhost 代理配置，但未镜像到 WSL。NAT 模式下的 WSL 不支持 localhost 代理。 参考:  https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1rw411Y7M1&#x2F;https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_50925658&#x2F;article&#x2F;">
+    <meta name="description" content="安装wsl, 没有centos的镜像, 装个默认的ubuntu吧   [更新]如果网络不好,会发现没有办法安装. 参照这个文档 (比如我用手机网络就不行, 但是公司网络自带翻墙了就没事)修改host重新ping  ping raw.githubusercontent.com  https:&#x2F;&#x2F;blog.csdn.net&#x2F;WQearl&#x2F;article&#x2F;details&#x2F;137348303  正常的话这">
 <meta property="og:type" content="article">
 <meta property="og:title" content="202406-wsl折腾1panel">
 <meta property="og:url" content="https://user-q123.github.io/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/index.html">
 <meta property="og:site_name" content="My blog">
-<meta property="og:description" content="安装wsl, 没有centos的镜像, 装个默认的ubuntu吧然后发现报错: wsl: 检测到 localhost 代理配置，但未镜像到 WSL。NAT 模式下的 WSL 不支持 localhost 代理。 参考:  https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1rw411Y7M1&#x2F;https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_50925658&#x2F;article&#x2F;">
+<meta property="og:description" content="安装wsl, 没有centos的镜像, 装个默认的ubuntu吧   [更新]如果网络不好,会发现没有办法安装. 参照这个文档 (比如我用手机网络就不行, 但是公司网络自带翻墙了就没事)修改host重新ping  ping raw.githubusercontent.com  https:&#x2F;&#x2F;blog.csdn.net&#x2F;WQearl&#x2F;article&#x2F;details&#x2F;137348303  正常的话这">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/0002.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/0003.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/0004.png">
+<meta property="og:image" content="https://user-q123.github.io/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/0001.png">
 <meta property="og:image" content="https://user-q123.github.io/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/001.png">
 <meta property="og:image" content="https://user-q123.github.io/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/002.png">
 <meta property="og:image" content="https://user-q123.github.io/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/003.png">
 <meta property="og:image" content="https://user-q123.github.io/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/004.png">
 <meta property="article:published_time" content="2024-06-18T15:58:08.000Z">
-<meta property="article:modified_time" content="2024-06-21T01:15:13.951Z">
+<meta property="article:modified_time" content="2024-07-16T13:20:09.372Z">
 <meta property="article:author" content="Petro">
 <meta property="article:tag" content="部署">
 <meta property="article:tag" content="wsl">
 <meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://user-q123.github.io/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/001.png">
+<meta name="twitter:image" content="https://user-q123.github.io/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/0002.png">
 
 
 <link rel="canonical" href="https://user-q123.github.io/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/">
-
 
 
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://user-q123.github.io/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/","path":"2024/06/18/202406-wsl折腾/","title":"202406-wsl折腾1panel"}</script>
@@ -125,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">79</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -136,7 +139,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">48</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -199,7 +202,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-06-21 09:15:13" itemprop="dateModified" datetime="2024-06-21T09:15:13+08:00">2024-06-21</time>
+      <time title="Modified: 2024-07-16 21:20:09" itemprop="dateModified" datetime="2024-07-16T21:20:09+08:00">2024-07-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -220,7 +223,15 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>安装wsl, 没有centos的镜像, 装个默认的ubuntu吧<br><img src="/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/001.png" alt="pic"><br>然后发现报错:</p>
+    <div class="post-body" itemprop="articleBody"><p>安装wsl, 没有centos的镜像, 装个默认的ubuntu吧  </p>
+<p>[更新]<br>如果网络不好,会发现没有办法安装. 参照这个文档 (比如我用手机网络就不行, 但是公司网络自带翻墙了就没事)<br><img src="/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/0002.png" alt="pic"><br>修改host<br><img src="/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/0003.png" alt="pic"><br>重新ping<br><img src="/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/0004.png" alt="pic"> </p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ping</span> raw.githubusercontent.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/WQearl/article/details/137348303">https://blog.csdn.net/WQearl/article/details/137348303</a></p>
+</blockquote>
+<p>正常的话这样就可以<br><img src="/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/0001.png" alt="pic">  </p>
+<hr>
+<p><img src="/2024/06/18/202406-wsl%E6%8A%98%E8%85%BE/001.png" alt="pic"><br>然后发现报错:</p>
 <pre class="line-numbers language-none"><code class="language-none">wsl: 检测到 localhost 代理配置，但未镜像到 WSL。NAT 模式下的 WSL 不支持 localhost 代理。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>参考:</p>
 <blockquote>
@@ -265,8 +276,8 @@ autoProxy&#x3D;true<span aria-hidden="true" class="line-numbers-rows"><span></sp
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/07/02/202407-%E6%97%A7CPU%E5%AF%B9%E6%AF%94/" rel="next" title="202407-旧CPU对比">
-                  202407-旧CPU对比 <i class="fa fa-angle-right"></i>
+                <a href="/2024/06/21/202406-SD%E9%87%8D%E6%96%B0%E6%8A%98%E8%85%BE/" rel="next" title="202406-SD重新折腾">
+                  202406-SD重新折腾 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -287,7 +298,7 @@ autoProxy&#x3D;true<span aria-hidden="true" class="line-numbers-rows"><span></sp
 
   <div class="copyright">
     &copy; 
-    <span itemprop="copyrightYear">2024</span>
+    <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
@@ -318,7 +329,7 @@ autoProxy&#x3D;true<span aria-hidden="true" class="line-numbers-rows"><span></sp
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
   
 
